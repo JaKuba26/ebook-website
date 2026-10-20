@@ -3,7 +3,7 @@
      Anführungszeichen ändern, dann speichern.
      ====================================================== */
   const CONFIG = {
-    preis: "19 €",              // Preis, der überall auf der Seite steht
+    preis: "18,99 €",              // Preis, der überall auf der Seite steht
     gumroadLink: "https://businessmind355.gumroad.com/l/popdsw",   // dein Gumroad-Produkt
     name: "Normal sein kostet dich dein Leben"   // erscheint auf Cover, beim Autor und unten auf der Seite
   };
