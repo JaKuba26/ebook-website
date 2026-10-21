@@ -3,3 +3,7 @@
 /links.html0   /links.html   301
 /link          /links.html   301
 /links/        /links.html   301
+
+# Kurze Kauf-Adresse für Videos/Posts -> direkt zu Gumroad
+/kaufen   https://businessmind355.gumroad.com/l/popdsw   302
+/kaufen/  https://businessmind355.gumroad.com/l/popdsw   302
