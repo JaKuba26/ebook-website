@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Startplan von 0 – das Spiel</title>
+<meta name="description" content="Spring über Ausreden, sammle Prompts und spiel den Startplan von 0 durch. Im Ziel wartet ein Code.">
+<!-- VORSCHAU-MODUS: Diese Zeile löschen, sobald Impressum und Datenschutz fertig sind. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0F1B2D">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  @font-face { font-family: Archivo; src: url("fonts/archivo-latin-wght.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  :root { --navy: #0F1B2D; --navy-2: #15253D; --lime: #C8F25A; --coral: #FF7A6B; --amber: #FFB547; --text: #DCE2EA; --muted: #9AA8BB; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; background: var(--navy); color: var(--text); font-family: Archivo, Arial, sans-serif; overflow: hidden;
+               -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; }
+  canvas { display: block; margin: 0 auto; }
+  .layer { position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; background: rgba(15, 27, 45, .86); overflow-y: auto; }
+  .layer[hidden] { display: none; }
+  .box { width: min(360px, 100%); min-width: 0; text-align: center; }
+  .kicker { color: var(--lime); font-weight: 800; letter-spacing: .16em; font-size: 12px; text-transform: uppercase; }
+  h1 { color: #fff; font-weight: 900; font-size: clamp(30px, 11vw, 44px); letter-spacing: -.03em; line-height: 1; margin-top: 8px; }
+  h1 em { font-style: normal; color: var(--lime); }
+  .sub { margin-top: 12px; line-height: 1.45; }
+  .regeln { margin-top: 16px; display: grid; gap: 8px; text-align: left; font-size: 14px; }
+  .regeln div { background: var(--navy-2); border-radius: 12px; padding: 10px 12px; }
+  .btn { display: block; width: 100%; margin-top: 18px; padding: 16px; border: 0; border-radius: 14px; background: var(--lime); color: var(--navy);
+         font: 900 18px Archivo, Arial, sans-serif; cursor: pointer; text-decoration: none; }
+  .btn.alt { background: transparent; color: var(--text); border: 2px solid rgba(220,226,234,.25); margin-top: 10px; font-size: 15px; padding: 12px; }
+  .gross { font-size: 56px; font-weight: 900; color: #fff; margin-top: 6px; line-height: 1; }
+  .codebox { margin-top: 18px; padding: 18px; border-radius: 18px; background: var(--navy-2); border: 2px solid var(--lime); }
+  .code { display: inline-block; margin-top: 10px; padding: 10px 16px; border-radius: 10px; background: var(--lime); color: var(--navy);
+          font-weight: 900; font-size: 26px; letter-spacing: .12em; }
+  .rabatt { color: #fff; font-size: 22px; font-weight: 900; margin-top: 10px; }
+  .knapp { color: var(--coral); font-weight: 800; margin-top: 6px; }
+  .klein { margin-top: 14px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .klein a { color: var(--muted); }
+</style>
+</head>
+<body>
+<canvas id="c" aria-label="Spielfeld"></canvas>
+
+<div class="layer" id="start">
+  <div class="box">
+    <div class="kicker">Normal sein kostet dich dein Leben</div>
+    <h1>Der Startplan <em>von 0</em></h1>
+    <p class="sub">Das Spiel. Spiel alle 3 Level durch – im Ziel wartet ein Code.</p>
+    <div class="regeln">
+      <div>🟥 Spring über <b>Ausreden</b> wie Zweifel, Montag und Angst</div>
+      <div>⚡ Sammle <b>Prompts</b> – wie viele der 42 schaffst du?</div>
+      <div>💚 Du hast <b>3 Leben</b></div>
+    </div>
+    <button class="btn" id="los">Los geht's</button>
+    <p class="klein">Tippen oder Leertaste = springen</p>
+  </div>
+</div>
+
+<div class="layer" id="verloren" hidden>
+  <div class="box">
+    <div class="kicker">Die Ausreden haben gewonnen</div>
+    <div class="gross" id="v-meter">0 m</div>
+    <p class="sub" id="v-text"></p>
+    <button class="btn" id="nochmal">Nochmal – diesmal schaffst du's</button>
+    <p class="klein">Der Code wartet im Ziel von Level 3.</p>
+  </div>
+</div>
+
+<div class="layer" id="sieg" hidden>
+  <div class="box">
+    <div class="kicker">🎉 Geschafft</div>
+    <h1>Du bist <em>nicht normal.</em></h1>
+    <p class="sub">Du hast den Startplan von 0 durchgespielt und <b id="s-prompts">0</b> Prompts gesammelt.</p>
+    <div class="codebox">
+      <div class="kicker">Dein Code</div>
+      <div class="code" id="s-code">••••••••••</div>
+      <div class="rabatt">−50 % aufs E-Book</div>
+      <div class="knapp">Nur 100 Codes – wer zuerst einlöst.</div>
+      <a class="btn" href="/code">Jetzt einlösen →</a>
+    </div>
+    <button class="btn alt" id="teilen">Freunde herausfordern</button>
+    <p class="klein">„Der Startplan von 0“: alle 42 Prompts, 30-Tage-Plan, Schritt für Schritt.<br>
+      <a href="links.html">Alle Links</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+  </div>
+</div>
+
+<script>
+/* „Der Startplan von 0“ – Spring-Spiel mit 3 Leveln. Im Ziel wird der Rabattcode angezeigt.
+   Mit ?frame=N wird ohne Bedienung der Zustand nach N Schritten (60 pro Sekunde) mit Autopilot gezeichnet –
+   so entstehen die Bilder fürs Video. */
+(() => {
+  const W = 390, H = 693, BODEN = 560, DT = 1 / 60, FIGUR = 34;
+  const LEVEL = [
+    { name: "IDEE FINDEN", bis: 500, tempo: 250, hin: ["ZWEIFEL", "KEINE ZEIT", "MONTAG"] },
+    { name: "ERSTES PRODUKT", bis: 1100, tempo: 300, hin: ["PERFEKT", "AUSREDE", "SCROLLEN"] },
+    { name: "ERSTER KUNDE", bis: 1800, tempo: 350, hin: ["ANGST", "ZU SPÄT", "DIE ANDEREN"] },
+  ];
+  const ZIEL = LEVEL[LEVEL.length - 1].bis;
+  const CODE = atob("TklDSFROT1JNQUw=");
+  const param = new URLSearchParams(location.search);
+  const renderFrame = param.has("frame") ? parseInt(param.get("frame"), 10) : null;
+  const cv = document.getElementById("c"), ctx = cv.getContext("2d");
+
+  function groesse() {
+    const skala = Math.min(innerWidth / W, innerHeight / H), dpr = devicePixelRatio || 1;
+    cv.width = Math.round(W * skala * dpr); cv.height = Math.round(H * skala * dpr);
+    cv.style.width = W * skala + "px"; cv.style.height = H * skala + "px";
+    cv.style.marginTop = (innerHeight - H * skala) / 2 + "px";
+    ctx.setTransform(skala * dpr, 0, 0, skala * dpr, 0, 0);
+  }
+
+  // feste Zufallsfolge pro Runde (im Video immer gleich)
+  function zufall(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+  let s;
+  function neu(seed) {
+    const rnd = zufall(seed);
+    s = { rnd, t: 0, weg: 0, y: BODEN - FIGUR, vy: 0, amBoden: true, hin: [], items: [], naechstes: 1.4, naechstesItem: 0.8,
+          leben: 3, schutz: 0, prompts: 0, level: 0, banner: 2, ende: null, funken: [], wackeln: 0,
+          stadt: Array.from({ length: 14 }, (_, i) => ({ x: i * 60, h: 60 + rnd() * 140 })) };
+  }
+  const meter = () => Math.floor(s.weg / 10);
+  const lv = () => LEVEL[s.level];
+
+  function springen() {
+    if (s.ende || !s.amBoden) return;
+    s.vy = -820; s.amBoden = false;
+    for (let i = 0; i < 8; i++) s.funken.push({ x: 87, y: BODEN, vx: -60 - s.rnd() * 120, vy: -s.rnd() * 160, l: .4, f: "#C8F25A" });
+  }
+
+  function schritt(auto) {
+    if (s.ende) { s.t += DT; s.funken.forEach(f => { f.x += f.vx * DT; f.y += f.vy * DT; f.vy += 300 * DT; f.l -= DT * .4; }); return; }
+    s.t += DT;
+    const tempo = lv().tempo + (meter() - (s.level ? LEVEL[s.level - 1].bis : 0)) * 0.06;
+    s.weg += tempo * DT;
+    if (meter() >= lv().bis) {
+      if (s.level === LEVEL.length - 1) return gewonnen();
+      s.level++; s.banner = 2;
+    }
+    s.banner = Math.max(0, s.banner - DT); s.schutz = Math.max(0, s.schutz - DT); s.wackeln = Math.max(0, s.wackeln - DT);
+    if (auto) {   // Autopilot: höchster Punkt über der Mitte des Hindernisses (halbe Flugzeit = 0,37 s)
+      const vorne = s.hin.find(h => h.x + h.w > 70);
+      if (vorne && vorne.x + vorne.w / 2 - 87 < tempo * 0.37) springen();
+    }
+    s.vy += 2200 * DT; s.y += s.vy * DT;
+    if (s.y >= BODEN - FIGUR) { s.y = BODEN - FIGUR; s.vy = 0; s.amBoden = true; }
+    // Ausreden und Prompts erscheinen – kurz vor dem Ziel nicht mehr
+    const kurzVorZiel = meter() > ZIEL - 40;
+    s.naechstes -= DT; s.naechstesItem -= DT;
+    if (s.naechstes <= 0 && !kurzVorZiel) {
+      const w = 44 + s.rnd() * 26, h = 44 + s.rnd() * 44, namen = lv().hin;
+      s.hin.push({ x: W + 10, w, h, text: namen[Math.floor(s.rnd() * namen.length)] });
+      s.naechstes = 0.9 + s.rnd() * 0.7;
+    }
+    if (s.naechstesItem <= 0 && !kurzVorZiel) {
+      s.items.push({ x: W + 10, y: BODEN - 60 - Math.floor(s.rnd() * 3) * 55, weg: false });
+      s.naechstesItem = 0.7 + s.rnd() * 0.8;
+    }
+    s.hin.forEach(h => h.x -= tempo * DT); s.items.forEach(i => i.x -= tempo * DT);
+    s.hin = s.hin.filter(h => h.x + h.w > -20 && !h.weg); s.items = s.items.filter(i => i.x > -30 && !i.weg);
+    s.stadt.forEach(b => { b.x -= tempo * 0.25 * DT; if (b.x < -60) { b.x += 14 * 60; b.h = 60 + s.rnd() * 140; } });
+    s.funken.forEach(f => { f.x += f.vx * DT; f.y += f.vy * DT; f.vy += 600 * DT; f.l -= DT; });
+    s.funken = s.funken.filter(f => f.l > 0);
+    for (const i of s.items)       // Prompt eingesammelt
+      if (Math.abs(i.x - 87) < 28 && Math.abs(i.y - (s.y + FIGUR / 2)) < 30) {
+        i.weg = true; s.prompts = Math.min(42, s.prompts + 1);
+        for (let k = 0; k < 10; k++) s.funken.push({ x: i.x, y: i.y, vx: (s.rnd() - .5) * 260, vy: (s.rnd() - .8) * 260, l: .5, f: "#FFB547" });
+      }
+    if (!s.schutz) for (const h of s.hin)   // gegen eine Ausrede gelaufen
+      if (70 + FIGUR > h.x + 5 && 70 < h.x + h.w - 5 && s.y + FIGUR > BODEN - h.h + 5) {
+        h.weg = true; s.leben--; s.schutz = 1.2; s.wackeln = .3;
+        if (s.leben <= 0) return verloren();
+      }
+  }
+
+  function gewonnen() {
+    s.ende = "sieg";
+    const farben = ["#C8F25A", "#FFB547", "#FF7A6B", "#5AD1F2", "#fff"];
+    for (let k = 0; k < 140; k++)
+      s.funken.push({ x: s.rnd() * W, y: -20 - s.rnd() * 300, vx: (s.rnd() - .5) * 80, vy: 60 + s.rnd() * 120, l: 3, f: farben[k % 5], k: true });
+    if (renderFrame === null) setTimeout(zeigeSieg, 1400);
+  }
+  function verloren() { s.ende = "aus"; if (renderFrame === null) setTimeout(zeigeVerloren, 500); }
+
+  function rund(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); }
+  function text(t, x, y, groesse, farbe, ausr = "left", gew = 900) {
+    ctx.fillStyle = farbe; ctx.font = gew + " " + groesse + "px Archivo, Arial"; ctx.textAlign = ausr; ctx.textBaseline = "top"; ctx.fillText(t, x, y);
+  }
+
+  function zeichnen() {
+    ctx.save();
+    if (s.wackeln) ctx.translate((s.rnd() - .5) * 10, (s.rnd() - .5) * 10);
+    ctx.fillStyle = "#0F1B2D"; ctx.fillRect(-10, -10, W + 20, H + 20);
+    const g = ctx.createRadialGradient(W * .8, 140, 10, W * .8, 140, 320);
+    g.addColorStop(0, ["rgba(200,242,90,.16)", "rgba(255,181,71,.18)", "rgba(90,209,242,.18)"][s.level]); g.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = "#15253D";
+    s.stadt.forEach(b => ctx.fillRect(b.x, BODEN - b.h, 52, b.h));
+    ctx.fillStyle = "rgba(255,181,71,.35)";
+    s.stadt.forEach(b => { for (let y = BODEN - b.h + 12; y < BODEN - 16; y += 22) for (let x = 8; x < 44; x += 16)
+      if (((b.h * 7 + x * 3 + y) | 0) % 5 < 2) ctx.fillRect(b.x + x, y, 6, 8); });
+    ctx.fillStyle = "#1D3150"; ctx.fillRect(0, BODEN, W, H - BODEN);
+    ctx.fillStyle = "#C8F25A"; ctx.fillRect(0, BODEN, W, 3);
+    ctx.fillStyle = "rgba(220,226,234,.15)";
+    for (let x = -(s.weg % 40); x < W; x += 40) ctx.fillRect(x, BODEN + 26, 20, 3);
+    const zielX = 87 + (ZIEL * 10 - s.weg);                          // Zielflagge
+    if (zielX < W + 40) {
+      ctx.fillStyle = "#fff"; ctx.fillRect(zielX, BODEN - 150, 4, 150);
+      for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) { ctx.fillStyle = (r + c) % 2 ? "#0F1B2D" : "#C8F25A"; ctx.fillRect(zielX + 4 + c * 10, BODEN - 150 + r * 10, 10, 10); }
+      text("ZIEL", zielX + 4, BODEN - 104, 14, "#C8F25A");
+    }
+    s.items.forEach(i => {                                           // Prompts (Blitze)
+      const sw = Math.sin(s.t * 6 + i.x * .05) * 3;
+      ctx.fillStyle = "rgba(255,181,71,.25)"; ctx.beginPath(); ctx.arc(i.x, i.y + sw, 16, 0, 7); ctx.fill();
+      ctx.fillStyle = "#FFB547"; ctx.beginPath();
+      ctx.moveTo(i.x + 3, i.y - 12 + sw); ctx.lineTo(i.x - 7, i.y + 2 + sw); ctx.lineTo(i.x, i.y + 2 + sw);
+      ctx.lineTo(i.x - 3, i.y + 12 + sw); ctx.lineTo(i.x + 7, i.y - 2 + sw); ctx.lineTo(i.x, i.y - 2 + sw); ctx.fill();
+    });
+    s.hin.forEach(h => {                                             // Ausreden
+      ctx.fillStyle = "#FF7A6B"; rund(h.x, BODEN - h.h, h.w, h.h, 8);
+      ctx.save(); ctx.translate(h.x + h.w / 2, BODEN - h.h / 2); ctx.rotate(-Math.PI / 2);
+      ctx.fillStyle = "#0F1B2D"; ctx.font = "900 12px Archivo, Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText(h.text, 0, 0, h.h - 8); ctx.restore();
+    });
+    s.funken.forEach(f => { ctx.globalAlpha = Math.max(0, Math.min(1, f.l / .4)); ctx.fillStyle = f.f; ctx.fillRect(f.x, f.y, f.k ? 6 : 4, f.k ? 9 : 4); });
+    ctx.globalAlpha = 1;
+    if (!(s.schutz && Math.floor(s.t * 12) % 2)) {                   // Spielfigur (blinkt nach Treffer)
+      const st = s.amBoden ? 0 : Math.max(-6, Math.min(6, s.vy / 120));
+      ctx.fillStyle = s.ende === "aus" ? "#9AA8BB" : "#C8F25A"; rund(70 + st / 2, s.y - st, FIGUR - st, FIGUR + st, 9);
+      ctx.fillStyle = "#0F1B2D"; ctx.fillRect(90, s.y + 10, 5, 7); ctx.fillRect(80, s.y + 10, 5, 7);
+    }
+    // Anzeige oben: Leben, Prompts, Fortschritt
+    for (let i = 0; i < 3; i++) { ctx.fillStyle = i < s.leben ? "#C8F25A" : "rgba(220,226,234,.2)"; rund(20 + i * 26, 22, 20, 20, 6); }
+    text("⚡ " + s.prompts + "/42", W - 20, 22, 20, "#FFB547", "right");
+    ctx.fillStyle = "rgba(220,226,234,.15)"; rund(20, 56, W - 40, 8, 4);
+    ctx.fillStyle = "#C8F25A"; rund(20, 56, Math.max(8, (W - 40) * Math.min(1, meter() / ZIEL)), 8, 4);
+    LEVEL.slice(0, -1).forEach(l => { ctx.fillStyle = "#0F1B2D"; ctx.fillRect(20 + (W - 40) * l.bis / ZIEL - 2, 54, 3, 12); });
+    text("LEVEL " + (s.level + 1) + " · " + lv().name, 20, 72, 12, "#9AA8BB", "left", 800);
+    text(Math.min(meter(), ZIEL) + " / " + ZIEL + " m", W - 20, 72, 12, "#9AA8BB", "right", 800);
+    if (s.banner > 0 && !s.ende) {                                   // Level-Ansage
+      ctx.globalAlpha = Math.min(1, s.banner * 2);
+      text("LEVEL " + (s.level + 1), W / 2, 210, 22, "#C8F25A", "center", 800);
+      text(lv().name, W / 2, 238, 38, "#fff", "center");
+      ctx.globalAlpha = 1;
+    }
+    if (s.ende === "sieg") {
+      text("GESCHAFFT!", W / 2, 200, 48, "#C8F25A", "center");
+      text("Startplan durchgespielt", W / 2, 256, 18, "#fff", "center", 800);
+    }
+    ctx.restore();
+  }
+
+  groesse(); addEventListener("resize", () => { groesse(); zeichnen(); });
+
+  if (param.has("zeitplan")) {                                       // fürs Video: bei welchem Schritt beginnt welches Level?
+    neu(11); const z = { level: [0] };
+    for (let i = 1; i < 6000 && !s.ende; i++) { const l = s.level; schritt(true); if (s.level !== l) z.level.push(i); if (s.ende) z[s.ende] = i; }
+    document.title = JSON.stringify(z);
+    return;
+  }
+
+  if (renderFrame !== null) {                                        // Video-Modus
+    document.getElementById("start").hidden = true;
+    neu(11); for (let i = 0; i < renderFrame; i++) schritt(true);
+    document.fonts.ready.then(zeichnen); zeichnen();
+    return;
+  }
+
+  // Normales Spiel
+  const ebenen = { start: document.getElementById("start"), verloren: document.getElementById("verloren"), sieg: document.getElementById("sieg") };
+  let laeuft = false, letzte = 0, rest = 0;
+  neu(1); zeichnen();
+
+  function spielen() {
+    neu(Date.now() & 0xffff); Object.values(ebenen).forEach(e => e.hidden = true);
+    laeuft = true; letzte = performance.now(); rest = 0; requestAnimationFrame(loop);
+  }
+  function loop(jetzt) {
+    if (!laeuft) return;
+    rest += Math.min(.1, (jetzt - letzte) / 1000); letzte = jetzt;
+    while (rest >= DT) { schritt(false); rest -= DT; }
+    zeichnen();
+    if (s.ende === "aus") { laeuft = false; return; }
+    requestAnimationFrame(loop);
+  }
+  function zeigeVerloren() {
+    document.getElementById("v-meter").textContent = meter() + " / " + ZIEL + " m";
+    document.getElementById("v-text").textContent = "Level " + (s.level + 1) + " von 3 · " + s.prompts + " Prompts gesammelt. Fast!";
+    ebenen.verloren.hidden = false;
+  }
+  function zeigeSieg() {
+    laeuft = false;
+    document.getElementById("s-prompts").textContent = s.prompts;
+    const feld = document.getElementById("s-code");
+    ebenen.sieg.hidden = false;
+    let i = 0;                                                       // Code Buchstabe für Buchstabe aufdecken
+    const tick = setInterval(() => { i++; feld.textContent = CODE.slice(0, i) + "•".repeat(Math.max(0, CODE.length - i)); if (i >= CODE.length) clearInterval(tick); }, 90);
+  }
+  function eingabe(e) {
+    if (e.type === "keydown" && e.code !== "Space" && e.code !== "ArrowUp") return;
+    if (laeuft) { e.preventDefault(); springen(); }
+  }
+  addEventListener("keydown", eingabe);
+  cv.addEventListener("pointerdown", eingabe);
+  document.getElementById("los").onclick = spielen;
+  document.getElementById("nochmal").onclick = spielen;
+  document.getElementById("teilen").onclick = async () => {
+    const t = "Ich hab den Startplan von 0 durchgespielt – schaffst du das auch?";
+    const url = location.origin + "/spiel";
+    try { if (navigator.share) await navigator.share({ text: t, url }); else await navigator.clipboard.writeText(t + " " + url); } catch (e) {}
+  };
+})();
+</script>
+</body>
+</html>
