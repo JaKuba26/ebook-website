@@ -12,3 +12,6 @@
 
 # Rabattcode aus dem Spiel (NICHTNORMAL, 50 %, max. 100 Einlösungen) -> Gumroad mit eingesetztem Code
 # -> netlify/functions/weiter.mjs (zählt den Klick, leitet dann zu Gumroad weiter)
+
+# Survivor-Spiel „Arena der Ausreden“
+/arena    /arena.html   200

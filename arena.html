@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Arena der Ausreden – das Spiel</title>
+<meta name="description" content="Überleb 3 Minuten gegen Horden von Ausreden – deine Prompts schießen von selbst. Im Ziel wartet ein Code.">
+<!-- VORSCHAU-MODUS: Diese Zeile löschen, sobald Impressum und Datenschutz fertig sind. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0F1B2D">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  @font-face { font-family: Archivo; src: url("fonts/archivo-latin-wght.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+  :root { --navy: #0F1B2D; --navy-2: #15253D; --lime: #C8F25A; --coral: #FF7A6B; --amber: #FFB547; --text: #DCE2EA; --muted: #9AA8BB; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; background: var(--navy); color: var(--text); font-family: Archivo, Arial, sans-serif; overflow: hidden;
+               -webkit-tap-highlight-color: transparent; touch-action: none; user-select: none; }
+  canvas { display: block; margin: 0 auto; }
+  .layer { position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; background: rgba(15, 27, 45, .88); overflow-y: auto; }
+  .layer[hidden] { display: none; }
+  .box { width: min(380px, 100%); min-width: 0; text-align: center; }
+  .kicker { color: var(--lime); font-weight: 800; letter-spacing: .16em; font-size: 12px; text-transform: uppercase; }
+  h1 { color: #fff; font-weight: 900; font-size: clamp(30px, 11vw, 46px); letter-spacing: -.03em; line-height: 1; margin-top: 8px; }
+  h1 em { font-style: normal; color: var(--lime); }
+  .sub { margin-top: 12px; line-height: 1.45; }
+  .regeln { margin-top: 16px; display: grid; gap: 8px; text-align: left; font-size: 14px; }
+  .regeln div { background: var(--navy-2); border-radius: 12px; padding: 10px 12px; }
+  .btn { display: block; width: 100%; margin-top: 18px; padding: 16px; border: 0; border-radius: 14px; background: var(--lime); color: var(--navy);
+         font: 900 18px Archivo, Arial, sans-serif; cursor: pointer; text-decoration: none; }
+  .btn.alt { background: transparent; color: var(--text); border: 2px solid rgba(220,226,234,.25); margin-top: 10px; font-size: 15px; padding: 12px; }
+  .gross { font-size: 56px; font-weight: 900; color: #fff; margin-top: 6px; line-height: 1; }
+  .karten { display: grid; gap: 10px; margin-top: 16px; }
+  .karte { display: flex; gap: 12px; align-items: center; text-align: left; padding: 14px; border-radius: 16px; background: var(--navy-2);
+           border: 2px solid rgba(200,242,90,.35); color: var(--text); font: inherit; cursor: pointer; }
+  .karte:hover, .karte:focus { border-color: var(--lime); outline: none; }
+  .karte .ico { font-size: 30px; width: 44px; text-align: center; flex: none; }
+  .karte b { color: #fff; display: block; font-size: 17px; }
+  .karte small { color: var(--muted); font-size: 13px; }
+  .karte .neu { color: var(--amber); font-weight: 800; font-size: 11px; letter-spacing: .1em; }
+  .codebox { margin-top: 18px; padding: 18px; border-radius: 18px; background: var(--navy-2); border: 2px solid var(--lime); }
+  .code { display: inline-block; margin-top: 10px; padding: 10px 16px; border-radius: 10px; background: var(--lime); color: var(--navy);
+          font-weight: 900; font-size: 26px; letter-spacing: .12em; }
+  .rabatt { color: #fff; font-size: 22px; font-weight: 900; margin-top: 10px; }
+  .knapp { color: var(--coral); font-weight: 800; margin-top: 6px; }
+  .klein { margin-top: 14px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .klein a { color: var(--muted); }
+  .ton { position: fixed; left: 12px; bottom: 12px; z-index: 5; width: 44px; height: 44px; border-radius: 50%; border: 0;
+         background: rgba(21, 37, 61, .85); color: #fff; font-size: 20px; cursor: pointer; }
+</style>
+</head>
+<body>
+<canvas id="c" aria-label="Spielfeld"></canvas>
+<button class="ton" id="ton" aria-label="Ton aus">🔊</button>
+
+<div class="layer" id="start">
+  <div class="box">
+    <div class="kicker">Normal sein kostet dich dein Leben</div>
+    <h1>Arena der <em>Ausreden</em></h1>
+    <p class="sub">Überleb 3 Minuten. Deine Prompts schießen von selbst – du musst nur ausweichen.</p>
+    <div class="regeln">
+      <div>🕹️ <b>Bewegen:</b> Finger übers Display ziehen (PC: Pfeiltasten / WASD)</div>
+      <div>⚡ <b>Prompts sammeln</b> → Level-up → Upgrade wählen</div>
+      <div>👹 Achtung: <b>DER MONTAG</b> und <b>DIE ANGST</b> kommen</div>
+      <div>🏆 Wer 3:00 überlebt, bekommt den <b>Code</b></div>
+    </div>
+    <button class="btn" id="los">Los geht's</button>
+  </div>
+</div>
+
+<div class="layer" id="levelup" hidden>
+  <div class="box">
+    <div class="kicker">Level-up!</div>
+    <h1>Wähl ein <em>Upgrade</em></h1>
+    <div class="karten" id="karten"></div>
+  </div>
+</div>
+
+<div class="layer" id="verloren" hidden>
+  <div class="box">
+    <div class="kicker">Die Ausreden haben gewonnen</div>
+    <div class="gross" id="v-zeit">0:00</div>
+    <p class="sub" id="v-text"></p>
+    <button class="btn" id="nochmal">Nochmal – diesmal schaffst du's</button>
+    <p class="klein">Der Code wartet bei 3:00.</p>
+  </div>
+</div>
+
+<div class="layer" id="sieg" hidden>
+  <div class="box">
+    <div class="kicker">🎉 3:00 überlebt</div>
+    <h1>Du bist <em>nicht normal.</em></h1>
+    <p class="sub" id="s-text"></p>
+    <div class="codebox">
+      <div class="kicker">Dein Code</div>
+      <div class="code" id="s-code">•••••••••••</div>
+      <div class="rabatt">−50 % aufs E-Book</div>
+      <div class="knapp">Nur 100 Codes – wer zuerst einlöst.</div>
+      <a class="btn" href="/code">Jetzt einlösen →</a>
+    </div>
+    <button class="btn alt" id="teilen">Freunde herausfordern</button>
+    <p class="klein">„Der Startplan von 0“: alle 42 Prompts, 30-Tage-Plan, Schritt für Schritt.<br>
+      <a href="links.html">Alle Links</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+  </div>
+</div>
+
+<script>
+/* „Arena der Ausreden“ – ein kleines Survivor-Spiel (wie Vampire Survivors).
+   Man bewegt nur die Figur, die Waffen (Prompts) feuern von selbst. Wer 3 Minuten überlebt, sieht den Rabattcode.
+   Fürs Video: ?frame=N zeichnet den Zustand nach N Schritten (60 pro Sekunde) mit Autopilot, ?zeitplan liefert Ereignisse. */
+(() => {
+  const W = 390, H = 693, DT = 1 / 60, ZIEL = 180;                 // Ansicht (Hochkant), Schrittweite, 3 Minuten
+  const CODE = atob("TklDSFROT1JNQUw=");
+  const param = new URLSearchParams(location.search);
+  const renderFrame = param.has("frame") ? parseInt(param.get("frame"), 10) : null;
+  const cv = document.getElementById("c"), ctx = cv.getContext("2d");
+
+  // ---------- Ton ----------
+  let ac = null, beat = null, beatQuelle = null, beatLaut = null, tonAn = true, letzterSchuss = 0;
+  try { tonAn = localStorage.getItem("startplan-ton") !== "aus"; } catch (e) {}
+  async function audioStart() {
+    if (!ac) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      ac = new AC(); beatLaut = ac.createGain(); beatLaut.gain.value = .3; beatLaut.connect(ac.destination);
+      try { beat = await ac.decodeAudioData(await (await fetch("sound/beat.wav")).arrayBuffer()); } catch (e) {}
+    }
+    if (ac.state === "suspended") ac.resume();
+  }
+  function musik(an) {
+    if (beatQuelle) { try { beatQuelle.stop(); } catch (e) {} beatQuelle = null; }
+    if (!an || !tonAn || !ac || !beat) return;
+    beatQuelle = ac.createBufferSource(); beatQuelle.buffer = beat; beatQuelle.loop = true; beatQuelle.connect(beatLaut); beatQuelle.start();
+  }
+  function klang(art) {
+    if (!ac || !tonAn) return;
+    const t = ac.currentTime;
+    if (art === "schuss") { if (t - letzterSchuss < .07) return; letzterSchuss = t; }
+    const g = ac.createGain(); g.connect(ac.destination);
+    const osz = (typ, f1, f2, start, dauer, laut) => {
+      const o = ac.createOscillator(), h = ac.createGain();
+      o.type = typ; o.frequency.setValueAtTime(f1, t + start); o.frequency.exponentialRampToValueAtTime(f2, t + start + dauer);
+      h.gain.setValueAtTime(laut, t + start); h.gain.exponentialRampToValueAtTime(.001, t + start + dauer);
+      o.connect(h); h.connect(g); o.start(t + start); o.stop(t + start + dauer + .02);
+    };
+    if (art === "schuss") osz("square", 900, 420, 0, .06, .025);
+    if (art === "treffer") osz("triangle", 300, 140, 0, .06, .05);
+    if (art === "prompt") osz("sine", 1300, 1700, 0, .05, .06);
+    if (art === "aua") osz("sawtooth", 180, 60, 0, .2, .18);
+    if (art === "level") [659, 784, 988, 1319].forEach((f, i) => osz("triangle", f, f * 1.001, i * .07, .16, .16));
+    if (art === "boss") osz("sawtooth", 90, 45, 0, .9, .25);
+    if (art === "sieg") [523, 659, 784, 1047, 1319].forEach((f, i) => osz("triangle", f, f * 1.001, i * .1, i === 4 ? .7 : .14, .22));
+    if (art === "aus") osz("sawtooth", 320, 70, 0, .6, .18);
+  }
+
+  // ---------- Bildschirm ----------
+  function groesse() {
+    const skala = Math.min(innerWidth / W, innerHeight / H), dpr = devicePixelRatio || 1;
+    cv.width = Math.round(W * skala * dpr); cv.height = Math.round(H * skala * dpr);
+    cv.style.width = W * skala + "px"; cv.style.height = H * skala + "px";
+    cv.style.marginTop = (innerHeight - H * skala) / 2 + "px";
+    ctx.setTransform(skala * dpr, 0, 0, skala * dpr, 0, 0);
+    cv.skala = skala;
+  }
+  function zufall(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+  // ---------- Spielinhalt ----------
+  const GEGNER = [   // ab Sekunde, Name, Leben, Tempo, Größe, Schaden, Farbe
+    { ab: 0, name: "ZWEIFEL", hp: 10, v: 46, r: 13, dmg: 8, f: "#FF7A6B" },
+    { ab: 25, name: "MONTAG", hp: 18, v: 40, r: 15, dmg: 10, f: "#FF9A6B" },
+    { ab: 55, name: "SCROLLEN", hp: 9, v: 78, r: 11, dmg: 6, f: "#FF6B9A" },
+    { ab: 85, name: "AUSREDE", hp: 34, v: 38, r: 18, dmg: 12, f: "#E85A5A" },
+    { ab: 115, name: "PERFEKT", hp: 26, v: 60, r: 14, dmg: 10, f: "#C77BFF" },
+  ];
+  const BOSSE = [{ zeit: 90, name: "DER MONTAG", hp: 900, v: 34, r: 34, dmg: 25, f: "#FF5A3C" },
+                 { zeit: 150, name: "DIE ANGST", hp: 1800, v: 40, r: 40, dmg: 30, f: "#9B4DFF" }];
+  const UPGRADES = [
+    { id: "mehr", ico: "⚡", name: "Mehr Prompts", text: "+1 Prompt-Blitz pro Schuss", max: 5 },
+    { id: "schnell", ico: "⌨️", name: "Schneller tippen", text: "Blitze kommen 15 % schneller", max: 5 },
+    { id: "besser", ico: "🎯", name: "Bessere Prompts", text: "+30 % Schaden", max: 5 },
+    { id: "aura", ico: "🟢", name: "Fokus-Aura", text: "Schadet allem in deiner Nähe", max: 5 },
+    { id: "orbit", ico: "💡", name: "Ideen-Kreis", text: "Ideen kreisen um dich herum", max: 5 },
+    { id: "tempo", ico: "👟", name: "Tempo", text: "+12 % Laufgeschwindigkeit", max: 4 },
+    { id: "ausdauer", ico: "❤️", name: "Ausdauer", text: "+25 Leben und voll heilen", max: 5 },
+    { id: "magnet", ico: "🧲", name: "Magnet", text: "Prompts von weiter weg einsammeln", max: 3 },
+  ];
+
+  let s;
+  function neu(seed) {
+    const rnd = zufall(seed);
+    s = { rnd, t: 0, n: 0, x: 0, y: 0, hp: 100, maxHp: 100, tempo: 150, schutz: 0, level: 1, xp: 0, xpNoetig: 5, prompts: 0, kills: 0,
+          gegner: [], schuesse: [], items: [], texte: [], funken: [], ende: null, pause: false, spawn: 0, bossDa: {}, banner: null,
+          up: { mehr: 0, schnell: 0, besser: 0, aura: 0, orbit: 0, tempo: 0, ausdauer: 0, magnet: 0 }, cd: 0, ereignisse: [], blick: 1 };
+  }
+  const schaden = () => 10 * (1 + .3 * s.up.besser);
+  const zeitText = t => Math.floor(t / 60) + ":" + String(Math.floor(t % 60)).padStart(2, "0");
+
+  function gegnerSpawn(typ, boss) {
+    const w = s.rnd() * Math.PI * 2, d = 430 + s.rnd() * 60;
+    const skal = 1 + s.t / 150;                                      // wird mit der Zeit zäher
+    s.gegner.push({ ...typ, x: s.x + Math.cos(w) * d, y: s.y + Math.sin(w) * d, hp: typ.hp * (boss ? 1 : skal), maxHp: typ.hp * (boss ? 1 : skal),
+                    boss: !!boss, blitz: 0 });
+  }
+
+  function upgradeWahl() {
+    const moegl = UPGRADES.filter(u => s.up[u.id] < u.max), wahl = [];
+    while (wahl.length < 3 && moegl.length) wahl.push(moegl.splice(Math.floor(s.rnd() * moegl.length), 1)[0]);
+    return wahl;
+  }
+  function upgrade(id) {
+    s.up[id]++;
+    if (id === "tempo") s.tempo *= 1.12;
+    if (id === "ausdauer") { s.maxHp += 25; s.hp = s.maxHp; }
+    const u = UPGRADES.find(u => u.id === id);
+    s.banner = { text: u.ico + " " + u.name + (s.up[id] > 1 ? " " + s.up[id] : ""), zeit: 1.6 };
+    s.ereignisse.push(["level", s.n]);
+  }
+
+  function schritt(eingabe, auto) {
+    if (s.ende || s.pause) { s.funken.forEach(f => { f.x += f.vx * DT; f.y += f.vy * DT; f.vy += 300 * DT; f.l -= DT * .4; }); return; }
+    s.t += DT; s.n++;
+    if (s.t >= ZIEL) return gewonnen();
+    // Bewegung
+    let mx = eingabe.x, my = eingabe.y;
+    if (auto) [mx, my] = autopilot();
+    const l = Math.hypot(mx, my);
+    if (l > 1) { mx /= l; my /= l; }
+    s.x += mx * s.tempo * DT; s.y += my * s.tempo * DT;
+    if (mx) s.blick = Math.sign(mx);
+    // Gegner erscheinen – immer mehr
+    s.spawn -= DT;
+    const proSek = 1 + s.t * .035 + (s.t > 120 ? 1.5 : 0);
+    while (s.spawn <= 0) {
+      const typen = GEGNER.filter(g => g.ab <= s.t);
+      gegnerSpawn(typen[Math.floor(s.rnd() * typen.length)]);
+      s.spawn += 1 / proSek;
+    }
+    for (const b of BOSSE) if (s.t >= b.zeit && !s.bossDa[b.name]) {
+      s.bossDa[b.name] = true; gegnerSpawn(b, true); s.banner = { text: "⚠️ " + b.name + " kommt!", zeit: 2.2, boss: true };
+      s.ereignisse.push(["boss", s.n]); klang("boss");
+    }
+    // Waffe 1: Prompt-Blitze auf den nächsten Gegner
+    s.cd -= DT;
+    if (s.cd <= 0 && s.gegner.length) {
+      const ziele = [...s.gegner].sort((a, b) => Math.hypot(a.x - s.x, a.y - s.y) - Math.hypot(b.x - s.x, b.y - s.y));
+      const anzahl = 1 + s.up.mehr;
+      for (let i = 0; i < anzahl; i++) {
+        const z = ziele[i % ziele.length], w = Math.atan2(z.y - s.y, z.x - s.x) + (i >= ziele.length ? (i - 1) * .15 : 0);
+        s.schuesse.push({ x: s.x, y: s.y, vx: Math.cos(w) * 420, vy: Math.sin(w) * 420, l: 1.1, durch: 1 + Math.floor(s.up.besser / 2) });
+      }
+      s.cd = .65 * Math.pow(.85, s.up.schnell); s.ereignisse.push(["schuss", s.n]); klang("schuss");
+    }
+    s.schuesse.forEach(p => { p.x += p.vx * DT; p.y += p.vy * DT; p.l -= DT; });
+    // Gegner laufen auf dich zu, Treffer
+    const auraR = s.up.aura ? 46 + s.up.aura * 10 : 0, orbitN = s.up.orbit ? s.up.orbit + 1 : 0;
+    for (const g of s.gegner) {
+      const dx = s.x - g.x, dy = s.y - g.y, d = Math.hypot(dx, dy) || 1;
+      g.x += dx / d * g.v * DT; g.y += dy / d * g.v * DT; g.blitz = Math.max(0, g.blitz - DT);
+      for (const p of s.schuesse) if (p.l > 0 && Math.hypot(p.x - g.x, p.y - g.y) < g.r + 5) {
+        g.hp -= schaden(); g.blitz = .1; p.durch--; if (p.durch <= 0) p.l = 0; zahl(g, schaden()); klang("treffer");
+      }
+      if (auraR && d < auraR + g.r) { g.hp -= schaden() * (.5 + s.up.aura * .15) * DT * 2; g.blitz = .05; }
+      for (let k = 0; k < orbitN; k++) {
+        const w = s.t * 3.2 + k * Math.PI * 2 / orbitN, ox = s.x + Math.cos(w) * 70, oy = s.y + Math.sin(w) * 70;
+        if (Math.hypot(ox - g.x, oy - g.y) < g.r + 9 && !g.orbitCd) { g.hp -= schaden() * .9; g.blitz = .1; g.orbitCd = .35; zahl(g, schaden() * .9); }
+      }
+      g.orbitCd = Math.max(0, (g.orbitCd || 0) - DT);
+      if (d < g.r + 13 && !s.schutz) {
+        s.hp -= g.dmg; s.schutz = .6; s.ereignisse.push(["aua", s.n]); klang("aua");
+        if (s.hp <= 0) return verloren();
+      }
+    }
+    s.schutz = Math.max(0, s.schutz - DT);
+    // besiegte Gegner lassen Prompts fallen
+    for (const g of s.gegner) if (g.hp <= 0) {
+      s.kills++;
+      const wert = g.boss ? 30 : 1;
+      for (let k = 0; k < (g.boss ? 12 : 1); k++) s.items.push({ x: g.x + (s.rnd() - .5) * (g.boss ? 60 : 0), y: g.y + (s.rnd() - .5) * (g.boss ? 60 : 0), wert: g.boss ? 3 : wert });
+      for (let k = 0; k < (g.boss ? 40 : 6); k++) s.funken.push({ x: g.x, y: g.y, vx: (s.rnd() - .5) * 240, vy: (s.rnd() - .5) * 240, l: .4, f: g.f });
+    }
+    s.gegner = s.gegner.filter(g => g.hp > 0 && Math.hypot(g.x - s.x, g.y - s.y) < 900);
+    s.schuesse = s.schuesse.filter(p => p.l > 0);
+    // Prompts einsammeln (mit Magnet)
+    const magnet = 80 * (1 + .45 * s.up.magnet);
+    for (const i of s.items) {
+      const d = Math.hypot(i.x - s.x, i.y - s.y);
+      if (d < magnet) { i.x += (s.x - i.x) / d * 380 * DT; i.y += (s.y - i.y) / d * 380 * DT; }
+      if (d < 16) {
+        i.weg = true; s.xp += i.wert; s.prompts += i.wert; s.ereignisse.push(["prompt", s.n]); klang("prompt");
+      }
+    }
+    s.items = s.items.filter(i => !i.weg && Math.hypot(i.x - s.x, i.y - s.y) < 1200);
+    s.funken.forEach(f => { f.x += f.vx * DT; f.y += f.vy * DT; f.l -= DT; }); s.funken = s.funken.filter(f => f.l > 0);
+    s.texte.forEach(t => { t.y -= 30 * DT; t.l -= DT; }); s.texte = s.texte.filter(t => t.l > 0);
+    if (s.banner) { s.banner.zeit -= DT; if (s.banner.zeit <= 0) s.banner = null; }
+    // Level-up
+    if (s.xp >= s.xpNoetig) {
+      s.xp -= s.xpNoetig; s.level++; s.xpNoetig = Math.round(4 + s.level * 2.2); s.hp = Math.min(s.maxHp, s.hp + 15); klang("level");   // kleine Heilung
+      const wahl = upgradeWahl();
+      if (auto || renderFrame !== null) upgrade(wahl[0].id);            // Autopilot nimmt immer die erste Karte
+      else zeigeLevelup(wahl);
+    }
+  }
+  function zahl(g, w) { if (s.texte.length < 40) s.texte.push({ x: g.x + (s.rnd() - .5) * 10, y: g.y - g.r, t: Math.round(w), l: .5 }); }
+
+  function autopilot() {    // weicht Gegnern aus, läuft zu Prompts, kreist leicht
+    let ax = 0, ay = 0;
+    for (const g of s.gegner) {
+      const dx = s.x - g.x, dy = s.y - g.y, d = Math.hypot(dx, dy) || 1, reich = g.boss ? 230 : 120;
+      if (d < reich) { const k = (reich - d) / reich * (g.boss ? 3 : 1.4); ax += dx / d * k; ay += dy / d * k; }
+    }
+    let nah = null, nd = 1e9;
+    for (const i of s.items) { const d = Math.hypot(i.x - s.x, i.y - s.y); if (d < nd) { nd = d; nah = i; } }
+    if (nah && nd < 320) { ax += (nah.x - s.x) / nd * .9; ay += (nah.y - s.y) / nd * .9; }
+    ax += Math.cos(s.t * .35) * .25; ay += Math.sin(s.t * .35) * .25;
+    return [ax, ay];
+  }
+
+  function gewonnen() {
+    s.ende = "sieg"; s.ereignisse.push(["sieg", s.n]); musik(false); klang("sieg");
+    const farben = ["#C8F25A", "#FFB547", "#FF7A6B", "#5AD1F2", "#fff"];
+    for (let k = 0; k < 160; k++)
+      s.funken.push({ x: s.x - W / 2 + s.rnd() * W, y: s.y - H / 2 - s.rnd() * 300, vx: (s.rnd() - .5) * 80, vy: 60 + s.rnd() * 120, l: 3, f: farben[k % 5], k: true });
+    if (renderFrame === null) setTimeout(zeigeSieg, 1400);
+  }
+  function verloren() { s.ende = "aus"; s.ereignisse.push(["aus", s.n]); musik(false); klang("aus"); if (renderFrame === null) setTimeout(zeigeVerloren, 700); }
+
+  // ---------- Zeichnen ----------
+  function rund(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); }
+  function text(t, x, y, groesse, farbe, ausr = "left", gew = 900) {
+    ctx.fillStyle = farbe; ctx.font = gew + " " + groesse + "px Archivo, Arial"; ctx.textAlign = ausr; ctx.textBaseline = "top"; ctx.fillText(t, x, y);
+  }
+  function figur(x, y, r, farbe, augenFarbe, blick) {
+    ctx.fillStyle = farbe; rund(x - r, y - r, r * 2, r * 2, r * .5);
+    ctx.fillStyle = augenFarbe; const ax = blick * r * .2;
+    ctx.fillRect(x - r * .38 + ax, y - r * .3, r * .2, r * .38); ctx.fillRect(x + r * .18 + ax, y - r * .3, r * .2, r * .38);
+  }
+
+  function zeichnen(joy) {
+    const kx = s.x - W / 2, ky = s.y - H / 2;
+    ctx.fillStyle = "#0F1B2D"; ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.translate(-kx, -ky);
+    // Boden: Raster + verstreute Punkte
+    ctx.strokeStyle = "rgba(220,226,234,.06)"; ctx.lineWidth = 1;
+    const gx = Math.floor(kx / 48) * 48, gy = Math.floor(ky / 48) * 48;
+    ctx.beginPath();
+    for (let x = gx; x < kx + W + 48; x += 48) { ctx.moveTo(x, ky); ctx.lineTo(x, ky + H); }
+    for (let y = gy; y < ky + H + 48; y += 48) { ctx.moveTo(kx, y); ctx.lineTo(kx + W, y); }
+    ctx.stroke();
+    ctx.fillStyle = "rgba(200,242,90,.08)";
+    for (let x = gx; x < kx + W + 48; x += 48) for (let y = gy; y < ky + H + 48; y += 48)
+      if (((x * 7 + y * 13) / 48 | 0) % 7 === 0) ctx.fillRect(x + 20, y + 20, 6, 6);
+    // Aura
+    if (s.up.aura) {
+      const r = 46 + s.up.aura * 10, p = 1 + Math.sin(s.t * 6) * .04;
+      ctx.fillStyle = "rgba(200,242,90,.10)"; ctx.beginPath(); ctx.arc(s.x, s.y, r * p, 0, 7); ctx.fill();
+      ctx.strokeStyle = "rgba(200,242,90,.35)"; ctx.lineWidth = 2; ctx.stroke();
+    }
+    // Prompts (Blitze am Boden)
+    s.items.forEach(i => {
+      const b = Math.sin(s.t * 6 + i.x) * 2, gr = i.wert > 1 ? 1.4 : 1;
+      ctx.fillStyle = "rgba(255,181,71,.22)"; ctx.beginPath(); ctx.arc(i.x, i.y + b, 9 * gr, 0, 7); ctx.fill();
+      ctx.fillStyle = "#FFB547"; ctx.beginPath();
+      ctx.moveTo(i.x + 2 * gr, i.y - 7 * gr + b); ctx.lineTo(i.x - 4 * gr, i.y + 1 * gr + b); ctx.lineTo(i.x, i.y + 1 * gr + b);
+      ctx.lineTo(i.x - 2 * gr, i.y + 7 * gr + b); ctx.lineTo(i.x + 4 * gr, i.y - 1 * gr + b); ctx.lineTo(i.x, i.y - 1 * gr + b); ctx.fill();
+    });
+    // Gegner
+    s.gegner.forEach(g => {
+      if (g.x < kx - 60 || g.x > kx + W + 60 || g.y < ky - 60 || g.y > ky + H + 60) return;
+      const wackel = Math.sin(s.t * 10 + g.x) * 1.5;
+      figur(g.x, g.y + wackel, g.r, g.blitz ? "#fff" : g.f, "#0F1B2D", Math.sign(s.x - g.x));
+      ctx.fillStyle = "#0F1B2D"; ctx.font = "900 " + Math.max(7, g.r * .55) + "px Archivo, Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText(g.name.split(" ").pop(), g.x, g.y + g.r * .45 + wackel, g.r * 2 - 2);
+      if (g.boss) {
+        ctx.fillStyle = "rgba(0,0,0,.4)"; rund(g.x - 40, g.y - g.r - 16, 80, 7, 3);
+        ctx.fillStyle = "#FF3B3B"; rund(g.x - 40, g.y - g.r - 16, 80 * Math.max(0, g.hp / g.maxHp), 7, 3);
+      }
+    });
+    // Ideen-Kreis
+    const orbitN = s.up.orbit ? s.up.orbit + 1 : 0;
+    for (let k = 0; k < orbitN; k++) {
+      const w = s.t * 3.2 + k * Math.PI * 2 / orbitN, ox = s.x + Math.cos(w) * 70, oy = s.y + Math.sin(w) * 70;
+      ctx.fillStyle = "rgba(255,201,60,.3)"; ctx.beginPath(); ctx.arc(ox, oy, 12, 0, 7); ctx.fill();
+      ctx.fillStyle = "#FFC93C"; ctx.beginPath(); ctx.arc(ox, oy, 7, 0, 7); ctx.fill();
+    }
+    // Prompt-Blitze
+    s.schuesse.forEach(p => {
+      ctx.strokeStyle = "#C8F25A"; ctx.lineWidth = 4; ctx.lineCap = "round"; ctx.beginPath();
+      ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - p.vx * .03, p.y - p.vy * .03); ctx.stroke();
+    });
+    // Spielerin/Spieler
+    if (!(s.schutz && Math.floor(s.t * 14) % 2)) figur(s.x, s.y + Math.sin(s.t * 12) * 1.2, 15, s.ende === "aus" ? "#9AA8BB" : "#C8F25A", "#0F1B2D", s.blick);
+    s.funken.forEach(f => { ctx.globalAlpha = Math.max(0, Math.min(1, f.l / .4)); ctx.fillStyle = f.f; ctx.fillRect(f.x, f.y, f.k ? 6 : 4, f.k ? 9 : 4); });
+    ctx.globalAlpha = 1;
+    s.texte.forEach(t => { ctx.globalAlpha = Math.min(1, t.l * 3); text(t.t, t.x, t.y, 11, "#fff", "center"); });
+    ctx.globalAlpha = 1;
+    ctx.restore();
+
+    // Anzeige: Zeit, Fortschritt, Leben, Level, XP
+    text(zeitText(s.t), W / 2, 18, 30, "#fff", "center");
+    text("/ 3:00", W / 2, 50, 11, "#9AA8BB", "center", 800);
+    ctx.fillStyle = "rgba(220,226,234,.15)"; rund(20, 70, W - 40, 6, 3);
+    ctx.fillStyle = "#C8F25A"; rund(20, 70, Math.max(6, (W - 40) * Math.min(1, s.t / ZIEL)), 6, 3);
+    [90, 150].forEach(z => { ctx.fillStyle = "#FF3B3B"; ctx.fillRect(20 + (W - 40) * z / ZIEL - 1, 67, 3, 12); });
+    text("❤ " + Math.max(0, Math.ceil(s.hp)), 20, 22, 15, "#FF7A6B");
+    text("LV " + s.level, W - 20, 22, 15, "#C8F25A", "right");
+    ctx.fillStyle = "rgba(220,226,234,.12)"; rund(20, H - 30, W - 40, 8, 4);
+    ctx.fillStyle = "#FFB547"; rund(20, H - 30, Math.max(8, (W - 40) * Math.min(1, s.xp / s.xpNoetig)), 8, 4);
+    text("⚡ " + s.prompts + " Prompts · " + s.kills + " Ausreden besiegt", W / 2, H - 50, 11, "#9AA8BB", "center", 800);
+    if (s.banner) {
+      ctx.globalAlpha = Math.min(1, s.banner.zeit * 2);
+      ctx.fillStyle = s.banner.boss ? "rgba(255,59,59,.9)" : "rgba(200,242,90,.95)"; rund(W / 2 - 150, 110, 300, 40, 12);
+      text(s.banner.text, W / 2, 120, 17, s.banner.boss ? "#fff" : "#0F1B2D", "center");
+      ctx.globalAlpha = 1;
+    }
+    if (s.ende === "sieg") { text("ÜBERLEBT!", W / 2, 220, 48, "#C8F25A", "center"); text("Der Code ist frei", W / 2, 276, 18, "#fff", "center", 800); }
+    if (joy && joy.aktiv) {                                           // virtueller Joystick am Handy
+      ctx.strokeStyle = "rgba(220,226,234,.35)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(joy.sx, joy.sy, 40, 0, 7); ctx.stroke();
+      ctx.fillStyle = "rgba(200,242,90,.5)"; ctx.beginPath(); ctx.arc(joy.sx + joy.dx * 40, joy.sy + joy.dy * 40, 18, 0, 7); ctx.fill();
+    }
+  }
+
+  groesse(); addEventListener("resize", () => { groesse(); zeichnen(); });
+
+  if (param.has("zeitplan")) {                                       // fürs Video: wann passiert was?
+    neu(5); const z = {};
+    for (let i = 1; i < 12000 && !s.ende; i++) schritt({ x: 0, y: 0 }, true);
+    s.ereignisse.forEach(([art, n]) => (z[art] = z[art] || []).push(n));
+    z.ende = s.ende; z.zeit = Math.round(s.t); z.level = s.level; z.kills = s.kills;
+    document.title = JSON.stringify(z);
+    return;
+  }
+  if (renderFrame !== null) {                                        // Video-Modus
+    document.getElementById("start").hidden = true; document.getElementById("ton").hidden = true;
+    neu(5); for (let i = 0; i < renderFrame; i++) schritt({ x: 0, y: 0 }, true);
+    document.fonts.ready.then(() => zeichnen()); zeichnen();
+    return;
+  }
+
+  // ---------- Normales Spiel ----------
+  const ebenen = { start: document.getElementById("start"), levelup: document.getElementById("levelup"),
+                   verloren: document.getElementById("verloren"), sieg: document.getElementById("sieg") };
+  const tasten = {}, joy = { aktiv: false, sx: 0, sy: 0, dx: 0, dy: 0 };
+  let laeuft = false, letzte = 0, rest = 0;
+  neu(1); zeichnen();
+
+  async function spielen() {
+    await audioStart(); musik(true);
+    neu(Date.now() & 0xffff); Object.values(ebenen).forEach(e => e.hidden = true);
+    laeuft = true; letzte = performance.now(); rest = 0; requestAnimationFrame(loop);
+  }
+  function eingabe() {
+    let x = (tasten.ArrowRight || tasten.KeyD ? 1 : 0) - (tasten.ArrowLeft || tasten.KeyA ? 1 : 0);
+    let y = (tasten.ArrowDown || tasten.KeyS ? 1 : 0) - (tasten.ArrowUp || tasten.KeyW ? 1 : 0);
+    if (joy.aktiv) { x = joy.dx; y = joy.dy; }
+    return { x, y };
+  }
+  function loop(jetzt) {
+    if (!laeuft) return;
+    rest += Math.min(.1, (jetzt - letzte) / 1000); letzte = jetzt;
+    while (rest >= DT && !s.pause && !s.ende) { schritt(eingabe(), false); rest -= DT; }
+    if (s.ende) schritt(eingabe(), false);
+    zeichnen(joy);
+    if (s.ende === "aus" && !s.funken.length) { laeuft = false; return; }
+    requestAnimationFrame(loop);
+  }
+  function zeigeLevelup(wahl) {
+    s.pause = true;
+    const k = document.getElementById("karten"); k.innerHTML = "";
+    wahl.forEach(u => {
+      const b = document.createElement("button"); b.className = "karte";
+      b.innerHTML = `<span class="ico">${u.ico}</span><span>${s.up[u.id] ? "" : '<span class="neu">NEU</span>'}<b>${u.name}${s.up[u.id] ? " " + (s.up[u.id] + 1) : ""}</b><small>${u.text}</small></span>`;
+      b.onclick = () => { upgrade(u.id); ebenen.levelup.hidden = true; s.pause = false; letzte = performance.now(); rest = 0; };
+      k.appendChild(b);
+    });
+    ebenen.levelup.hidden = false; k.firstChild.focus();
+  }
+  function zeigeVerloren() {
+    document.getElementById("v-zeit").textContent = zeitText(s.t) + " / 3:00";
+    document.getElementById("v-text").textContent = "Level " + s.level + " · " + s.kills + " Ausreden besiegt. Fast!";
+    ebenen.verloren.hidden = false;
+  }
+  function zeigeSieg() {
+    laeuft = false;
+    document.getElementById("s-text").textContent = "3 Minuten überlebt, Level " + s.level + ", " + s.kills + " Ausreden besiegt.";
+    const feld = document.getElementById("s-code"); ebenen.sieg.hidden = false;
+    let i = 0;
+    const tick = setInterval(() => { i++; feld.textContent = CODE.slice(0, i) + "•".repeat(Math.max(0, CODE.length - i)); if (i >= CODE.length) clearInterval(tick); }, 90);
+  }
+  addEventListener("keydown", e => { tasten[e.code] = true; if (laeuft && e.code.startsWith("Arrow")) e.preventDefault(); });
+  addEventListener("keyup", e => { tasten[e.code] = false; });
+  const punkt = e => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) / cv.skala, (e.clientY - r.top) / cv.skala]; };
+  cv.addEventListener("pointerdown", e => { if (!laeuft) return; [joy.sx, joy.sy] = punkt(e); joy.aktiv = true; joy.dx = joy.dy = 0; cv.setPointerCapture(e.pointerId); });
+  cv.addEventListener("pointermove", e => {
+    if (!joy.aktiv) return;
+    const [x, y] = punkt(e), dx = x - joy.sx, dy = y - joy.sy, d = Math.hypot(dx, dy), m = Math.min(1, d / 40);
+    joy.dx = d ? dx / d * m : 0; joy.dy = d ? dy / d * m : 0;
+  });
+  const loslassen = () => { joy.aktiv = false; joy.dx = joy.dy = 0; };
+  cv.addEventListener("pointerup", loslassen); cv.addEventListener("pointercancel", loslassen);
+  document.getElementById("los").onclick = spielen;
+  document.getElementById("nochmal").onclick = spielen;
+  document.getElementById("teilen").onclick = async () => {
+    const t = "Ich hab 3 Minuten in der Arena der Ausreden überlebt – schaffst du das auch?";
+    const url = location.origin + "/arena";
+    try { if (navigator.share) await navigator.share({ text: t, url }); else await navigator.clipboard.writeText(t + " " + url); } catch (e) {}
+  };
+  const tonKnopf = document.getElementById("ton");
+  const tonZeigen = () => { tonKnopf.textContent = tonAn ? "🔊" : "🔇"; tonKnopf.setAttribute("aria-label", tonAn ? "Ton aus" : "Ton an"); };
+  tonZeigen();
+  tonKnopf.onclick = async () => {
+    tonAn = !tonAn; tonZeigen();
+    try { localStorage.setItem("startplan-ton", tonAn ? "an" : "aus"); } catch (e) {}
+    await audioStart(); musik(tonAn && laeuft);
+  };
+})();
+</script>
+</body>
+</html>
