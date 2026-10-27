@@ -5,12 +5,10 @@
 /links/        /links.html   301
 
 # Kurze Kauf-Adresse für Videos/Posts -> direkt zu Gumroad
-/kaufen   https://businessmind355.gumroad.com/l/popdsw   302
-/kaufen/  https://businessmind355.gumroad.com/l/popdsw   302
+# -> netlify/functions/weiter.mjs (zählt den Klick, leitet dann zu Gumroad weiter)
 
 # Spiel: kurze Adresse für Videos
 /spiel    /spiel.html   200
 
 # Rabattcode aus dem Spiel (NICHTNORMAL, 50 %, max. 100 Einlösungen) -> Gumroad mit eingesetztem Code
-/code     https://businessmind355.gumroad.com/l/popdsw/NICHTNORMAL   302
-/code/    https://businessmind355.gumroad.com/l/popdsw/NICHTNORMAL   302
+# -> netlify/functions/weiter.mjs (zählt den Klick, leitet dann zu Gumroad weiter)

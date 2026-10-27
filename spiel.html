@@ -87,6 +87,7 @@
   </div>
 </div>
 
+<script src="js/zaehler.js"></script>
 <script>
 /* „Der Startplan von 0“ – Spring-Spiel mit 3 Leveln. Im Ziel wird der Rabattcode angezeigt.
    Mit ?frame=N wird ohne Bedienung der Zustand nach N Schritten (60 pro Sekunde) mit Autopilot gezeichnet –
@@ -221,9 +222,9 @@
     const farben = ["#C8F25A", "#FFB547", "#FF7A6B", "#5AD1F2", "#fff"];
     for (let k = 0; k < 140; k++)
       s.funken.push({ x: s.rnd() * W, y: -20 - s.rnd() * 300, vx: (s.rnd() - .5) * 80, vy: 60 + s.rnd() * 120, l: 3, f: farben[k % 5], k: true });
-    if (renderFrame === null) setTimeout(zeigeSieg, 1400);
+    if (renderFrame === null) { setTimeout(zeigeSieg, 1400); window.zaehle && zaehle("spiel:sieg"); }
   }
-  function verloren() { s.ende = "aus"; musik(false); klang("aus"); if (renderFrame === null) setTimeout(zeigeVerloren, 500); }
+  function verloren() { s.ende = "aus"; musik(false); klang("aus"); if (renderFrame === null) { setTimeout(zeigeVerloren, 500); window.zaehle && zaehle("spiel:aus"); } }
 
   function rund(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); }
   function text(t, x, y, groesse, farbe, ausr = "left", gew = 900) {
@@ -317,6 +318,7 @@
 
   async function spielen() {
     await audioStart(); musik(true);
+    window.zaehle && zaehle("spiel:start");
     neu(Date.now() & 0xffff); Object.values(ebenen).forEach(e => e.hidden = true);
     laeuft = true; letzte = performance.now(); rest = 0; requestAnimationFrame(loop);
   }

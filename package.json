@@ -1,0 +1,9 @@
+{
+  "name": "ebook-website",
+  "private": true,
+  "description": "Statische Website + kleiner eigener Besucherzähler (Netlify Functions + Blobs)",
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^11.0.0"
+  }
+}
