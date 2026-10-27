@@ -36,10 +36,13 @@
   .knapp { color: var(--coral); font-weight: 800; margin-top: 6px; }
   .klein { margin-top: 14px; font-size: 12px; color: var(--muted); line-height: 1.5; }
   .klein a { color: var(--muted); }
+  .ton { position: fixed; right: 12px; bottom: 12px; z-index: 5; width: 44px; height: 44px; border-radius: 50%; border: 0;
+         background: rgba(21, 37, 61, .85); color: #fff; font-size: 20px; cursor: pointer; }
 </style>
 </head>
 <body>
 <canvas id="c" aria-label="Spielfeld"></canvas>
+<button class="ton" id="ton" aria-label="Ton aus">🔊</button>
 
 <div class="layer" id="start">
   <div class="box">
@@ -101,6 +104,45 @@
   const renderFrame = param.has("frame") ? parseInt(param.get("frame"), 10) : null;
   const cv = document.getElementById("c"), ctx = cv.getContext("2d");
 
+  // ---------- Ton: Beat aus den Videos als Schleife + selbst erzeugte Geräusche ----------
+  let ac = null, beat = null, beatQuelle = null, beatLaut = null, tonAn = true;
+  try { tonAn = localStorage.getItem("startplan-ton") !== "aus"; } catch (e) {}
+  async function audioStart() {
+    if (!ac) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      ac = new AC(); beatLaut = ac.createGain(); beatLaut.gain.value = .32; beatLaut.connect(ac.destination);
+      try { beat = await ac.decodeAudioData(await (await fetch("sound/beat.wav")).arrayBuffer()); } catch (e) {}
+    }
+    if (ac.state === "suspended") ac.resume();
+  }
+  function musik(an) {
+    if (beatQuelle) { try { beatQuelle.stop(); } catch (e) {} beatQuelle = null; }
+    if (!an || !tonAn || !ac || !beat) return;
+    beatQuelle = ac.createBufferSource(); beatQuelle.buffer = beat; beatQuelle.loop = true;
+    beatQuelle.connect(beatLaut); beatQuelle.start();
+  }
+  function klang(art) {
+    if (!ac || !tonAn) return;
+    const t = ac.currentTime, g = ac.createGain(); g.connect(ac.destination);
+    const osz = (typ, f1, f2, start, dauer, laut) => {
+      const o = ac.createOscillator(), h = ac.createGain();
+      o.type = typ; o.frequency.setValueAtTime(f1, t + start); o.frequency.exponentialRampToValueAtTime(f2, t + start + dauer);
+      h.gain.setValueAtTime(laut, t + start); h.gain.exponentialRampToValueAtTime(.001, t + start + dauer);
+      o.connect(h); h.connect(g); o.start(t + start); o.stop(t + start + dauer + .02);
+    };
+    if (art === "sprung") osz("square", 260, 760, 0, .13, .07);
+    if (art === "prompt") { osz("sine", 988, 990, 0, .07, .2); osz("sine", 1480, 1482, .06, .14, .2); }
+    if (art === "treffer") {
+      osz("sawtooth", 160, 50, 0, .3, .25);
+      const n = ac.createBufferSource(), b = ac.createBuffer(1, ac.sampleRate * .2, ac.sampleRate), d = b.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+      const h = ac.createGain(); h.gain.value = .25; n.buffer = b; n.connect(h); h.connect(g); n.start(t);
+    }
+    if (art === "sieg") [523, 659, 784, 1047, 1319].forEach((f, i) => osz("triangle", f, f * 1.001, i * .1, i === 4 ? .7 : .14, .22));
+    if (art === "aus") osz("sawtooth", 320, 70, 0, .6, .18);
+  }
+
   function groesse() {
     const skala = Math.min(innerWidth / W, innerHeight / H), dpr = devicePixelRatio || 1;
     cv.width = Math.round(W * skala * dpr); cv.height = Math.round(H * skala * dpr);
@@ -117,7 +159,7 @@
   function neu(seed) {
     const rnd = zufall(seed);
     s = { rnd, t: 0, weg: 0, y: BODEN - FIGUR, vy: 0, amBoden: true, hin: [], items: [], naechstes: 1.4, naechstesItem: 0.8,
-          leben: 3, schutz: 0, prompts: 0, level: 0, banner: 2, ende: null, funken: [], wackeln: 0,
+          leben: 3, schutz: 0, prompts: 0, level: 0, banner: 2, ende: null, funken: [], wackeln: 0, n: 0, ereignisse: [],
           stadt: Array.from({ length: 14 }, (_, i) => ({ x: i * 60, h: 60 + rnd() * 140 })) };
   }
   const meter = () => Math.floor(s.weg / 10);
@@ -125,14 +167,14 @@
 
   function springen() {
     if (s.ende || !s.amBoden) return;
-    s.vy = -820; s.amBoden = false;
+    s.vy = -820; s.amBoden = false; s.ereignisse.push(["sprung", s.n]); klang("sprung");
     for (let i = 0; i < 8; i++) s.funken.push({ x: 87, y: BODEN, vx: -60 - s.rnd() * 120, vy: -s.rnd() * 160, l: .4, f: "#C8F25A" });
   }
 
   function schritt(auto) {
     if (s.ende) { s.t += DT; s.funken.forEach(f => { f.x += f.vx * DT; f.y += f.vy * DT; f.vy += 300 * DT; f.l -= DT * .4; }); return; }
-    s.t += DT;
-    const tempo = lv().tempo + (meter() - (s.level ? LEVEL[s.level - 1].bis : 0)) * 0.06;
+    s.t += DT; s.n++;
+    const tempo =lv().tempo + (meter() - (s.level ? LEVEL[s.level - 1].bis : 0)) * 0.06;
     s.weg += tempo * DT;
     if (meter() >= lv().bis) {
       if (s.level === LEVEL.length - 1) return gewonnen();
@@ -164,24 +206,24 @@
     s.funken = s.funken.filter(f => f.l > 0);
     for (const i of s.items)       // Prompt eingesammelt
       if (Math.abs(i.x - 87) < 28 && Math.abs(i.y - (s.y + FIGUR / 2)) < 30) {
-        i.weg = true; s.prompts = Math.min(42, s.prompts + 1);
+        i.weg = true; s.prompts = Math.min(42, s.prompts + 1); s.ereignisse.push(["prompt", s.n]); klang("prompt");
         for (let k = 0; k < 10; k++) s.funken.push({ x: i.x, y: i.y, vx: (s.rnd() - .5) * 260, vy: (s.rnd() - .8) * 260, l: .5, f: "#FFB547" });
       }
     if (!s.schutz) for (const h of s.hin)   // gegen eine Ausrede gelaufen
       if (70 + FIGUR > h.x + 5 && 70 < h.x + h.w - 5 && s.y + FIGUR > BODEN - h.h + 5) {
-        h.weg = true; s.leben--; s.schutz = 1.2; s.wackeln = .3;
+        h.weg = true; s.leben--; s.schutz = 1.2; s.wackeln = .3; s.ereignisse.push(["treffer", s.n]); klang("treffer");
         if (s.leben <= 0) return verloren();
       }
   }
 
   function gewonnen() {
-    s.ende = "sieg";
+    s.ende = "sieg"; musik(false); klang("sieg");
     const farben = ["#C8F25A", "#FFB547", "#FF7A6B", "#5AD1F2", "#fff"];
     for (let k = 0; k < 140; k++)
       s.funken.push({ x: s.rnd() * W, y: -20 - s.rnd() * 300, vx: (s.rnd() - .5) * 80, vy: 60 + s.rnd() * 120, l: 3, f: farben[k % 5], k: true });
     if (renderFrame === null) setTimeout(zeigeSieg, 1400);
   }
-  function verloren() { s.ende = "aus"; if (renderFrame === null) setTimeout(zeigeVerloren, 500); }
+  function verloren() { s.ende = "aus"; musik(false); klang("aus"); if (renderFrame === null) setTimeout(zeigeVerloren, 500); }
 
   function rund(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); }
   function text(t, x, y, groesse, farbe, ausr = "left", gew = 900) {
@@ -256,12 +298,13 @@
   if (param.has("zeitplan")) {                                       // fürs Video: bei welchem Schritt beginnt welches Level?
     neu(11); const z = { level: [0] };
     for (let i = 1; i < 6000 && !s.ende; i++) { const l = s.level; schritt(true); if (s.level !== l) z.level.push(i); if (s.ende) z[s.ende] = i; }
+    s.ereignisse.forEach(([art, n]) => (z[art] = z[art] || []).push(n));   // Sprünge usw. für die Geräusche im Video
     document.title = JSON.stringify(z);
     return;
   }
 
   if (renderFrame !== null) {                                        // Video-Modus
-    document.getElementById("start").hidden = true;
+    document.getElementById("start").hidden = true; document.getElementById("ton").hidden = true;
     neu(11); for (let i = 0; i < renderFrame; i++) schritt(true);
     document.fonts.ready.then(zeichnen); zeichnen();
     return;
@@ -272,10 +315,19 @@
   let laeuft = false, letzte = 0, rest = 0;
   neu(1); zeichnen();
 
-  function spielen() {
+  async function spielen() {
+    await audioStart(); musik(true);
     neu(Date.now() & 0xffff); Object.values(ebenen).forEach(e => e.hidden = true);
     laeuft = true; letzte = performance.now(); rest = 0; requestAnimationFrame(loop);
   }
+  const tonKnopf = document.getElementById("ton");
+  const tonZeigen = () => { tonKnopf.textContent = tonAn ? "🔊" : "🔇"; tonKnopf.setAttribute("aria-label", tonAn ? "Ton aus" : "Ton an"); };
+  tonZeigen();
+  tonKnopf.onclick = async () => {
+    tonAn = !tonAn; tonZeigen();
+    try { localStorage.setItem("startplan-ton", tonAn ? "an" : "aus"); } catch (e) {}
+    await audioStart(); musik(tonAn && laeuft);
+  };
   function loop(jetzt) {
     if (!laeuft) return;
     rest += Math.min(.1, (jetzt - letzte) / 1000); letzte = jetzt;
