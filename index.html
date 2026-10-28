@@ -29,7 +29,7 @@
   canvas#c { display: block; margin: 0 auto; }
   /* ---------- Grusel-Retro-Menüs (alles innerhalb des 9:16-Rahmens) ---------- */
   #ui { position: fixed; z-index: 4; pointer-events: none; }
-  .screen { position: absolute; inset: 0; display: flex; flex-direction: column; pointer-events: auto; overflow: hidden; }
+  .screen { position: absolute; inset: 0; display: flex; flex-direction: column; pointer-events: auto; overflow: hidden; padding-top: var(--oben, 0px); padding-bottom: var(--unten, 0px); }
   .screen[hidden], [hidden] { display: none !important; }
   .screen::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 5;                       /* Röhrenbildschirm */
                    background: repeating-linear-gradient(180deg, rgba(0,0,0,.22) 0 1px, transparent 1px 3px), radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0,0,0,.65) 100%); }
@@ -64,7 +64,7 @@
   .knopf.rot::before { content: "✕ "; }
   /* Titel mit tropfendem Blut */
   .titelbild { text-align: center; margin-top: 30px; }
-  .titelbild .t0 { font: 900 11px var(--schrift); color: var(--blut2); letter-spacing: 5px; text-shadow: 0 0 8px rgba(200,16,42,.7); }
+  .titelbild .t0 { font: 900 11px var(--schrift); color: #FFD8D8; letter-spacing: 5px; text-shadow: 0 0 4px #000, 0 0 10px #000, 0 0 14px rgba(200,16,42,.8); }
   .titelbild .t1 { position: relative; display: inline-block; font: 900 42px var(--schrift); color: var(--knochen); letter-spacing: 2px; line-height: .92; margin-top: 6px;
                    text-shadow: 3px 3px 0 #4A0810, 0 0 22px rgba(200,16,42,.55); animation: flackern 7s infinite; }
   .titelbild .t1 i { position: absolute; top: 88%; width: 4px; border-radius: 0 0 3px 3px; background: linear-gradient(#5A0A12, var(--blut2)); animation: tropfen 5s ease-in infinite; }
@@ -78,7 +78,7 @@
           box-shadow: inset 0 0 0 4px #5C5A62, inset 0 -18px 0 #2E2D33, inset 0 10px 0 #4A6A2A, 0 10px 0 #18171B, 0 0 30px rgba(122,232,216,.15); transition: box-shadow .2s, transform .2s; }
   .grab span { display: block; font: 900 30px var(--schrift); color: #1E1D22; letter-spacing: 3px; text-shadow: 0 1px 0 rgba(255,255,255,.18), 0 -1px 0 rgba(0,0,0,.6); margin-top: 22px; }
   .grab small { display: block; font: 900 9px var(--schrift); color: #26252A; letter-spacing: 1px; margin-top: 6px; text-shadow: 0 1px 0 rgba(255,255,255,.12); }
-  .grab::after { content: "✝"; position: absolute; top: 14px; left: 50%; transform: translateX(-50%); color: #2A292F; font-size: 16px; }
+  .grab::after { content: "\271D\FE0E"; position: absolute; top: 14px; left: 50%; transform: translateX(-50%); color: #2A292F; font-size: 16px; }
   .grab:hover, .grab:focus-visible { outline: none; transform: translateY(-3px); box-shadow: inset 0 0 0 4px #6A6870, inset 0 -18px 0 #2E2D33, inset 0 10px 0 #5A8A2E, 0 13px 0 #18171B, 0 0 40px rgba(122,232,216,.45); }
   .grab:hover span { color: #2A3A10; text-shadow: 0 0 10px rgba(122,232,216,.9); }
   /* Retro-Menüliste mit blinkendem Zeiger */
@@ -459,7 +459,10 @@
   const PC = param.has("geraet") ? param.get("geraet") === "pc" : matchMedia("(pointer: fine)").matches && innerWidth > innerHeight * 1.1;
   const breite = () => PC ? Math.round(693 * Math.min(1.9, Math.max(1.3, innerWidth / innerHeight))) : 390;
   let W = breite();
-  const H = 693, DT = 1 / 60, ZIEL = 600;
+  const hoehe = () => PC ? 693 : Math.round(Math.min(960, Math.max(693, 390 * innerHeight / innerWidth)));   // Handy: so hoch wie der Bildschirm
+  let H = hoehe();
+  const DT = 1 / 60, ZIEL = 600;
+  let sicherOben = 0, sicherUnten = 0;                                           // Platz für Uhrzeit-Leiste / Home-Strich (iPhone)
   let SPAWN_D = Math.max(430, Math.hypot(W / 2, H / 2) + 40);            // Monster erscheinen immer knapp außerhalb des Bildes
   document.body.classList.toggle("pc", PC);
   const CODE = atob("TklDSFROT1JNQUw=");
@@ -533,12 +536,18 @@
   }
 
   // ---------- Bildschirm ----------
+  const sicherProbe = document.createElement("div");                         // misst den sicheren Bereich des Geräts
+  sicherProbe.style.cssText = "position:fixed;top:0;left:0;width:0;height:0;visibility:hidden;pointer-events:none;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)";
+  document.body.appendChild(sicherProbe);
   function groesse() {
-    if (PC && breite() !== W) {                                             // Fenster/Vollbild geändert: Spielfeld passt sich an
-      W = breite(); SPAWN_D = Math.max(430, Math.hypot(W / 2, H / 2) + 40);
-      if (typeof lichtCv !== "undefined") lichtCv.width = W;
+    if (breite() !== W || hoehe() !== H) {                                   // Fenster/Vollbild/Handy geändert: Spielfeld passt sich an
+      W = breite(); H = hoehe(); SPAWN_D = Math.max(430, Math.hypot(W / 2, H / 2) + 40);
+      if (typeof lichtCv !== "undefined") { lichtCv.width = W; lichtCv.height = H; }
     }
     const skala = Math.min(innerWidth / W, innerHeight / H), dpr = devicePixelRatio || 1;
+    const rand = getComputedStyle(sicherProbe);
+    sicherOben = (parseFloat(rand.paddingTop) || 0) / skala; sicherUnten = (parseFloat(rand.paddingBottom) || 0) / skala;
+    ui.style.setProperty("--oben", sicherOben + "px"); ui.style.setProperty("--unten", sicherUnten + "px");
     cv.width = Math.round(W * skala * dpr); cv.height = Math.round(H * skala * dpr);
     cv.style.width = W * skala + "px"; cv.style.height = H * skala + "px";
     const oben = (innerHeight - H * skala) / 2, links = (innerWidth - W * skala) / 2;
@@ -2497,6 +2506,13 @@
 
   // ---------- HUD (Aufbau wie im Original: XP-Balken oben, Slots links, Zeit Mitte, Kills/Gold rechts) ----------
   function hud(joy) {
+    ctx.save(); ctx.translate(0, sicherOben); hudInnen(); ctx.restore();          // Anzeige beginnt unter der Uhrzeit-Leiste
+    if (joy && joy.aktiv && meta.opt.joy) {
+      ctx.globalAlpha = .55; ctx.fillStyle = "#DCE2EA"; ctx.beginPath(); ctx.arc(joy.sx, joy.sy, 36, 0, 7); ctx.fill();
+      ctx.globalAlpha = .9; ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(joy.sx + joy.dx * 30, joy.sy + joy.dy * 30, 14, 0, 7); ctx.fill(); ctx.globalAlpha = 1;
+    }
+  }
+  function hudInnen() {
     if (s.verschlungen) {
       ctx.fillStyle = "#000"; ctx.fillRect(0, 0, W, H);
       text("VERSCHLUNGEN", W / 2, H / 2 - 30, 34, "#C8001E", "center", 900);
@@ -2581,10 +2597,6 @@
       ctx.beginPath(); ctx.moveTo(maus.x - 14, maus.y); ctx.lineTo(maus.x - 5, maus.y); ctx.moveTo(maus.x + 5, maus.y); ctx.lineTo(maus.x + 14, maus.y);
       ctx.moveTo(maus.x, maus.y - 14); ctx.lineTo(maus.x, maus.y - 5); ctx.moveTo(maus.x, maus.y + 5); ctx.lineTo(maus.x, maus.y + 14); ctx.stroke();
       ctx.fillStyle = "#C8F25A"; ctx.fillRect(maus.x - 1, maus.y - 1, 2, 2); ctx.lineWidth = 1;
-    }
-    if (joy && joy.aktiv && meta.opt.joy) {
-      ctx.globalAlpha = .55; ctx.fillStyle = "#DCE2EA"; ctx.beginPath(); ctx.arc(joy.sx, joy.sy, 36, 0, 7); ctx.fill();
-      ctx.globalAlpha = .9; ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(joy.sx + joy.dx * 30, joy.sy + joy.dy * 30, 14, 0, 7); ctx.fill(); ctx.globalAlpha = 1;
     }
   }
 
@@ -3051,7 +3063,7 @@
   cv.addEventListener("pointerdown", e => {
     if (modus !== "spiel") return;
     const [x, y] = punkt(e);
-    if (x > W - 64 && x < W - 40 && y > 14 && y < 44) return pause();             // Pause-Knopf
+    if (x > W - 64 && x < W - 40 && y > 14 + sicherOben && y < 44 + sicherOben) return pause();             // Pause-Knopf
     if (e.pointerType === "mouse") { maus.aktiv = true; [maus.x, maus.y] = [x, y]; return; }   // PC: WASD + Maus
     [joy.sx, joy.sy] = [x, y]; joy.aktiv = true; joy.dx = joy.dy = 0; cv.setPointerCapture(e.pointerId);
   });
