@@ -7,7 +7,11 @@
 <meta name="description" content="DARKWOOD – ein Grusel-Survival-Spiel: Überlebe die Nacht im dunklen Wald, sammle Seelen, finde die Hütten und die letzte Laterne.">
 <!-- VORSCHAU-MODUS: Diese Zeile löschen, sobald Impressum und Datenschutz fertig sind. -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0F1B2D">
+<meta name="theme-color" content="#0A0204">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DARKWOOD">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
   @font-face { font-family: Archivo; src: url("fonts/archivo-latin-wght.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
@@ -333,6 +337,8 @@
       <div class="regler">Blink-Effekte <input type="checkbox" id="opt-blink"></div>
       <div class="regler">Schadenszahlen <input type="checkbox" id="opt-zahlen"></div>
       <div class="regler">Bildschirm wackeln <input type="checkbox" id="opt-wackel"></div>
+      <div class="regler">Vollbild <input type="checkbox" id="opt-vollbild"></div>
+      <div class="klein" id="opt-vollbild-info" style="text-align:left"></div>
       <div style="text-align:center;padding:14px"><button class="knopf rot" id="opt-reset">Spielstand löschen</button></div>
     </div></div>
   </div>
@@ -449,8 +455,10 @@
   const param = new URLSearchParams(location.search);
   // PC (Maus + Querformat-Fenster): breites Spielfeld. Handy/Tablet: Hochformat. ?geraet=pc|handy erzwingt eine Version.
   const PC = param.has("geraet") ? param.get("geraet") === "pc" : matchMedia("(pointer: fine)").matches && innerWidth > innerHeight * 1.1;
-  const W = PC ? Math.round(693 * Math.min(1.9, Math.max(1.3, innerWidth / innerHeight))) : 390, H = 693, DT = 1 / 60, ZIEL = 600;
-  const SPAWN_D = Math.max(430, Math.hypot(W / 2, H / 2) + 40);          // Monster erscheinen immer knapp außerhalb des Bildes
+  const breite = () => PC ? Math.round(693 * Math.min(1.9, Math.max(1.3, innerWidth / innerHeight))) : 390;
+  let W = breite();
+  const H = 693, DT = 1 / 60, ZIEL = 600;
+  let SPAWN_D = Math.max(430, Math.hypot(W / 2, H / 2) + 40);            // Monster erscheinen immer knapp außerhalb des Bildes
   document.body.classList.toggle("pc", PC);
   const CODE = atob("TklDSFROT1JNQUw=");
   const renderFrame = param.has("frame") ? parseInt(param.get("frame"), 10) : null;
@@ -461,7 +469,7 @@
   const STANDARD = { gold: 0, pu: {}, puAus: {}, helden: { waldlaeufer: true }, held: "waldlaeufer", stage: "wald", stages: { wald: true }, hyper: false,
                      gesehen: {}, kills: {}, erfolge: {}, statistik: { maxZeit: 0, kills: 0, laeufe: 0, laternen: 0, goldGesamt: 0 },
                      waffenFrei: { blitz: true, peitsche: true, aura: true, orbit: true }, verbannt: {}, karten: { neustart: true }, karte: "", karteV2: true,
-                     opt: { sfx: .8, musik: .5, joy: true, blink: true, zahlen: true, wackel: true } };
+                     opt: { sfx: .8, musik: .5, joy: true, blink: true, zahlen: true, wackel: true, vollbild: false } };
   let meta = JSON.parse(JSON.stringify(STANDARD));
   try { const g = JSON.parse(localStorage.getItem("arena-v3") || "null"); if (g) meta = Object.assign(meta, g, { opt: Object.assign(meta.opt, g.opt || {}), statistik: Object.assign(meta.statistik, g.statistik || {}) }); } catch (e) {}
   if (!meta.karteV2) { meta.karte = ""; meta.karteV2 = true; }
@@ -524,6 +532,10 @@
 
   // ---------- Bildschirm ----------
   function groesse() {
+    if (PC && breite() !== W) {                                             // Fenster/Vollbild geändert: Spielfeld passt sich an
+      W = breite(); SPAWN_D = Math.max(430, Math.hypot(W / 2, H / 2) + 40);
+      if (typeof lichtCv !== "undefined") lichtCv.width = W;
+    }
     const skala = Math.min(innerWidth / W, innerHeight / H), dpr = devicePixelRatio || 1;
     cv.width = Math.round(W * skala * dpr); cv.height = Math.round(H * skala * dpr);
     cv.style.width = W * skala + "px"; cv.style.height = H * skala + "px";
@@ -2776,6 +2788,9 @@
   function optionen() {
     $("opt-sfx").value = meta.opt.sfx; $("opt-musik").value = meta.opt.musik; $("opt-joy").checked = meta.opt.joy;
     $("opt-blink").checked = meta.opt.blink; $("opt-zahlen").checked = meta.opt.zahlen; $("opt-wackel").checked = meta.opt.wackel;
+    $("opt-vollbild").checked = !!meta.opt.vollbild; $("opt-vollbild").disabled = !vollbildMoeglich;
+    $("opt-vollbild-info").innerHTML = vollbildMoeglich ? "Füllt den ganzen Bildschirm. Am PC passt sich das Spielfeld an die Bildschirmbreite an."
+      : "Auf diesem Gerät (z. B. iPhone) geht Vollbild so: im Browser auf *Teilen* tippen → *Zum Home-Bildschirm* und das Spiel von dort starten.";
   }
   [["opt-sfx", "sfx", "value"], ["opt-musik", "musik", "value"], ["opt-joy", "joy", "checked"], ["opt-blink", "blink", "checked"], ["opt-zahlen", "zahlen", "checked"], ["opt-wackel", "wackel", "checked"]]
     .forEach(([el, k, prop]) => $(el).oninput = e => { meta.opt[k] = prop === "value" ? +e.target.value : e.target.checked; lautstaerke(); speichern(); });
@@ -2787,7 +2802,20 @@
   const tasten = {}, joy = { aktiv: false, sx: 0, sy: 0, dx: 0, dy: 0 };
   let letzte = performance.now(), rest = 0, codeTimer = null, kartenZoom = .35, pickupsZeigen = false;
   function menue() { modus = "menue"; musik(false); neu(7, meta.held, meta.stage); zeige("s-haupt"); }
+  // Vollbild: Handy und PC; das Spielfeld passt sich danach automatisch an (resize → groesse)
+  const vollbildMoeglich = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+  const vollbildAktiv = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  function vollbild(an) {
+    const el = document.documentElement;
+    try {
+      if (an && !vollbildAktiv()) { const p = (el.requestFullscreen || el.webkitRequestFullscreen).call(el, { navigationUI: "hide" }); if (p && p.catch) p.catch(() => {}); }
+      if (!an && vollbildAktiv()) { const p = (document.exitFullscreen || document.webkitExitFullscreen).call(document); if (p && p.catch) p.catch(() => {}); }
+    } catch (e) {}
+  }
+  $("opt-vollbild").onchange = e => { meta.opt.vollbild = e.target.checked; speichern(); vollbild(e.target.checked); };
+  ["fullscreenchange", "webkitfullscreenchange"].forEach(ev => document.addEventListener(ev, () => { groesse(); if (s) zeichnen(); }));
   async function spielen() {
+    if (meta.opt.vollbild) vollbild(true);                                    // beim Start (Klick) wieder in den Vollbildmodus
     await audioStart(); musik(true);
     modus = "spiel"; neu(Date.now() & 0xffff, meta.held, meta.stage, meta.hyper && meta.hyperFrei); zeige(null);
     s.banner = { text: matchMedia("(pointer: fine)").matches ? "⌨️ WASD laufen · 🖱️ Maus zielen" : "👆 Wisch zum Laufen – du schießt automatisch", zeit: 4 };
