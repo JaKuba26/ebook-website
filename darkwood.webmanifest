@@ -1,0 +1,14 @@
+{
+  "name": "DARKWOOD",
+  "short_name": "DARKWOOD",
+  "description": "Grusel-Survival-Spiel: Überlebe die Nacht und stoppe Vorax.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "background_color": "#0A0204",
+  "theme_color": "#0A0204",
+  "icons": [
+    { "src": "darkwood-icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "darkwood-icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
