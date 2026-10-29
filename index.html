@@ -336,12 +336,12 @@
   .pc #s-helden .hw-licht { display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
        --k: max(calc(100cqw / 1536), calc(100cqh / 1024)); --ox: calc((100cqw - 1536 * var(--k)) / 2); --oy: calc((100cqh - 1024 * var(--k)) / 2); }
   .hw-licht i { position: absolute; left: calc(var(--ox) + var(--x) * var(--k)); top: calc(var(--oy) + var(--y) * var(--k)); width: calc(var(--r) * 2 * var(--k)); height: calc(var(--r) * 2 * var(--k));
-       transform: translate(-50%, -50%); border-radius: 50%; mix-blend-mode: lighten; animation: flackern var(--d) ease-in-out infinite alternate; animation-delay: var(--v);
+       transform: translate(-50%, -50%); border-radius: 50%; mix-blend-mode: lighten; animation: lichtFlackern var(--d) ease-in-out infinite alternate; animation-delay: var(--v);
        background: radial-gradient(circle, rgba(230,120,35,.55) 0%, rgba(200,85,20,.32) 22%, rgba(160,55,12,.15) 48%, rgba(120,40,10,0) 72%); }
   .hw-licht i.kern { mix-blend-mode: screen; animation-name: flammeZucken;
        background: radial-gradient(ellipse 40% 60% at 50% 60%, rgba(255,240,180,.7) 0%, rgba(255,180,70,.35) 45%, rgba(255,140,40,0) 100%); }
   .hw-licht i.boden { border-radius: 50%; mix-blend-mode: lighten; animation-name: bodenLicht; background: radial-gradient(ellipse, rgba(170,70,20,.6) 0%, rgba(140,50,14,.3) 45%, rgba(110,35,10,0) 75%); }
-  @keyframes flackern { 0% { opacity: .75; transform: translate(-50%, -50%) scale(1); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); } 45% { opacity: .6; transform: translate(-50%, -50%) scale(.95); }
+  @keyframes lichtFlackern { 0% { opacity: .75; transform: translate(-50%, -50%) scale(1); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); } 45% { opacity: .6; transform: translate(-50%, -50%) scale(.95); }
        70% { opacity: .95; transform: translate(-50%, -50%) scale(1.03); } 100% { opacity: .7; transform: translate(-50%, -50%) scale(.98); } }
   @keyframes flammeZucken { 0% { opacity: .8; transform: translate(-50%, -60%) scale(1, 1); } 30% { opacity: 1; transform: translate(-52%, -64%) scale(.9, 1.15); } 60% { opacity: .7; transform: translate(-48%, -58%) scale(1.08, .92); } 100% { opacity: .95; transform: translate(-50%, -62%) scale(.95, 1.08); } }
   @keyframes bodenLicht { 0% { opacity: .7; } 35% { opacity: 1; } 60% { opacity: .55; } 100% { opacity: .9; } }
