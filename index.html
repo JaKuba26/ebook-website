@@ -284,6 +284,7 @@
   .pc #s-helden .hw { display: block; position: static; padding: 0; overflow: visible; }
   .pc #s-helden .hw-buehne { position: absolute; inset: 0; height: auto; background: none; box-shadow: none; overflow: visible; pointer-events: none; }
   .pc #s-helden .hw-buehne .held { left: var(--px); top: var(--py); bottom: auto; height: var(--ph); transform: translate(-50%, -100%); z-index: 2; filter: drop-shadow(0 0 4px var(--hf)); }
+  .pc #s-helden .hw-buehne .held.zu { filter: brightness(0) drop-shadow(0 0 4px #8A1A24); }   /* gesperrt: nur schwarzer Schatten */
   .pc #s-helden .hw-buehne .fx, .pc #s-helden .hw-buehne .pf, .pc #s-helden .hw-buehne::before { display: none; }
   .hw-buehne .schatten { display: none; }
   .pc #s-helden .hw-buehne .schatten { display: block; position: absolute; left: var(--px); top: var(--py); width: calc(var(--ph) * 1.5); height: calc(var(--ph) * .3); transform: translate(-50%, -50%); z-index: 1;
@@ -3291,7 +3292,7 @@
       [pxi("abkling") + " Abklingzeit", "−" + Math.round((1 - (h.cd || 1) + .025 * p("abkling")) * 100) + " %"], [pxi("bereich") + " Bereich", "+" + Math.round(((h.bereich || 1) - 1 + .05 * p("bereich")) * 100) + " %"],
       [pxi("magnet") + " Magnet", "+" + Math.round(((h.magnet || 1) - 1 + .25 * p("magnet")) * 100) + " %"], [pxi("glueck") + " Glück", "+" + 10 * p("glueck") + " %"], [pxi("gier") + " Gier", "+" + 10 * p("gier") + " %"],
       [pxi("entwicklung") + " Entwicklung", "+" + 3 * p("entwicklung") + " %"], [pxi("fluch") + " Fluch", "+" + 10 * p("fluch") + " %"],
-    ].map(([a, b]) => `<span>${a}</span><span>${b}</span>`).join("");
+    ].map(([a, b]) => `<span>${a}</span><span>${frei ? b : "?"}</span>`).join("");   // gesperrt: Werte verborgen
   }
   $("held-ok").onclick = () => { meta.held = heldWahl; speichern(); zeige("s-stages"); };
   // Stages
