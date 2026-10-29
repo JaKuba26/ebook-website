@@ -314,6 +314,21 @@
   .pc .hw-rechts { display: flex; flex-direction: column; gap: 10px; min-height: 0; overflow-y: auto; }
   .pc .hw-werte { grid-template-columns: 1fr auto; }
   .pc .hw-unten { justify-content: center; gap: 40px; }
+  /* Lebendiger Hintergrund: Kerzen und Fackeln flackern und werfen warmes Licht (Positionen in Kubas Bild 1536 × 1024) */
+  .hw-licht { display: none; }
+  .pc #s-helden .hw-licht { display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+       --k: max(calc(100cqw / 1536), calc(100cqh / 1024)); --ox: calc((100cqw - 1536 * var(--k)) / 2); --oy: calc((100cqh - 1024 * var(--k)) / 2); }
+  .hw-licht i { position: absolute; left: calc(var(--ox) + var(--x) * var(--k)); top: calc(var(--oy) + var(--y) * var(--k)); width: calc(var(--r) * 2 * var(--k)); height: calc(var(--r) * 2 * var(--k));
+       transform: translate(-50%, -50%); border-radius: 50%; mix-blend-mode: lighten; animation: flackern var(--d) ease-in-out infinite alternate; animation-delay: var(--v);
+       background: radial-gradient(circle, rgba(230,120,35,.55) 0%, rgba(200,85,20,.32) 22%, rgba(160,55,12,.15) 48%, rgba(120,40,10,0) 72%); }
+  .hw-licht i.kern { mix-blend-mode: screen; animation-name: flammeZucken;
+       background: radial-gradient(ellipse 40% 60% at 50% 60%, rgba(255,240,180,.7) 0%, rgba(255,180,70,.35) 45%, rgba(255,140,40,0) 100%); }
+  .hw-licht i.boden { border-radius: 50%; mix-blend-mode: lighten; animation-name: bodenLicht; background: radial-gradient(ellipse, rgba(170,70,20,.6) 0%, rgba(140,50,14,.3) 45%, rgba(110,35,10,0) 75%); }
+  @keyframes flackern { 0% { opacity: .75; transform: translate(-50%, -50%) scale(1); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); } 45% { opacity: .6; transform: translate(-50%, -50%) scale(.95); }
+       70% { opacity: .95; transform: translate(-50%, -50%) scale(1.03); } 100% { opacity: .7; transform: translate(-50%, -50%) scale(.98); } }
+  @keyframes flammeZucken { 0% { opacity: .8; transform: translate(-50%, -60%) scale(1, 1); } 30% { opacity: 1; transform: translate(-52%, -64%) scale(.9, 1.15); } 60% { opacity: .7; transform: translate(-48%, -58%) scale(1.08, .92); } 100% { opacity: .95; transform: translate(-50%, -62%) scale(.95, 1.08); } }
+  @keyframes bodenLicht { 0% { opacity: .7; } 35% { opacity: 1; } 60% { opacity: .55; } 100% { opacity: .9; } }
+  @media (prefers-reduced-motion: reduce) { .hw-licht i { animation: none; } }
   .statbox { margin: 8px 8px 0; background: rgba(0,0,0,.55); color: var(--knochen2); clip-path: var(--ecke); box-shadow: inset 0 0 0 2px #3E3A38; padding: 8px 10px; font-size: 11px;
              display: grid; grid-template-columns: 1fr 1fr; gap: 2px 10px; }
   .statbox span:nth-child(even) { color: var(--knochen); }
@@ -523,6 +538,7 @@
   <!-- Charakter-Auswahl -->
   <div class="screen menuebg" id="s-helden" hidden>
     <div class="topbar"><span class="sp"></span><div class="goldanz">💰 <span class="gold">0</span></div><button class="knopf rot" data-ziel="s-haupt">Zurück</button></div>
+    <div class="hw-licht" id="held-licht"></div>
     <div class="hw">
       <div class="hw-links"><h2 class="hw-titel">Charakter-Auswahl</h2><div class="hw-liste" id="held-raster"></div></div>
       <div class="hw-mitte"><div class="hw-buehne" id="held-buehne"></div></div>
@@ -3261,6 +3277,17 @@
   }
   // Helden
   let heldWahl = meta.held;
+  // Lebendiger Hintergrund der Charakter-Auswahl: Lichter einmal anlegen (x, y, Radius; t = Fackel)
+  (() => {
+    const L = [[518, 444, 1], [1184, 452, 1], [275, 422], [302, 458], [317, 470], [438, 542], [415, 578], [463, 580], [29, 608], [7, 658], [31, 654], [75, 676], [100, 722], [73, 842],
+               [1156, 624], [1176, 598], [1200, 636], [1518, 568], [1529, 524], [1440, 732], [1463, 746], [1482, 700], [1360, 784], [1367, 892], [1213, 970]];
+    const z = (a, b) => (a + Math.random() * (b - a)).toFixed(2);
+    document.getElementById("held-licht").innerHTML = L.map(([x, y, t]) => {
+      const v = `--x:${x};--y:${y};--v:-${z(0, 3)}s`;
+      return t ? `<i style="${v};--r:210;--d:${z(.9, 1.4)}s"></i><i class="boden" style="--x:${x};--y:${y + 230};--r:200;--d:${z(1.1, 1.7)}s;--v:-${z(0, 3)}s"></i><i class="kern" style="${v};--r:16;--d:${z(.18, .3)}s"></i>`
+               : `<i style="${v};--r:95;--d:${z(.6, 1.2)}s"></i><i class="kern" style="--x:${x};--y:${y - 4};--v:-${z(0, 2)}s;--r:9;--d:${z(.15, .28)}s"></i>`;
+    }).join("");
+  })();
   function helden() {                                            // Charakter-Auswahl: Liste, Bühne, Infos
     const ids = Object.keys(HELDEN), r = $("held-raster"), alt = r.scrollTop; r.innerHTML = "";
     for (const id of ids) {
