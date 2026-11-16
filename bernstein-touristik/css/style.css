@@ -712,3 +712,23 @@ p { margin: 0 0 1em; }
   .footer__grid > div:last-child h3 { width: 100%; }
   .footer__grid > div:last-child p { margin: 0; }
 }
+
+/* Preistabelle: am Handy ohne seitliches Wischen */
+.kurz { display: none; }
+@media (max-width: 680px) {
+  .lang { display: none; }
+  .kurz { display: inline; }
+  .table-wrap { overflow-x: visible; }
+  .prices { font-size: .8rem; }
+  .prices:not(.prices--compact) { table-layout: fixed; }
+  .prices th, .prices td { padding: 9px 4px; white-space: nowrap; }
+  .prices th:first-child, .prices td:first-child { padding-left: 10px; }
+  .prices th:last-child, .prices td:last-child { padding-right: 10px; }
+  .prices thead th { font-size: .75rem; }
+  .prices:not(.prices--compact) thead th:first-child { width: 19%; }
+  .prices--compact th, .prices--compact td { white-space: normal; }
+}
+@media (max-width: 360px) {
+  .prices { font-size: .74rem; }
+  .prices th, .prices td { padding: 8px 2px; }
+}

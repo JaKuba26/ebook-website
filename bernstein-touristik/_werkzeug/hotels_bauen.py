@@ -138,6 +138,16 @@ def tausender(p):
     return re.sub(r'(\d)\s(\d{3})\b', r'\1.\2', p or '')
 
 
+MONAT_KURZ = {'jan': 'Jan.', 'feb': 'Feb.', 'mär': 'März', 'mar': 'März', 'apr': 'Apr.', 'mai': 'Mai', 'jun': 'Juni',
+              'jul': 'Juli', 'aug': 'Aug.', 'sep': 'Sep.', 'okt': 'Okt.', 'nov': 'Nov.', 'dez': 'Dez.'}
+
+
+def monat_kurz(m):
+    """'September' -> 'Sep.' (für die Handy-Ansicht der Preistabelle)"""
+    k = MONAT_KURZ.get(m.strip().lower()[:3])
+    return k if k else m
+
+
 def preis_zahl(p):
     try:
         return float(re.sub(r'\s', '', p.replace('€', '').replace('.', '')).replace(',', '.'))
@@ -211,7 +221,7 @@ def preise_html(h):
         </div>
       </section>'''
     titel = f'Termine &amp; Preise {esc(p["jahr"])}'.strip()
-    kopf = ''.join(f'<th scope="col">{n} Nächte</th>' for n in p['naechte'])
+    kopf = ''.join(f'<th scope="col"><span class="lang">{n} Nächte</span><span class="kurz">{n} N.</span></th>' for n in p['naechte'])
     # günstigsten Monat markieren (nach der 7-Nächte-Spalte, sonst erste Spalte)
     spalte = p['naechte'].index(7) if 7 in p['naechte'] else 0
     werte = [preis_zahl(z['preise'][spalte]) if spalte < len(z['preise']) else None for z in p['zeilen']]
@@ -222,7 +232,7 @@ def preise_html(h):
         ist_best = best is not None and w == best and werte.count(best) <= 2
         pill = ' <span class="pill">Günstig</span>' if ist_best else ''
         zellen = ''.join(f'<td>{esc(tausender(x)) or "–"}</td>' for x in z['preise'])
-        zeilen.append(f'<tr{" class=\"is-best\"" if ist_best else ""}><th scope="row">{esc(z["monat"])}{pill}</th>{zellen}</tr>')
+        zeilen.append(f'<tr{" class=\"is-best\"" if ist_best else ""}><th scope="row"><span class="lang">{esc(z["monat"])}</span><span class="kurz">{esc(monat_kurz(z["monat"]))}</span>{pill}</th>{zellen}</tr>')
     extras = ''
     if h['extras']:
         eintraege = []
@@ -241,11 +251,11 @@ def preise_html(h):
         alt_hinweis = f'<p class="note"><strong>Hinweis:</strong> Diese Preise gelten für {esc(p["jahr"])}. Aktuelle Preise erfahren Sie gerne telefonisch oder per Anfrage.</p>'
     return f'''<section class="block" id="preise">
         <h2>{titel}</h2>
-        <p>Pro Person im Doppelzimmer.</p>
+        <p>Pro Person im Doppelzimmer.<span class="kurz"> N. = Nächte.</span></p>
         {alt_hinweis}
         <div class="table-wrap">
           <table class="prices">
-            <thead><tr><th scope="col">Anreise im</th>{kopf}</tr></thead>
+            <thead><tr><th scope="col"><span class="lang">Anreise im</span><span class="kurz">Monat</span></th>{kopf}</tr></thead>
             <tbody>
               {"".join(zeilen)}
             </tbody>
