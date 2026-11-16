@@ -188,7 +188,11 @@
         html += '<tr><th scope="row">' + (f[0] ? f[0] + ' ' : '') + f[1].replace(/,/g, ', ').replace(/-/g, '–') + (f[3] ? '*' : '') + '</th><td>' + euro(f[2]) + '</td></tr>';
       });
       html += '</tbody></table><p class="note">* PLZ 15: Anreise und Abreise samstags.</p>';
-      html += '<p class="note"><strong>Badeort-Zuschläge p. P.:</strong> Henkenhagen 25 € · Großmöllen 79 € · Rügenwaldermünde 129 € · Jershöft 149 € · Danzig 299 €. Ohne Zuschlag: alle Orte von Swinemünde bis Kolberg.</p>';
+      html += '<table class="prices prices--compact plz-tabelle__zuschlag"><thead><tr><th scope="col">Badeorte und Zuschläge</th><th scope="col">p. P.</th></tr></thead><tbody>';
+      Object.keys(ZUSCHLAG).forEach(function (k) {
+        if (ZUSCHLAG[k][1] !== null) html += '<tr><th scope="row">' + ZUSCHLAG[k][0] + '</th><td>' + euro(ZUSCHLAG[k][1]) + '</td></tr>';
+      });
+      html += '</tbody></table><p class="note">Zuschläge werden separat berechnet. Ohne Zuschlag: alle Orte von Swinemünde bis Kolberg.</p>';
       tabelle.innerHTML = html;
     }
     var zeigen = function () {
