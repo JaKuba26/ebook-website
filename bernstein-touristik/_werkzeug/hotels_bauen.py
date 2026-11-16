@@ -28,9 +28,48 @@ def esc(s):
     return html.escape(s or '', quote=True)
 
 
+# Sprechende Adressen statt Tippfehler/Kürzel (alte Adressen -> _redirects mit 301)
+SLUG_NEU = {
+    'hotel-pension-pestelowy': 'hotel-pension-pastelowy',
+    'hotel-west-baltik-resort': 'hotel-west-baltic-resort',
+    'hotel-bociane-gniadzo-storchennest': 'hotel-bocianie-gniazdo-storchennest',
+    'hotel-swarovzvc': 'hotel-bursztyn',
+    'hotel-platinium-hotels-resort': 'hotel-platino-mare',
+    'hotel-el-park': 'hotel-el-park',
+    'ikrplaza': 'hotel-ikar-plaza',
+    'htldiva': 'hotel-diva-spa',
+    'htl-yrs': 'hotel-irys',
+    'hot-senat': 'hotel-senator',
+    'hot-arka': 'hotel-arka-medical-spa',
+    'newskan': 'hotel-new-skanpol',
+    'herc-swin-2': 'hotel-villa-hercules',
+    'alga-swin': 'hotel-alga',
+    'max': 'hotel-kurhaus-max',
+}
+
+# Korrigierte Hotelnamen (Korrekturliste Kunde)
+NAME_NEU = {
+    'Hotel Boziane Gniazdo (STORCHENNEST)': 'Hotel Bocianie Gniazdo (Storchennest)',
+    'Hotel El Pak': 'Hotel El Park',
+    'Hotel Radisson Blue Resort': 'Hotel Radisson Blu Resort',
+}
+
+
+def anpassen(hotels):
+    """Slugs/Namen korrigieren; 'bild' behält den alten Slug (Bildordner)."""
+    for h in hotels:
+        h.setdefault('bild', h['slug'])
+        h['alt_slug'] = h['bild']
+        h['slug'] = SLUG_NEU.get(h['bild'], h['bild'])
+        h['name'] = NAME_NEU.get(h['name'], h['name'])
+    return hotels
+
+
 def lade():
     hotels = json.load(open(os.path.join(HIER, 'hotels.json'), encoding='utf-8'))
     auslassen = set(json.load(open(os.path.join(HIER, 'auslassen.json'))))
+    hotels = [h for h in hotels if h['slug'] not in auslassen or h['slug'] in HANDGEBAUT]
+    hotels = anpassen(hotels)
     groessen = json.load(open(os.path.join(HIER, 'bildgroessen.json')))
     return hotels, auslassen, groessen
 
@@ -184,7 +223,7 @@ def tags(h):
 
 
 def galerie(h, groessen, tiefe='../../'):
-    slug = h['slug']
+    slug = h['bild']
     n = min(12, len(h['bilder_quelle']))
     nrs = [i for i in range(1, n + 1) if f'{slug}/{i:02d}' in groessen]
     if not nrs:
@@ -308,8 +347,8 @@ def karte(h, groessen, tiefe, mit_ort=True):
     slug = h['slug']
     if slug in HANDGEBAUT:
         bild = HANDGEBAUT[slug]['bild'].replace('../', tiefe, 1)
-    elif f'{slug}/01' in groessen:
-        bild = f'{tiefe}img/hotels/{slug}/01-klein.webp'
+    elif f'{h["bild"]}/01' in groessen:
+        bild = f'{tiefe}img/hotels/{h["bild"]}/01-klein.webp'
     else:
         bild = f'{tiefe}img/hero.jpg'
     sterne = sterne_html(h['sterne'])
@@ -515,7 +554,12 @@ def main():
     hotels, auslassen, groessen = lade()
     teile = vorlage_teile()
     radisson = next(h for h in hotels if h['slug'] == 'radisson-blu-resort-swinemuende')
-    aktiv = [h for h in hotels if h['slug'] not in auslassen]
+    aktiv = [h for h in hotels if h['slug'] not in HANDGEBAUT]
+    # alte Ordner umbenannter Hotels entfernen
+    import shutil
+    for alt, neu in SLUG_NEU.items():
+        if alt != neu and os.path.isdir(os.path.join(HOTELS_DIR, alt)):
+            shutil.rmtree(os.path.join(HOTELS_DIR, alt))
     for h in aktiv:
         ordner = os.path.join(HOTELS_DIR, h['slug'])
         os.makedirs(ordner, exist_ok=True)

@@ -159,7 +159,7 @@
   // Badeort-Zuschläge pro Person (Orte östlich von Kolberg); null = auf Anfrage
   var ZUSCHLAG = {
     'ostseebad-henkenhagen-ustronie-morskie': ['Henkenhagen', 25],
-    'ostseebad-groess-moellen-mielno': ['Großmöllen', 79],
+    'ostseebad-grossmoellen-mielno': ['Großmöllen', 79],
     'ruegenwaldermuende': ['Rügenwaldermünde', 129],
     'jershoeft': ['Jershöft', 149],
     'pommern-danzig': ['Danzig', 299],

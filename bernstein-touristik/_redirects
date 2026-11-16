@@ -1,0 +1,38 @@
+# Bernstein Touristik – Weiterleitungen (aktiv, sobald dieser Ordner das Veröffentlichungsverzeichnis ist)
+
+# Korrigierte Hotel-Adressen (Tippfehler / Kürzel -> sprechende Adressen)
+/hotels/hotel-pension-pestelowy/*             /hotels/hotel-pension-pastelowy/             301
+/hotels/hotel-west-baltik-resort/*            /hotels/hotel-west-baltic-resort/            301
+/hotels/hotel-bociane-gniadzo-storchennest/*  /hotels/hotel-bocianie-gniazdo-storchennest/ 301
+/hotels/hotel-swarovzvc/*                     /hotels/hotel-bursztyn/                      301
+/hotels/hotel-platinium-hotels-resort/*       /hotels/hotel-platino-mare/                  301
+/hotels/ikrplaza/*                            /hotels/hotel-ikar-plaza/                    301
+/hotels/htldiva/*                             /hotels/hotel-diva-spa/                      301
+/hotels/htl-yrs/*                             /hotels/hotel-irys/                          301
+/hotels/hot-senat/*                           /hotels/hotel-senator/                       301
+/hotels/hot-arka/*                            /hotels/hotel-arka-medical-spa/              301
+/hotels/newskan/*                             /hotels/hotel-new-skanpol/                   301
+/hotels/herc-swin-2/*                         /hotels/hotel-villa-hercules/                301
+/hotels/alga-swin/*                           /hotels/hotel-alga/                          301
+/hotels/max/*                                 /hotels/hotel-kurhaus-max/                   301
+
+# Korrigierte Orts-Adresse
+/orte/ostseebad-groess-moellen-mielno/*       /orte/ostseebad-grossmoellen-mielno/         301
+
+# Abgelaufene Weihnachts-/Silvesterangebote -> Hotel
+/hotels/hotel-admiral-weihnachten-silverster/*              /hotels/hotel-admiral-1/          301
+/hotels/hotel-baginski-chabinka-spa-weihnachten-silvester/* /hotels/hotel-baginski-chabinka-spa/ 301
+/hotels/hotel-bursztyn-sonderangebot/*                      /hotels/hotel-bursztyn/           301
+/hotels/hotel-henryk-weihnachten-silvester/*                /hotels/hotel-henryk/             301
+/hotels/hotel-nad-parseta-weihnachten-silvester/*           /hotels/nad-parseta/              301
+/hotels/hotel-new-skanpol-weihnachten-silvester/*           /hotels/hotel-new-skanpol/        301
+/hotels/hotel-sandra-spa-weihnachten-silvester/*            /hotels/hotel-sandra-spa/         301
+/hotels/hotel-trofana-weihnachten-silvester/*               /hotels/hotel-trofana/            301
+
+# Alte WordPress-Adressen
+/datenschutz          /datenschutzerklaerung/   301
+/datenschutz/         /datenschutzerklaerung/   301
+/hotelkarte/*         /karte/                   301
+/wp-content/uploads/*.pdf  /bernstein-katalog/  301
+/feed/*               /                         301
+/  s=:q  /suche/?q=:q  301

@@ -17,8 +17,8 @@ import sys
 HIER = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HIER)
 from hotels_auslesen import ORTE  # noqa: E402
-from hotels_bauen import (HANDGEBAUT, WURZEL, esc, karte, preis_zahl,  # noqa: E402
-                          vorlage_teile)
+from hotels_bauen import (HANDGEBAUT, SLUG_NEU, WURZEL, anpassen, esc, karte,  # noqa: E402
+                          preis_zahl, vorlage_teile)
 
 ALT = 'https://www.bernstein-touristik.de'
 CALL_FAB = '''<a class="call-fab" href="tel:+493048490070" aria-label="Jetzt anrufen: 030-484 900 70">
@@ -247,7 +247,6 @@ def formular(name, r, felder_extra='', danke='danke/', knopf='Nachricht senden',
               <label>Vor- und Nachname*<input name="name" autocomplete="name" required></label>
               <label>E-Mail*<input type="email" name="email" autocomplete="email" required></label>
               <label>Telefon<input type="tel" name="telefon" autocomplete="tel"></label>
-              <label>Adresse<input name="adresse" autocomplete="street-address"></label>
             </div>
             {felder_extra}
             <label>Ihre Nachricht{'*' if not felder_extra else ''}<textarea name="nachricht" rows="5" {'required' if not felder_extra else ''}></textarea></label>
@@ -340,10 +339,36 @@ def katalog_seite():
         <p>Auf 102 Seiten finden Sie unsere Hotels an der polnischen Ostsee mit Beschreibungen, Leistungen und Preisen. Gerne schicken wir Ihnen den Katalog auch kostenlos per Post – rufen Sie uns einfach an.</p>
         <div class="contact__actions">
           <a class="btn btn--amber btn--lg" href="{pdf}" target="_blank" rel="noopener">Katalog öffnen (PDF, 23 MB)</a>
-          <a class="btn btn--outline btn--lg" href="{pdf}" download>Herunterladen</a>
+          <a class="btn btn--outline btn--lg" href="#bestellen">Per Post bestellen</a>
         </div>
         <p class="note">Tipp: Aktuelle Preise finden Sie auch direkt auf den <a href="{r}hotels/">Hotelseiten</a>.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="section section--sand section--tight" id="bestellen">
+    <div class="wrap kontakt-grid">
+      <div>
+        <p class="eyebrow">Kostenlos per Post</p>
+        <h2>Katalog bestellen</h2>
+        <p>Sie blättern lieber im gedruckten Katalog? Wir schicken ihn Ihnen kostenlos nach Hause. Einfach das Formular ausfüllen – oder anrufen: <a href="tel:+493048490070">030 48 49 00 70</a>.</p>
+      </div>
+      <form class="form" name="katalog-bestellung" method="post" action="{r}danke/" data-netlify="true" netlify-honeypot="website">
+        <input type="hidden" name="form-name" value="katalog-bestellung">
+        <p class="hp"><label>Bitte leer lassen <input name="website"></label></p>
+        <fieldset>
+          <legend>Versandadresse</legend>
+          <label>Vor- und Nachname*<input name="name" autocomplete="name" required></label>
+          <label>Straße und Hausnummer*<input name="strasse" autocomplete="street-address" required></label>
+          <div class="form__grid">
+            <label>Postleitzahl*<input name="plz" inputmode="numeric" autocomplete="postal-code" required></label>
+            <label>Ort*<input name="ort" autocomplete="address-level2" required></label>
+          </div>
+          <label>E-Mail (für Rückfragen)<input type="email" name="email" autocomplete="email"></label>
+        </fieldset>
+        <label class="consent"><input type="checkbox" name="datenschutz" required> <span>Ich bin damit einverstanden, dass meine Angaben zum Versand des Katalogs gespeichert werden. Es gilt die <a href="{r}datenschutzerklaerung/">Datenschutzerklärung</a>.*</span></label>
+        <button class="btn btn--amber btn--lg" type="submit">Katalog kostenlos bestellen</button>
+      </form>
     </div>
   </section>
   {kontakt_band(r)}'''
@@ -383,8 +408,8 @@ def suche_seite(hotels):
     for h in hotels:
         if h['slug'] in HANDGEBAUT:
             bild = HANDGEBAUT[h['slug']]['bild'].replace('../', '', 1)
-        elif f'{h["slug"]}/01' in GROESSEN:
-            bild = f'img/hotels/{h["slug"]}/01-klein.webp'
+        elif f'{h["bild"]}/01' in GROESSEN:
+            bild = f'img/hotels/{h["bild"]}/01-klein.webp'
         else:
             bild = 'img/hero.jpg'
         text = ' '.join(re.sub(r'<[^>]+>', ' ', json.dumps(a['bloecke'], ensure_ascii=False)) for a in h['abschnitte'])
@@ -492,6 +517,27 @@ def rechtsseiten(alter_ordner):
 
 # ---------------------------------------------------------------- Links umstellen
 
+# Einheitliche Schreibweisen / Korrekturen aus der Korrekturliste (auf alle Seiten angewendet)
+TEXT_ERSETZUNGEN = [
+    ('030-484 900 70', '030 48 49 00 70'),
+    ('030-48 49 00 70', '030 48 49 00 70'),
+    ('Fax: +49 (0) 30 48 49 00 7 -29', 'Fax: 030 48 49 00 729'),
+    ('Telefon (030) -484 9007-0', 'Telefon 030 48 49 00 70'),
+    ('Telefax (030) -484 9007-29', 'Telefax 030 48 49 00 729'),
+    ('© <span id="jahr">', '© 2016–<span id="jahr">'),
+    ('Copyright 2016 Bernstein Touristik GmbH.', '© 2016–2026 Bernstein Touristik GmbH.'),
+    ('Festpreise in € pro Person. Irrtümer vorbehalten. Abbildungen ähnlich.',
+     'Preise ab, pro Person, freibleibend und vorbehaltlich Verfügbarkeit. Irrtümer vorbehalten. Abbildungen ähnlich.'),
+    ('Preisgünstige Angebote mit Festpreisen pro Person', 'Preisgünstige Angebote mit transparenten Preisen pro Person'),
+    ('30 Tage vor Reisebeginn kostenlos umbuchen', 'Umbuchung bis 30 Tage vor Reisebeginn gegen Gebühr'),
+    ('Boziane Gniazdo (STORCHENNEST)', 'Bocianie Gniazdo (Storchennest)'),
+    ('Boziane Gniazdo', 'Bocianie Gniazdo'),
+    ('Hotel El Pak', 'Hotel El Park'),
+    ('Radisson Blue', 'Radisson Blu'),
+    ('Grossmöllen', 'Großmöllen'),
+]
+
+
 ZIELE = ['karte', 'bernstein-katalog', 'kontakt', 'impressum', 'agb', 'datenschutzerklaerung', 'vip']
 
 
@@ -509,6 +555,13 @@ def links_umstellen():
             r = rel(tiefe) or ''
             s = open(pfad, encoding='utf-8').read()
             alt = s
+            for a, b in TEXT_ERSETZUNGEN:
+                s = s.replace(a, b)
+            # umbenannte Hotel-Adressen
+            for a, b in SLUG_NEU.items():
+                if a != b:
+                    # nur Seiten-Links, nicht die Bildordner (img/hotels/<alter-slug>/)
+                    s = re.sub(r'(?<!img/)hotels/' + re.escape(a) + '/', f'hotels/{b}/', s)
             s = re.sub(re.escape(ALT) + r'/orte/([a-z0-9-]+)/', lambda m: f'{r}orte/{m.group(1)}/', s)
             for z in ZIELE:
                 s = s.replace(f'{ALT}/{z}/', f'{r}{z}/')
@@ -523,6 +576,13 @@ def links_umstellen():
             if s != alt:
                 open(pfad, 'w', encoding='utf-8').write(s)
                 geaendert += 1
+    # Suchindex ebenfalls korrigieren
+    pfad = os.path.join(WURZEL, 'suche', 'hotels.json')
+    if os.path.exists(pfad):
+        t = open(pfad, encoding='utf-8').read()
+        for a, b in TEXT_ERSETZUNGEN:
+            t = t.replace(a, b)
+        open(pfad, 'w', encoding='utf-8').write(t)
     return geaendert
 
 
@@ -534,7 +594,7 @@ def main():
     GROESSEN = json.load(open(os.path.join(HIER, 'bildgroessen.json')))
     hotels = json.load(open(os.path.join(HIER, 'hotels.json'), encoding='utf-8'))
     auslassen = set(json.load(open(os.path.join(HIER, 'auslassen.json')))) - set(HANDGEBAUT)
-    hotels = [h for h in hotels if h['slug'] not in auslassen]
+    hotels = anpassen([h for h in hotels if h['slug'] not in auslassen])
     n = orte_seiten(hotels)
     kontakt_seite()
     vip_seite()

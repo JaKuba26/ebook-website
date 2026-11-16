@@ -27,7 +27,7 @@ ORTE = {
     'ostseebad-gribow': ('Ostseebad Gribow', 'Gribow'),
     'ostseebad-kolberg': ('Ostseebad Kolberg', 'Kolberg'),
     'ostseebad-henkenhagen-ustronie-morskie': ('Ostseebad Henkenhagen / Ziegenberg', 'Henkenhagen'),
-    'ostseebad-groess-moellen-mielno': ('Ostseebad Großmöllen', 'Großmöllen'),
+    'ostseebad-grossmoellen-mielno': ('Ostseebad Großmöllen', 'Großmöllen'),
     'jershoeft': ('Jershöft', 'Jershöft'),
     'ruegenwaldermuende': ('Rügenwaldermünde', 'Rügenwaldermünde'),
     'ostseebad-stolpmuende-ustka': ('Ostseebad Stolpmünde', 'Stolpmünde'),
@@ -333,6 +333,10 @@ def auslesen(pfad, slug):
 def main():
     ordner, orte_json = sys.argv[1], sys.argv[2]
     orte = json.load(open(orte_json))
+    # alte Orts-Slugs der WordPress-Seite -> neue Slugs
+    for alt, neu in {'ostseebad-groess-moellen-mielno': 'ostseebad-grossmoellen-mielno'}.items():
+        if alt in orte:
+            orte[neu] = orte.pop(alt)
     hotel_ort = {}
     for o, hs in orte.items():
         if o in ORTE:
