@@ -179,30 +179,28 @@
 
         <div class="taxi">
           <div class="taxi__text">
-            <p class="eyebrow">Haustür-Abholservice</p>
-            <h3>Mit dem Kurtaxi bis vor das Hotel</h3>
-            <p>Wir holen Sie direkt an Ihrer Haustür ab und bringen Sie sicher zu Ihrem Wunschhotel – so beginnt die Erholung schon bei der Abfahrt.</p>
+            <p class="eyebrow">Hol- und Bringdienst</p>
+            <h3>Von Ihrer Haustür bis ins Hotel</h3>
+            <p>Wir holen Sie <strong>direkt bei Ihnen zu Hause</strong> ab und bringen Sie ohne Umsteigen zu Ihrem Hotel – und am Ende der Reise wieder bis vor Ihre Haustür.</p>
             <ul class="checks">
-              <li>Ganzjährig, bundesweit (nur tagsüber)</li>
-              <li>Hin- und Rückfahrt ohne Umsteigen</li>
-              <li>Moderne Kleinbusse mit max. 8 Personen</li>
-              <li>Bequeme, individuelle Fahrt mit Pausen</li>
-              <li>Hinfahrt sonntags, Rückfahrt samstags*</li>
+              <li><strong>Abholung sonntags</strong> an Ihrer Haustür</li>
+              <li><strong>Rückfahrt samstags</strong> bis nach Hause</li>
+              <li>Moderne, klimatisierte Kleinbusse mit max. 8 Personen</li>
+              <li>Gepäckservice und Pausen inklusive</li>
+              <li>Aufenthalt 6, 13, 20 oder 27 Nächte</li>
+              <li>Bundesweit, ganzjährig (tagsüber)</li>
+              <li>5 % Gruppenrabatt ab 5 Personen</li>
             </ul>
           </div>
-          <div class="taxi__prices">
-            <table class="prices prices--compact">
-              <caption>Preis für Hin- &amp; Rückfahrt pro Person</caption>
-              <thead><tr><th scope="col">Postleitzahl</th><th scope="col">Preis</th></tr></thead>
-              <tbody>
-                <tr><th scope="row">Abfahrtspunkte Berlin¹</th><td>79 €</td></tr>
-                <tr><th scope="row">PLZ 1…</th><td>99 €</td></tr>
-                <tr><th scope="row">PLZ 0…</th><td>129 €</td></tr>
-                <tr><th scope="row">PLZ 2…, 3…</th><td>149 €</td></tr>
-                <tr><th scope="row">PLZ 4… – 9…</th><td>199 €</td></tr>
-              </tbody>
-            </table>
-            <p class="note">¹ Hauptbahnhof, Alexanderplatz oder Fehrbelliner Platz.<br>* Bei Nutzung des Haustürservice verkürzt sich der Aufenthalt in einigen Hotels um eine Übernachtung. Infos unter der kostenlosen Hotline 030-484 900 70.</p>
+          <div class="plz-check" data-ort="ostseebad-swinemuende">
+            <label class="plz-check__label" for="plz-eingabe">Ihr Fahrpreis – geben Sie Ihre Postleitzahl ein:</label>
+            <input class="plz-check__input" id="plz-eingabe" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" autocomplete="postal-code" placeholder="z. B. 13187">
+            <div class="plz-check__ergebnis" aria-live="polite"></div>
+            <p class="note">Preis pro Person für Hin- und Rückfahrt, von Ihrer Haustür bis zum Hotel. Gepäck bis 20 kg inklusive · Rollator 15 € · Zusatzkoffer 25 € · Rollstuhl und E-Scooter auf Anfrage.</p>
+            <details class="plz-check__alle">
+              <summary>Alle Preise nach Postleitzahl</summary>
+              <div class="plz-tabelle"></div>
+            </details>
           </div>
         </div>
       </section>
@@ -237,7 +235,7 @@
             </div>
             <div class="form__grid">
               <div class="choice">
-                <span>Haustür-Abholservice gewünscht?</span>
+                <span>Haustür-Abholservice gewünscht? (Abholung sonntags, Rückfahrt samstags)</span>
                 <label><input type="radio" name="abholservice" value="Ja"> Ja</label>
                 <label><input type="radio" name="abholservice" value="Nein" checked> Nein</label>
               </div>

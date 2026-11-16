@@ -87,7 +87,7 @@
   }
 
   // Hotelseite: lange Abschnitte einklappen ("Mehr anzeigen")
-  var KLAPP_IDS = ['lage', 'zimmer', 'ausstattung', 'verpflegung', 'wellness', 'leistungen', 'anreise'];
+  var KLAPP_IDS = ['lage', 'zimmer', 'ausstattung', 'verpflegung', 'wellness', 'leistungen'];
   var GRENZE = 260;   // ab dieser Höhe (px) wird eingeklappt
   var SICHTBAR = 170; // so viel bleibt sichtbar
   var klappen = [];
@@ -142,6 +142,81 @@
     });
   });
   oeffneAnker();
+
+  // Hol- und Bringdienst: Fahrpreis nach Postleitzahl (Katalog 2025, S. 7)
+  var FAHRPREISE = [
+    ['Berlin', '10-13,17', 99], ['', '01-02', 199], ['', '03,06', 179], ['', '04,08-09', 159], ['', '07', 189],
+    ['', '14', 139], ['', '15', 189, 'Sa'], ['', '16', 129], ['', '18', 179], ['', '19', 189],
+    ['', '20,22,28-29', 199], ['', '21', 189], ['', '23,27', 279], ['', '24-25', 329], ['', '26', 299],
+    ['', '30-31,37-38', 199], ['', '32-33', 219], ['', '34-36', 209], ['', '39', 189], ['', '40,44-46', 249],
+    ['', '41,47', 299], ['', '42', 239], ['', '48', 229], ['', '49', 199], ['', '50-51,63', 249],
+    ['', '52-53,55', 299], ['', '54,66', 349], ['', '56', 279], ['', '57-58', 229], ['', '59', 199],
+    ['', '60-61,64-65', 279], ['', '67-69', 319], ['', '70,72,75-76', 349], ['', '71,73', 299], ['', '74', 249],
+    ['', '77,79', 399], ['', '78', 379], ['', '80-81', 279], ['', '82-83,87', 399], ['', '84-85', 339],
+    ['', '86,89', 299], ['', '88', 349], ['', '90,92', 239], ['', '91', 279], ['', '93', 309],
+    ['', '94', 229], ['', '95', 209], ['', '96-98', 199], ['', '99', 189]
+  ];
+  // Badeort-Zuschläge pro Person (Orte östlich von Kolberg); null = auf Anfrage
+  var ZUSCHLAG = {
+    'ostseebad-henkenhagen-ustronie-morskie': ['Henkenhagen', 25],
+    'ostseebad-groess-moellen-mielno': ['Großmöllen', 79],
+    'ruegenwaldermuende': ['Rügenwaldermünde', 129],
+    'jershoeft': ['Jershöft', 149],
+    'pommern-danzig': ['Danzig', 299],
+    'ostseebad-stolpmuende-ustka': ['Stolpmünde', null]
+  };
+  var fahrpreis = function (plz) {
+    var z = parseInt(plz.slice(0, 2), 10);
+    for (var i = 0; i < FAHRPREISE.length; i++) {
+      var teile = FAHRPREISE[i][1].split(',');
+      for (var j = 0; j < teile.length; j++) {
+        var g = teile[j].split('-'), von = parseInt(g[0], 10), bis = parseInt(g[1] || g[0], 10);
+        if (z >= von && z <= bis) return { preis: FAHRPREISE[i][2], samstag: FAHRPREISE[i][3] === 'Sa' };
+      }
+    }
+    return null;
+  };
+  var euro = function (n) { return n.toLocaleString('de-DE') + ' €'; };
+  document.querySelectorAll('.plz-check').forEach(function (box) {
+    var eingabe = box.querySelector('.plz-check__input');
+    var ausgabe = box.querySelector('.plz-check__ergebnis');
+    var ort = ZUSCHLAG[box.dataset.ort || ''];
+    var tabelle = box.querySelector('.plz-tabelle');
+    if (tabelle) {
+      var html = '<table class="prices prices--compact"><thead><tr><th scope="col">PLZ beginnt mit</th><th scope="col">Preis p. P.</th></tr></thead><tbody>';
+      FAHRPREISE.forEach(function (f) {
+        html += '<tr><th scope="row">' + (f[0] ? f[0] + ' ' : '') + f[1].replace(/,/g, ', ').replace(/-/g, '–') + (f[3] ? '*' : '') + '</th><td>' + euro(f[2]) + '</td></tr>';
+      });
+      html += '</tbody></table><p class="note">* PLZ 15: Anreise und Abreise samstags.</p>';
+      html += '<p class="note"><strong>Badeort-Zuschläge p. P.:</strong> Henkenhagen 25 € · Großmöllen 79 € · Rügenwaldermünde 129 € · Jershöft 149 € · Danzig 299 €. Ohne Zuschlag: alle Orte von Swinemünde bis Kolberg.</p>';
+      tabelle.innerHTML = html;
+    }
+    var zeigen = function () {
+      var plz = eingabe.value.replace(/\D/g, '').slice(0, 5);
+      if (eingabe.value !== plz) eingabe.value = plz;
+      box.classList.remove('is-ok', 'is-fehler');
+      if (plz.length < 2) { ausgabe.innerHTML = ''; return; }
+      var t = fahrpreis(plz);
+      if (!t) {
+        box.classList.add('is-fehler');
+        ausgabe.innerHTML = 'Für diese Postleitzahl haben wir keinen Festpreis – bitte rufen Sie uns an: <a href="tel:+493048490070">030-484 900 70</a>.';
+        return;
+      }
+      box.classList.add('is-ok');
+      var gesamt = t.preis, extra = '';
+      if (ort && ort[1] !== null) {
+        gesamt += ort[1];
+        extra = '<span class="plz-check__detail">' + euro(t.preis) + ' Fahrpreis + ' + euro(ort[1]) + ' Badeort-Zuschlag ' + ort[0] + '</span>';
+      } else if (ort) {
+        extra = '<span class="plz-check__detail">zzgl. Badeort-Zuschlag ' + ort[0] + ' – Preis auf Anfrage</span>';
+      }
+      var tage = t.samstag ? 'Abholung samstags · Rückfahrt samstags' : 'Abholung sonntags · Rückfahrt samstags';
+      ausgabe.innerHTML = '<span class="plz-check__preis">' + euro(gesamt) + '<small> pro Person</small></span>' + extra +
+        '<span class="plz-check__detail">Hin- und Rückfahrt ab Ihrer Haustür · ' + tage + '</span>';
+    };
+    eingabe.addEventListener('input', zeigen);
+    zeigen();
+  });
 
   // Hotelseite: mobile Buchungsleiste
   if (document.querySelector('.sticky-book')) document.body.classList.add('has-sticky-book');

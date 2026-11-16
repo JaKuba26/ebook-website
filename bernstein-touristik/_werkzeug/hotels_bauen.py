@@ -379,6 +379,7 @@ def seite(h, alle, groessen, teile):
     </div>
   </section>'''
 
+    anreise_ = anreise.replace('data-ort="ostseebad-swinemuende"', f'data-ort="{esc(h["ort"] or "")}"')
     form = formular.replace('value="Radisson Blu Resort, Swinemünde"', f'value="{esc(name)}, {esc(h["ort_kurz"])}"')
     leiste = seitenleiste.replace('449 €', f'{esc(ab)} €').replace('7 Nächte · Halbpension · Doppelzimmer', 'pro Person · Doppelzimmer')
     kopf_ = kopf.replace(' aria-current="page"', '').replace('<li><a href="../">Hotels</a></li>', '<li><a href="../" aria-current="page">Hotels</a></li>')
@@ -431,7 +432,7 @@ def seite(h, alle, groessen, teile):
 
       {preise_html(h)}
 
-      {anreise}
+      {anreise_}
       {form}</article>
 
     {leiste}  </div>

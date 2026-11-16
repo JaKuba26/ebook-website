@@ -732,3 +732,27 @@ p { margin: 0 0 1em; }
   .prices { font-size: .74rem; }
   .prices th, .prices td { padding: 8px 2px; }
 }
+
+/* Hol- und Bringdienst: Fahrpreis nach Postleitzahl */
+.plz-check { background: var(--white); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); align-self: start; }
+.plz-check__label { display: block; font-weight: 600; color: var(--navy); margin-bottom: 10px; font-size: .95rem; }
+.plz-check__input {
+  width: 100%; font: 600 1.4rem var(--sans); letter-spacing: .25em; color: var(--navy);
+  padding: 14px 18px; border: 2px solid var(--line); border-radius: 999px; background: var(--sand); outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.plz-check__input::placeholder { color: #a8a094; letter-spacing: .1em; font-weight: 500; }
+.plz-check__input:focus { border-color: var(--amber); box-shadow: 0 0 0 4px rgba(245,166,35,.2); }
+.plz-check.is-ok .plz-check__input { border-color: #2e9e5b; }
+.plz-check.is-fehler .plz-check__input { border-color: var(--red); }
+.plz-check__ergebnis:not(:empty) { margin-top: 14px; padding: 14px 16px; border-radius: 12px; background: #eef8f1; display: grid; gap: 4px; }
+.plz-check.is-fehler .plz-check__ergebnis { background: #fdeeee; color: var(--red); font-size: .92rem; }
+.plz-check__preis { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: #1f7a45; line-height: 1.1; }
+.plz-check__preis::before { content: "✓ "; font-size: .7em; }
+.plz-check__preis small { font-family: var(--sans); font-size: .9rem; font-weight: 400; color: var(--muted); }
+.plz-check__detail { font-size: .88rem; color: #3f4c58; }
+.plz-check .note { margin: 12px 0 0; }
+.plz-check__alle { margin-top: 12px; }
+.plz-check__alle summary { cursor: pointer; font-weight: 600; color: var(--navy); font-size: .92rem; padding: 6px 0; }
+.plz-tabelle .prices { margin-top: 8px; font-size: .88rem; }
+.plz-tabelle .prices th, .plz-tabelle .prices td { padding: 6px 12px; }
