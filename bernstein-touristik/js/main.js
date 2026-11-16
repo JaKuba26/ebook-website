@@ -78,11 +78,11 @@
     var show = function (i) {
       idx = (i + n) % n;
       var b = data.bilder[idx];
-      img.src = data.pfad + b[0] + '.jpg';
+      img.src = data.pfad + b[0] + (data.endung || '.jpg');
       img.alt = b[1];
       cap.textContent = b[1] + ' · ' + (idx + 1) + ' / ' + n;
       // nächstes Bild vorladen
-      new Image().src = data.pfad + data.bilder[(idx + 1) % n][0] + '.jpg';
+      new Image().src = data.pfad + data.bilder[(idx + 1) % n][0] + (data.endung || '.jpg');
     };
     document.querySelectorAll('.gallery__item').forEach(function (a) {
       a.addEventListener('click', function (e) {
@@ -108,6 +108,25 @@
       if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1));
       x0 = null;
     });
+  }
+
+  // Hotelübersicht: nach Ort filtern (auch über #ort in der Adresse)
+  var chips = document.querySelectorAll('.chip[data-filter]');
+  if (chips.length) {
+    var gruppen = document.querySelectorAll('.ort-gruppe');
+    var filtern = function (ort, scroll) {
+      chips.forEach(function (c) { c.classList.toggle('is-active', c.dataset.filter === ort); });
+      gruppen.forEach(function (g) { g.hidden = !!ort && g.dataset.ort !== ort; });
+      if (scroll) window.scrollTo({ top: document.querySelector('.hotel-groups').offsetTop - 160, behavior: 'smooth' });
+    };
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        filtern(c.dataset.filter, true);
+        history.replaceState(null, '', c.dataset.filter ? '#' + c.dataset.filter : location.pathname);
+      });
+    });
+    var start = location.hash.slice(1);
+    if (start && document.getElementById(start)) filtern(start, false);
   }
 
   // Jahr im Footer
