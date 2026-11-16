@@ -756,3 +756,4 @@ p { margin: 0 0 1em; }
 .plz-check__alle summary { cursor: pointer; font-weight: 600; color: var(--navy); font-size: .92rem; padding: 6px 0; }
 .plz-tabelle .prices { margin-top: 8px; font-size: .88rem; }
 .plz-tabelle .prices th, .plz-tabelle .prices td { padding: 6px 12px; }
+.plz-check__zuschlag { margin: 12px 0 0; padding: 10px 14px; border-radius: 10px; background: #fff6e3; border: 1px solid #f3dca6; font-size: .88rem; color: #5b4a1f; }

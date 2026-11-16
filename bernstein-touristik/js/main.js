@@ -176,7 +176,7 @@
     }
     return null;
   };
-  var euro = function (n) { return n.toLocaleString('de-DE') + ' €'; };
+  var euro = function (n) { return n.toLocaleString('de-DE') + '\u00a0€'; };
   document.querySelectorAll('.plz-check').forEach(function (box) {
     var eingabe = box.querySelector('.plz-check__input');
     var ausgabe = box.querySelector('.plz-check__ergebnis');
@@ -203,17 +203,16 @@
         return;
       }
       box.classList.add('is-ok');
-      var gesamt = t.preis, extra = '';
-      if (ort && ort[1] !== null) {
-        gesamt += ort[1];
-        extra = '<span class="plz-check__detail">' + euro(t.preis) + ' Fahrpreis + ' + euro(ort[1]) + ' Badeort-Zuschlag ' + ort[0] + '</span>';
-      } else if (ort) {
-        extra = '<span class="plz-check__detail">zzgl. Badeort-Zuschlag ' + ort[0] + ' – Preis auf Anfrage</span>';
-      }
       var tage = t.samstag ? 'Abholung samstags · Rückfahrt samstags' : 'Abholung sonntags · Rückfahrt samstags';
-      ausgabe.innerHTML = '<span class="plz-check__preis">' + euro(gesamt) + '<small> pro Person</small></span>' + extra +
+      ausgabe.innerHTML = '<span class="plz-check__preis">' + euro(t.preis) + '<small> pro Person</small></span>' +
         '<span class="plz-check__detail">Hin- und Rückfahrt ab Ihrer Haustür · ' + tage + '</span>';
     };
+    if (ort) {
+      var hinweis = document.createElement('p');
+      hinweis.className = 'plz-check__zuschlag';
+      hinweis.innerHTML = '<strong>Badeort-Zuschlag ' + ort[0] + ':</strong> ' + (ort[1] !== null ? euro(ort[1]) + ' pro Person' : 'auf Anfrage') + ' – wird separat berechnet.';
+      ausgabe.parentNode.insertBefore(hinweis, ausgabe.nextSibling);
+    }
     eingabe.addEventListener('input', zeigen);
     zeigen();
   });
