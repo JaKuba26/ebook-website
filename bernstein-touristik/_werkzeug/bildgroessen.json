@@ -1,0 +1,4078 @@
+{
+"3-sterne-hotel-atol-spa/01": [
+898,
+609
+],
+"3-sterne-hotel-atol-spa/02": [
+1024,
+681
+],
+"3-sterne-hotel-atol-spa/03": [
+1024,
+472
+],
+"3-sterne-hotel-atol-spa/04": [
+1200,
+800
+],
+"3-sterne-hotel-atol-spa/05": [
+1200,
+900
+],
+"3-sterne-hotel-atol-spa/06": [
+1024,
+683
+],
+"3-sterne-hotel-atol-spa/07": [
+1200,
+800
+],
+"3-sterne-hotel-atol-spa/08": [
+1200,
+814
+],
+"3-sterne-hotel-atol-spa/09": [
+1022,
+680
+],
+"3-sterne-hotel-atol-spa/10": [
+1024,
+683
+],
+"3-sterne-hotel-atol-spa/11": [
+1200,
+809
+],
+"3-sterne-hotel-atol-spa/12": [
+1024,
+681
+],
+"3-sterne-hotel-villa-jupiter/01": [
+1200,
+1046
+],
+"afrodyta-spa/01": [
+1024,
+576
+],
+"afrodyta-spa/02": [
+1200,
+675
+],
+"afrodyta-spa/03": [
+1024,
+1024
+],
+"afrodyta-spa/04": [
+576,
+768
+],
+"afrodyta-spa/05": [
+1200,
+1200
+],
+"afrodyta-spa/06": [
+292,
+420
+],
+"afrodyta-spa/07": [
+1200,
+1140
+],
+"afrodyta-spa/08": [
+960,
+768
+],
+"afrodyta-spa/09": [
+621,
+305
+],
+"afrodyta-spa/10": [
+622,
+302
+],
+"afrodyta-spa/11": [
+768,
+1024
+],
+"afrodyta-spa/12": [
+900,
+1200
+],
+"alga-swin/01": [
+1024,
+685
+],
+"alga-swin/02": [
+1150,
+863
+],
+"alga-swin/03": [
+900,
+602
+],
+"alga-swin/04": [
+900,
+1200
+],
+"alga-swin/05": [
+1200,
+800
+],
+"alga-swin/06": [
+1200,
+800
+],
+"alga-swin/07": [
+1150,
+863
+],
+"alga-swin/08": [
+1024,
+685
+],
+"alga-swin/09": [
+800,
+533
+],
+"alga-swin/10": [
+1150,
+863
+],
+"alga-swin/11": [
+800,
+600
+],
+"alga-swin/12": [
+1200,
+800
+],
+"aparthotel-baltic-spa/01": [
+700,
+465
+],
+"aparthotel-baltic-spa/02": [
+1004,
+768
+],
+"aparthotel-baltic-spa/03": [
+858,
+768
+],
+"aparthotel-baltic-spa/04": [
+1024,
+681
+],
+"aparthotel-baltic-spa/05": [
+700,
+465
+],
+"aparthotel-baltic-spa/06": [
+700,
+465
+],
+"aparthotel-baltic-spa/07": [
+1024,
+682
+],
+"aparthotel-etna/01": [
+1024,
+768
+],
+"aparthotel-etna/02": [
+576,
+768
+],
+"aparthotel-etna/03": [
+1200,
+800
+],
+"aparthotel-etna/04": [
+1200,
+691
+],
+"aparthotel-etna/05": [
+1200,
+599
+],
+"aparthotel-etna/06": [
+1200,
+674
+],
+"aparthotel-etna/07": [
+667,
+1000
+],
+"aparthotel-etna/08": [
+1200,
+801
+],
+"aparthotel-etna/09": [
+1024,
+768
+],
+"aparthotel-etna/10": [
+1024,
+768
+],
+"aparthotel-etna/11": [
+1024,
+750
+],
+"aparthotel-etna/12": [
+1024,
+768
+],
+"apartment-hotel-baltic-fort/01": [
+1024,
+683
+],
+"apartment-hotel-baltic-fort/02": [
+1200,
+525
+],
+"apartment-hotel-baltic-fort/03": [
+1200,
+800
+],
+"apartment-hotel-baltic-fort/04": [
+450,
+300
+],
+"apartment-hotel-baltic-fort/05": [
+565,
+425
+],
+"apartment-hotel-baltic-fort/06": [
+1200,
+600
+],
+"apartment-hotel-baltic-fort/07": [
+1200,
+800
+],
+"apartment-hotel-baltic-fort/08": [
+1200,
+874
+],
+"apartment-hotel-baltic-fort/09": [
+1200,
+600
+],
+"apartment-hotel-baltic-fort/10": [
+1200,
+800
+],
+"apartments-mlynska-10/01": [
+1200,
+800
+],
+"apartments-mlynska-10/02": [
+1200,
+800
+],
+"apartments-mlynska-10/03": [
+1200,
+800
+],
+"apartments-mlynska-10/04": [
+1200,
+800
+],
+"apartments-mlynska-10/05": [
+1200,
+800
+],
+"apartments-mlynska-10/06": [
+1200,
+800
+],
+"apartments-mlynska-10/07": [
+1200,
+800
+],
+"apartments-mlynska-10/08": [
+1200,
+800
+],
+"apartments-mlynska-10/09": [
+1200,
+800
+],
+"apartments-mlynska-10/10": [
+1200,
+800
+],
+"appartments-feniks/01": [
+1024,
+576
+],
+"appartments-feniks/02": [
+1024,
+681
+],
+"appartments-feniks/03": [
+1024,
+681
+],
+"appartments-feniks/04": [
+1000,
+220
+],
+"appartments-feniks/05": [
+640,
+426
+],
+"appartments-feniks/06": [
+700,
+465
+],
+"aquamarina-marisol/01": [
+1024,
+681
+],
+"aquamarina-marisol/02": [
+800,
+532
+],
+"aquamarina-marisol/03": [
+1024,
+681
+],
+"aquamarina-marisol/04": [
+1024,
+681
+],
+"aquamarina-marisol/05": [
+1024,
+681
+],
+"aquamarina-marisol/06": [
+1024,
+681
+],
+"aquamarina-marisol/07": [
+1024,
+683
+],
+"aquamarina-marisol/08": [
+1024,
+683
+],
+"aquamarina-marisol/09": [
+1024,
+683
+],
+"aquarius/01": [
+1200,
+675
+],
+"aquarius/02": [
+1100,
+619
+],
+"aquarius/03": [
+1200,
+900
+],
+"aquarius/04": [
+900,
+600
+],
+"aquarius/05": [
+650,
+435
+],
+"aquarius/06": [
+1100,
+733
+],
+"aquarius/07": [
+1100,
+733
+],
+"aquarius/08": [
+1200,
+801
+],
+"aquarius/09": [
+1200,
+799
+],
+"aquarius/10": [
+1200,
+801
+],
+"aquarius/11": [
+1200,
+675
+],
+"aquarius/12": [
+1200,
+801
+],
+"ferienapartments-aqua-polanki/01": [
+1024,
+576
+],
+"ferienapartments-aqua-polanki/02": [
+1024,
+683
+],
+"ferienapartments-aqua-polanki/03": [
+576,
+768
+],
+"ferienapartments-aqua-polanki/04": [
+1024,
+768
+],
+"ferienapartments-aqua-polanki/05": [
+1024,
+768
+],
+"ferienapartments-aqua-polanki/06": [
+1024,
+767
+],
+"ferienapartments-aqua-polanki/07": [
+1024,
+659
+],
+"ferienapartments-aqua-polanki/08": [
+594,
+768
+],
+"ferienapartments-aqua-polanki/09": [
+576,
+768
+],
+"ferienapartments-aqua-polanki/10": [
+1024,
+683
+],
+"ferienapartments-aqua-polanki/11": [
+1024,
+683
+],
+"ferienapartments-aqua-polanki/12": [
+1024,
+683
+],
+"hamilton-spa-wellness/01": [
+1024,
+681
+],
+"hamilton-spa-wellness/02": [
+1024,
+681
+],
+"hamilton-spa-wellness/03": [
+1200,
+800
+],
+"hamilton-spa-wellness/04": [
+1200,
+800
+],
+"hamilton-spa-wellness/05": [
+1200,
+800
+],
+"hamilton-spa-wellness/06": [
+1200,
+794
+],
+"hamilton-spa-wellness/07": [
+1200,
+449
+],
+"hamilton-spa-wellness/08": [
+1200,
+800
+],
+"hamilton-spa-wellness/09": [
+1200,
+800
+],
+"hamilton-spa-wellness/10": [
+1200,
+798
+],
+"hamilton-spa-wellness/11": [
+1200,
+790
+],
+"hamilton-spa-wellness/12": [
+1200,
+801
+],
+"herc-swin-2/01": [
+1000,
+667
+],
+"herc-swin-2/02": [
+1024,
+683
+],
+"herc-swin-2/03": [
+1000,
+665
+],
+"herc-swin-2/04": [
+1000,
+665
+],
+"herc-swin-2/05": [
+1000,
+665
+],
+"herc-swin-2/06": [
+1000,
+665
+],
+"herc-swin-2/07": [
+1200,
+675
+],
+"herc-swin-2/08": [
+1200,
+675
+],
+"herc-swin-2/09": [
+1024,
+576
+],
+"herc-swin-2/10": [
+1200,
+675
+],
+"hilton-resort-spa/01": [
+1200,
+618
+],
+"hilton-resort-spa/02": [
+1200,
+468
+],
+"hilton-resort-spa/03": [
+1200,
+468
+],
+"hilton-resort-spa/04": [
+1200,
+468
+],
+"hilton-resort-spa/05": [
+1200,
+468
+],
+"hilton-resort-spa/06": [
+1200,
+800
+],
+"hilton-resort-spa/07": [
+1200,
+600
+],
+"hilton-resort-spa/08": [
+1200,
+800
+],
+"hilton-resort-spa/09": [
+1200,
+800
+],
+"hilton-resort-spa/10": [
+1200,
+800
+],
+"hilton-resort-spa/11": [
+1200,
+800
+],
+"hilton-resort-spa/12": [
+1200,
+468
+],
+"hot-arka/01": [
+909,
+619
+],
+"hot-arka/02": [
+1200,
+750
+],
+"hot-arka/03": [
+1200,
+800
+],
+"hot-arka/04": [
+1200,
+800
+],
+"hot-arka/05": [
+1200,
+800
+],
+"hot-arka/06": [
+1200,
+800
+],
+"hot-arka/07": [
+1200,
+800
+],
+"hot-arka/08": [
+1200,
+800
+],
+"hot-arka/09": [
+1200,
+800
+],
+"hot-arka/10": [
+1200,
+800
+],
+"hot-arka/11": [
+1200,
+800
+],
+"hot-arka/12": [
+1200,
+800
+],
+"hot-senat/01": [
+1024,
+678
+],
+"hot-senat/02": [
+1024,
+683
+],
+"hot-senat/03": [
+1024,
+683
+],
+"hot-senat/04": [
+1024,
+683
+],
+"hot-senat/05": [
+1024,
+672
+],
+"hot-senat/06": [
+1024,
+576
+],
+"hot-senat/07": [
+1024,
+683
+],
+"hot-senat/08": [
+1200,
+675
+],
+"hot-senat/09": [
+560,
+600
+],
+"hotel-admiral-1/01": [
+800,
+532
+],
+"hotel-admiral-1/02": [
+1200,
+798
+],
+"hotel-admiral-1/03": [
+1200,
+798
+],
+"hotel-admiral-1/04": [
+1200,
+793
+],
+"hotel-admiral-1/05": [
+1200,
+1053
+],
+"hotel-admiral-1/06": [
+1200,
+798
+],
+"hotel-admiral-1/07": [
+1200,
+799
+],
+"hotel-admiral-1/08": [
+1200,
+800
+],
+"hotel-admiral-1/09": [
+960,
+639
+],
+"hotel-admiral-1/10": [
+1200,
+799
+],
+"hotel-admiral-1/11": [
+1200,
+798
+],
+"hotel-admiral-1/12": [
+1200,
+798
+],
+"hotel-amber-baltic/01": [
+1200,
+799
+],
+"hotel-amber-baltic/02": [
+1200,
+800
+],
+"hotel-amber-baltic/03": [
+1200,
+515
+],
+"hotel-amber-baltic/04": [
+1200,
+483
+],
+"hotel-amber-baltic/05": [
+1200,
+800
+],
+"hotel-amber-baltic/06": [
+1200,
+800
+],
+"hotel-amber-baltic/07": [
+1200,
+800
+],
+"hotel-amber-baltic/08": [
+1200,
+515
+],
+"hotel-amber-baltic/09": [
+1200,
+800
+],
+"hotel-amber-baltic/10": [
+1200,
+800
+],
+"hotel-amber-baltic/11": [
+1200,
+515
+],
+"hotel-amber-baltic/12": [
+1200,
+483
+],
+"hotel-amber-port/01": [
+1200,
+900
+],
+"hotel-amber-port/02": [
+1200,
+899
+],
+"hotel-amber-port/03": [
+1200,
+900
+],
+"hotel-amber-port/04": [
+1200,
+900
+],
+"hotel-amber-port/05": [
+1170,
+690
+],
+"hotel-amber-port/06": [
+888,
+601
+],
+"hotel-amber-port/07": [
+1200,
+799
+],
+"hotel-amber-port/08": [
+1200,
+900
+],
+"hotel-amber-port/09": [
+600,
+900
+],
+"hotel-amber-port/10": [
+1200,
+799
+],
+"hotel-amber-port/11": [
+1200,
+799
+],
+"hotel-amber-port/12": [
+1200,
+799
+],
+"hotel-arka-medical-spa/01": [
+1024,
+768
+],
+"hotel-arka-medical-spa/02": [
+1200,
+694
+],
+"hotel-arka-medical-spa/03": [
+1200,
+797
+],
+"hotel-arka-medical-spa/04": [
+1200,
+814
+],
+"hotel-arka-medical-spa/05": [
+1200,
+798
+],
+"hotel-arka-medical-spa/06": [
+1200,
+803
+],
+"hotel-arka-medical-spa/07": [
+570,
+300
+],
+"hotel-arka-medical-spa/08": [
+1200,
+770
+],
+"hotel-arka-medical-spa/09": [
+1200,
+800
+],
+"hotel-arka-medical-spa/10": [
+1200,
+800
+],
+"hotel-arka-medical-spa/11": [
+1200,
+800
+],
+"hotel-arka-medical-spa/12": [
+1200,
+800
+],
+"hotel-baginscy-spa/01": [
+1200,
+800
+],
+"hotel-baginscy-spa/02": [
+1200,
+674
+],
+"hotel-baginscy-spa/03": [
+1200,
+800
+],
+"hotel-baginscy-spa/04": [
+1200,
+800
+],
+"hotel-baginscy-spa/05": [
+1200,
+800
+],
+"hotel-baginscy-spa/06": [
+1200,
+800
+],
+"hotel-baginscy-spa/07": [
+1200,
+800
+],
+"hotel-baginscy-spa/08": [
+1200,
+800
+],
+"hotel-baginscy-spa/09": [
+1200,
+800
+],
+"hotel-baginscy-spa/10": [
+1200,
+800
+],
+"hotel-baginscy-spa/11": [
+1200,
+800
+],
+"hotel-baginscy-spa/12": [
+1200,
+800
+],
+"hotel-baginski-chabinka-spa/01": [
+1200,
+675
+],
+"hotel-baginski-chabinka-spa/02": [
+1200,
+675
+],
+"hotel-baginski-chabinka-spa/03": [
+1200,
+675
+],
+"hotel-baginski-chabinka-spa/04": [
+1200,
+675
+],
+"hotel-baginski-chabinka-spa/05": [
+1200,
+675
+],
+"hotel-baginski-chabinka-spa/06": [
+1200,
+675
+],
+"hotel-baginski-chabinka-spa/07": [
+1200,
+675
+],
+"hotel-baginski-chabinka-spa/08": [
+1200,
+675
+],
+"hotel-baginski-chabinka-spa/09": [
+1200,
+675
+],
+"hotel-baginski-chabinka-spa/10": [
+1200,
+675
+],
+"hotel-baltivia-sea-resort/01": [
+1200,
+718
+],
+"hotel-baltivia-sea-resort/02": [
+1200,
+674
+],
+"hotel-baltivia-sea-resort/03": [
+1200,
+544
+],
+"hotel-baltivia-sea-resort/04": [
+1200,
+801
+],
+"hotel-baltivia-sea-resort/05": [
+1200,
+801
+],
+"hotel-baltivia-sea-resort/06": [
+1200,
+801
+],
+"hotel-baltivia-sea-resort/07": [
+1200,
+801
+],
+"hotel-baltivia-sea-resort/08": [
+1200,
+807
+],
+"hotel-baltivia-sea-resort/09": [
+1200,
+801
+],
+"hotel-baltivia-sea-resort/10": [
+1200,
+801
+],
+"hotel-baltivia-sea-resort/11": [
+1200,
+801
+],
+"hotel-baltivia-sea-resort/12": [
+1200,
+801
+],
+"hotel-bociane-gniadzo-storchennest/01": [
+1200,
+800
+],
+"hotel-bociane-gniadzo-storchennest/02": [
+1200,
+675
+],
+"hotel-bociane-gniadzo-storchennest/03": [
+1080,
+608
+],
+"hotel-bociane-gniadzo-storchennest/04": [
+1200,
+800
+],
+"hotel-bociane-gniadzo-storchennest/05": [
+960,
+960
+],
+"hotel-bociane-gniadzo-storchennest/06": [
+1200,
+675
+],
+"hotel-bociane-gniadzo-storchennest/07": [
+1200,
+1003
+],
+"hotel-bociane-gniadzo-storchennest/08": [
+600,
+600
+],
+"hotel-bociane-gniadzo-storchennest/09": [
+1200,
+798
+],
+"hotel-bociane-gniadzo-storchennest/10": [
+1200,
+798
+],
+"hotel-brauerei-folga/01": [
+1200,
+750
+],
+"hotel-brauerei-folga/02": [
+1200,
+801
+],
+"hotel-brauerei-folga/03": [
+1200,
+801
+],
+"hotel-brauerei-folga/04": [
+1200,
+750
+],
+"hotel-brauerei-folga/05": [
+797,
+1200
+],
+"hotel-brauerei-folga/06": [
+1200,
+797
+],
+"hotel-brauerei-folga/07": [
+1200,
+797
+],
+"hotel-brauerei-folga/08": [
+800,
+1200
+],
+"hotel-brauerei-folga/09": [
+1200,
+799
+],
+"hotel-brauerei-folga/10": [
+1200,
+800
+],
+"hotel-brauerei-folga/11": [
+1200,
+900
+],
+"hotel-brauerei-folga/12": [
+1200,
+900
+],
+"hotel-delfin-spa/01": [
+580,
+460
+],
+"hotel-delfin-spa/02": [
+1200,
+901
+],
+"hotel-delfin-spa/03": [
+720,
+480
+],
+"hotel-delfin-spa/04": [
+1024,
+700
+],
+"hotel-delfin-spa/05": [
+840,
+460
+],
+"hotel-delfin-spa/06": [
+512,
+768
+],
+"hotel-delfin-spa/07": [
+1024,
+576
+],
+"hotel-delfin-spa/08": [
+1000,
+579
+],
+"hotel-delfin-spa/09": [
+1200,
+900
+],
+"hotel-delfin-spa/10": [
+1200,
+675
+],
+"hotel-delfin-spa/11": [
+580,
+460
+],
+"hotel-delfin-spa/12": [
+1200,
+676
+],
+"hotel-diune-resort/01": [
+1200,
+823
+],
+"hotel-diune-resort/02": [
+1200,
+823
+],
+"hotel-diune-resort/03": [
+1200,
+674
+],
+"hotel-diune-resort/04": [
+1200,
+675
+],
+"hotel-diune-resort/05": [
+1200,
+801
+],
+"hotel-diune-resort/06": [
+1200,
+795
+],
+"hotel-diune-resort/07": [
+1200,
+795
+],
+"hotel-diune-resort/08": [
+1200,
+795
+],
+"hotel-diune-resort/09": [
+1200,
+800
+],
+"hotel-diune-resort/10": [
+1200,
+801
+],
+"hotel-diune-resort/11": [
+795,
+1200
+],
+"hotel-diune-resort/12": [
+1200,
+795
+],
+"hotel-drei-inseln/01": [
+1024,
+683
+],
+"hotel-drei-inseln/02": [
+1024,
+767
+],
+"hotel-drei-inseln/03": [
+1200,
+675
+],
+"hotel-drei-inseln/04": [
+1200,
+675
+],
+"hotel-drei-inseln/05": [
+1024,
+683
+],
+"hotel-drei-inseln/06": [
+1200,
+675
+],
+"hotel-drei-inseln/07": [
+881,
+660
+],
+"hotel-drei-inseln/08": [
+1024,
+685
+],
+"hotel-drei-inseln/09": [
+1080,
+720
+],
+"hotel-drei-inseln/10": [
+1200,
+800
+],
+"hotel-drei-inseln/11": [
+960,
+639
+],
+"hotel-drei-inseln/12": [
+1200,
+504
+],
+"hotel-el-park/01": [
+1200,
+800
+],
+"hotel-el-park/02": [
+1200,
+323
+],
+"hotel-el-park/03": [
+1200,
+800
+],
+"hotel-el-park/04": [
+1200,
+800
+],
+"hotel-el-park/05": [
+1200,
+800
+],
+"hotel-el-park/06": [
+1200,
+800
+],
+"hotel-el-park/07": [
+1200,
+800
+],
+"hotel-el-park/08": [
+1200,
+800
+],
+"hotel-el-park/09": [
+1200,
+800
+],
+"hotel-ewerdin/01": [
+1200,
+874
+],
+"hotel-ewerdin/02": [
+1200,
+675
+],
+"hotel-ewerdin/03": [
+1200,
+780
+],
+"hotel-ewerdin/04": [
+1200,
+951
+],
+"hotel-ewerdin/05": [
+1200,
+675
+],
+"hotel-ewerdin/06": [
+1200,
+801
+],
+"hotel-ewerdin/07": [
+675,
+1200
+],
+"hotel-ewerdin/08": [
+1200,
+1085
+],
+"hotel-ewerdin/09": [
+1200,
+801
+],
+"hotel-ewerdin/10": [
+1200,
+801
+],
+"hotel-gold/01": [
+808,
+1200
+],
+"hotel-gold/02": [
+999,
+627
+],
+"hotel-gold/03": [
+1200,
+801
+],
+"hotel-gold/04": [
+808,
+1200
+],
+"hotel-gold/05": [
+1200,
+800
+],
+"hotel-gold/06": [
+800,
+1200
+],
+"hotel-gold/07": [
+900,
+599
+],
+"hotel-gold/08": [
+800,
+1200
+],
+"hotel-gold/09": [
+1200,
+800
+],
+"hotel-gold/10": [
+1200,
+800
+],
+"hotel-gold/11": [
+1000,
+563
+],
+"hotel-gold/12": [
+1200,
+798
+],
+"hotel-grand-laola/01": [
+1200,
+800
+],
+"hotel-grand-laola/02": [
+1200,
+594
+],
+"hotel-grand-laola/03": [
+1200,
+800
+],
+"hotel-grand-laola/04": [
+1200,
+801
+],
+"hotel-grand-laola/05": [
+1200,
+594
+],
+"hotel-grand-laola/06": [
+1200,
+626
+],
+"hotel-grand-laola/07": [
+1200,
+899
+],
+"hotel-grand-laola/08": [
+600,
+401
+],
+"hotel-grand-laola/09": [
+1200,
+899
+],
+"hotel-grand-laola/10": [
+1200,
+800
+],
+"hotel-grand-laola/11": [
+1200,
+800
+],
+"hotel-grand-laola/12": [
+1200,
+800
+],
+"hotel-henryk/01": [
+1200,
+900
+],
+"hotel-henryk/02": [
+1200,
+900
+],
+"hotel-henryk/03": [
+1200,
+823
+],
+"hotel-henryk/04": [
+1200,
+900
+],
+"hotel-henryk/05": [
+800,
+1200
+],
+"hotel-henryk/06": [
+1200,
+799
+],
+"hotel-henryk/07": [
+1200,
+799
+],
+"hotel-henryk/08": [
+1200,
+799
+],
+"hotel-henryk/09": [
+1200,
+800
+],
+"hotel-henryk/10": [
+1200,
+799
+],
+"hotel-henryk/11": [
+1200,
+799
+],
+"hotel-henryk/12": [
+1200,
+799
+],
+"hotel-holland-house-residence/01": [
+1200,
+883
+],
+"hotel-holland-house-residence/02": [
+1200,
+803
+],
+"hotel-holland-house-residence/03": [
+1024,
+683
+],
+"hotel-holland-house-residence/04": [
+1024,
+681
+],
+"hotel-holland-house-residence/05": [
+1024,
+681
+],
+"hotel-holland-house-residence/06": [
+1200,
+628
+],
+"hotel-holland-house-residence/07": [
+1200,
+633
+],
+"hotel-holland-house-residence/08": [
+1200,
+800
+],
+"hotel-holland-house-residence/09": [
+1200,
+799
+],
+"hotel-holland-house-residence/10": [
+1200,
+798
+],
+"hotel-holland-house-residence/11": [
+798,
+1200
+],
+"hotel-ikar/01": [
+1200,
+500
+],
+"hotel-ikar/02": [
+1200,
+801
+],
+"hotel-ikar/03": [
+1200,
+800
+],
+"hotel-ikar/04": [
+1200,
+800
+],
+"hotel-ikar/05": [
+1200,
+500
+],
+"hotel-ikar/06": [
+1200,
+500
+],
+"hotel-ikar/07": [
+576,
+960
+],
+"hotel-ikar/08": [
+1024,
+681
+],
+"hotel-ikar/09": [
+1200,
+798
+],
+"hotel-ikar/10": [
+1200,
+674
+],
+"hotel-ikar/11": [
+1200,
+801
+],
+"hotel-ikar/12": [
+1200,
+801
+],
+"hotel-imperiall-resort-und-medi-spa/01": [
+1200,
+674
+],
+"hotel-imperiall-resort-und-medi-spa/02": [
+1024,
+768
+],
+"hotel-imperiall-resort-und-medi-spa/03": [
+1024,
+386
+],
+"hotel-imperiall-resort-und-medi-spa/04": [
+1024,
+683
+],
+"hotel-imperiall-resort-und-medi-spa/05": [
+1200,
+800
+],
+"hotel-imperiall-resort-und-medi-spa/06": [
+1200,
+801
+],
+"hotel-imperiall-resort-und-medi-spa/07": [
+1200,
+674
+],
+"hotel-imperiall-resort-und-medi-spa/08": [
+1200,
+800
+],
+"hotel-imperiall-resort-und-medi-spa/09": [
+1200,
+800
+],
+"hotel-interferie-medical-spa/01": [
+1017,
+608
+],
+"hotel-interferie-medical-spa/02": [
+1024,
+683
+],
+"hotel-interferie-medical-spa/03": [
+1200,
+720
+],
+"hotel-interferie-medical-spa/04": [
+1024,
+614
+],
+"hotel-interferie-medical-spa/05": [
+1024,
+614
+],
+"hotel-interferie-medical-spa/06": [
+1200,
+897
+],
+"hotel-interferie-medical-spa/07": [
+1200,
+900
+],
+"hotel-interferie-medical-spa/08": [
+1200,
+800
+],
+"hotel-interferie-medical-spa/09": [
+1200,
+800
+],
+"hotel-interferie-medical-spa/10": [
+1200,
+800
+],
+"hotel-interferie-medical-spa/11": [
+1200,
+800
+],
+"hotel-interferie-medical-spa/12": [
+1200,
+800
+],
+"hotel-jantar/01": [
+1200,
+798
+],
+"hotel-jantar/02": [
+1200,
+800
+],
+"hotel-jantar/03": [
+1200,
+800
+],
+"hotel-jantar/04": [
+1200,
+801
+],
+"hotel-jantar/05": [
+1200,
+801
+],
+"hotel-jantar/06": [
+1200,
+801
+],
+"hotel-jantar/07": [
+1200,
+801
+],
+"hotel-jantar/08": [
+1200,
+801
+],
+"hotel-jantar/09": [
+1200,
+675
+],
+"hotel-kielczanka/01": [
+1200,
+780
+],
+"hotel-kielczanka/02": [
+1200,
+675
+],
+"hotel-kielczanka/03": [
+1024,
+683
+],
+"hotel-kielczanka/04": [
+1024,
+683
+],
+"hotel-kielczanka/05": [
+1024,
+922
+],
+"hotel-kielczanka/06": [
+580,
+460
+],
+"hotel-kielczanka/07": [
+1200,
+675
+],
+"hotel-kielczanka/08": [
+1200,
+675
+],
+"hotel-kielczanka/09": [
+1024,
+1024
+],
+"hotel-kielczanka/10": [
+1200,
+503
+],
+"hotel-kielczanka/11": [
+1200,
+675
+],
+"hotel-koral-live/01": [
+1200,
+675
+],
+"hotel-koral-live/02": [
+1200,
+900
+],
+"hotel-koral-live/03": [
+1200,
+900
+],
+"hotel-koral-live/04": [
+1200,
+900
+],
+"hotel-koral-live/05": [
+1200,
+900
+],
+"hotel-koral-live/06": [
+1200,
+900
+],
+"hotel-koral-live/07": [
+1200,
+800
+],
+"hotel-koral-live/08": [
+1200,
+675
+],
+"hotel-koral-live/09": [
+1200,
+675
+],
+"hotel-koral-live/10": [
+1200,
+675
+],
+"hotel-koral-live/11": [
+1200,
+900
+],
+"hotel-koral-live/12": [
+1200,
+801
+],
+"hotel-krol-plaza-spa/01": [
+1200,
+900
+],
+"hotel-krol-plaza-spa/02": [
+1200,
+633
+],
+"hotel-krol-plaza-spa/03": [
+870,
+524
+],
+"hotel-krol-plaza-spa/04": [
+950,
+534
+],
+"hotel-krol-plaza-spa/05": [
+950,
+534
+],
+"hotel-krol-plaza-spa/06": [
+950,
+534
+],
+"hotel-lambert/01": [
+1200,
+800
+],
+"hotel-lambert/02": [
+1024,
+683
+],
+"hotel-lambert/03": [
+1024,
+683
+],
+"hotel-lambert/04": [
+1024,
+683
+],
+"hotel-lambert/05": [
+1024,
+683
+],
+"hotel-lambert/06": [
+1200,
+675
+],
+"hotel-lidia-spa-wellness/01": [
+1200,
+722
+],
+"hotel-lidia-spa-wellness/02": [
+1200,
+488
+],
+"hotel-lidia-spa-wellness/03": [
+1200,
+798
+],
+"hotel-lidia-spa-wellness/04": [
+805,
+450
+],
+"hotel-lidia-spa-wellness/05": [
+1200,
+801
+],
+"hotel-lidia-spa-wellness/06": [
+622,
+436
+],
+"hotel-lidia-spa-wellness/07": [
+1200,
+781
+],
+"hotel-lidia-spa-wellness/08": [
+1200,
+800
+],
+"hotel-lidia-spa-wellness/09": [
+1200,
+800
+],
+"hotel-lidia-spa-wellness/10": [
+1200,
+405
+],
+"hotel-lidia-spa-wellness/11": [
+1200,
+445
+],
+"hotel-lidia-spa-wellness/12": [
+812,
+1200
+],
+"hotel-lidia-spa/01": [
+812,
+1200
+],
+"hotel-lidia-spa/02": [
+1200,
+801
+],
+"hotel-lidia-spa/03": [
+1200,
+987
+],
+"hotel-lidia-spa/04": [
+1200,
+675
+],
+"hotel-lidia-spa/05": [
+1200,
+801
+],
+"hotel-lidia-spa/06": [
+622,
+436
+],
+"hotel-lidia-spa/07": [
+1200,
+781
+],
+"hotel-lidia-spa/08": [
+1200,
+800
+],
+"hotel-lidia-spa/09": [
+1200,
+800
+],
+"hotel-lidia-spa/10": [
+1200,
+800
+],
+"hotel-lidia-spa/11": [
+1200,
+489
+],
+"hotel-lidia-spa/12": [
+1200,
+798
+],
+"hotel-linea-mare/01": [
+1200,
+800
+],
+"hotel-linea-mare/02": [
+1200,
+800
+],
+"hotel-linea-mare/03": [
+1200,
+800
+],
+"hotel-linea-mare/04": [
+1200,
+800
+],
+"hotel-linea-mare/05": [
+1200,
+800
+],
+"hotel-linea-mare/06": [
+1200,
+800
+],
+"hotel-linea-mare/07": [
+1200,
+800
+],
+"hotel-marena/01": [
+925,
+693
+],
+"hotel-marena/02": [
+1200,
+801
+],
+"hotel-marena/03": [
+1200,
+800
+],
+"hotel-marena/04": [
+1200,
+800
+],
+"hotel-marena/05": [
+1040,
+693
+],
+"hotel-marena/06": [
+925,
+693
+],
+"hotel-marena/07": [
+1200,
+765
+],
+"hotel-marena/08": [
+1200,
+801
+],
+"hotel-marena/09": [
+1200,
+801
+],
+"hotel-marine/01": [
+1200,
+900
+],
+"hotel-marine/02": [
+800,
+600
+],
+"hotel-marine/03": [
+1200,
+800
+],
+"hotel-marine/04": [
+1200,
+600
+],
+"hotel-marine/05": [
+1200,
+525
+],
+"hotel-marine/06": [
+1200,
+600
+],
+"hotel-marine/07": [
+1024,
+639
+],
+"hotel-marine/08": [
+1200,
+525
+],
+"hotel-marine/09": [
+1200,
+900
+],
+"hotel-marine/10": [
+1200,
+525
+],
+"hotel-marine/11": [
+770,
+336
+],
+"hotel-marine/12": [
+1200,
+800
+],
+"hotel-millennium-health-resort-spa/01": [
+1200,
+623
+],
+"hotel-millennium-health-resort-spa/02": [
+400,
+231
+],
+"hotel-millennium-health-resort-spa/03": [
+1200,
+203
+],
+"hotel-millennium-health-resort-spa/04": [
+867,
+580
+],
+"hotel-millennium-health-resort-spa/05": [
+900,
+600
+],
+"hotel-millennium-health-resort-spa/06": [
+880,
+556
+],
+"hotel-millennium-health-resort-spa/07": [
+700,
+468
+],
+"hotel-millennium-health-resort-spa/08": [
+900,
+600
+],
+"hotel-millennium-health-resort-spa/09": [
+1200,
+300
+],
+"hotel-millennium-health-resort-spa/10": [
+1200,
+801
+],
+"hotel-millennium-health-resort-spa/11": [
+1200,
+801
+],
+"hotel-millennium/01": [
+1000,
+410
+],
+"hotel-millennium/02": [
+1200,
+801
+],
+"hotel-millennium/03": [
+1200,
+800
+],
+"hotel-millennium/04": [
+1200,
+800
+],
+"hotel-millennium/05": [
+1200,
+808
+],
+"hotel-millennium/06": [
+1200,
+623
+],
+"hotel-millennium/07": [
+1000,
+410
+],
+"hotel-millennium/08": [
+1200,
+800
+],
+"hotel-millennium/09": [
+1200,
+800
+],
+"hotel-millennium/10": [
+1200,
+800
+],
+"hotel-millennium/11": [
+800,
+532
+],
+"hotel-millennium/12": [
+900,
+600
+],
+"hotel-olymp-2/01": [
+1200,
+803
+],
+"hotel-olymp-2/02": [
+1200,
+800
+],
+"hotel-olymp-2/03": [
+1199,
+800
+],
+"hotel-olymp-2/04": [
+1039,
+800
+],
+"hotel-olymp-2/05": [
+1200,
+506
+],
+"hotel-olymp-2/06": [
+1200,
+500
+],
+"hotel-olymp-2/07": [
+1200,
+801
+],
+"hotel-olymp-2/08": [
+1024,
+683
+],
+"hotel-olymp-2/09": [
+1200,
+800
+],
+"hotel-olymp-3/01": [
+639,
+500
+],
+"hotel-olymp-3/02": [
+1200,
+800
+],
+"hotel-olymp-3/03": [
+1200,
+801
+],
+"hotel-olymp-3/04": [
+1200,
+801
+],
+"hotel-olymp-3/05": [
+1200,
+801
+],
+"hotel-olymp-3/06": [
+1200,
+800
+],
+"hotel-olymp-3/07": [
+1200,
+800
+],
+"hotel-olymp-3/08": [
+534,
+800
+],
+"hotel-olymp-3/09": [
+639,
+500
+],
+"hotel-olymp-3/10": [
+1200,
+800
+],
+"hotel-olymp-3/11": [
+639,
+500
+],
+"hotel-olymp-3/12": [
+1200,
+800
+],
+"hotel-olymp-4/01": [
+1024,
+768
+],
+"hotel-olymp-4/02": [
+1200,
+800
+],
+"hotel-olymp-4/03": [
+1200,
+800
+],
+"hotel-olymp-4/04": [
+1200,
+875
+],
+"hotel-olymp-4/05": [
+1200,
+800
+],
+"hotel-olymp-4/06": [
+1200,
+830
+],
+"hotel-olymp-4/07": [
+1024,
+683
+],
+"hotel-olymp-4/08": [
+1200,
+800
+],
+"hotel-olymp-4/09": [
+1024,
+683
+],
+"hotel-olymp-4/10": [
+974,
+800
+],
+"hotel-olymp-4/11": [
+1200,
+850
+],
+"hotel-olymp-4/12": [
+1200,
+800
+],
+"hotel-paula-wellness-und-spa/01": [
+1200,
+633
+],
+"hotel-paula-wellness-und-spa/02": [
+1200,
+613
+],
+"hotel-paula-wellness-und-spa/03": [
+1200,
+675
+],
+"hotel-paula-wellness-und-spa/04": [
+1024,
+768
+],
+"hotel-paula-wellness-und-spa/05": [
+1024,
+683
+],
+"hotel-paula-wellness-und-spa/06": [
+1200,
+675
+],
+"hotel-pension-pestelowy/01": [
+1200,
+800
+],
+"hotel-pension-pestelowy/02": [
+1200,
+800
+],
+"hotel-pension-pestelowy/03": [
+861,
+1200
+],
+"hotel-pension-pestelowy/04": [
+1024,
+768
+],
+"hotel-pension-pestelowy/05": [
+1024,
+768
+],
+"hotel-pension-pestelowy/06": [
+1024,
+768
+],
+"hotel-pension-pestelowy/07": [
+576,
+768
+],
+"hotel-perla-baltyku/01": [
+800,
+600
+],
+"hotel-perla-baltyku/02": [
+800,
+600
+],
+"hotel-perla-baltyku/03": [
+513,
+768
+],
+"hotel-perla-baltyku/04": [
+1000,
+600
+],
+"hotel-perla-baltyku/05": [
+1024,
+683
+],
+"hotel-perla-baltyku/06": [
+1200,
+797
+],
+"hotel-perla-baltyku/07": [
+1024,
+683
+],
+"hotel-perla-baltyku/08": [
+1024,
+683
+],
+"hotel-perla-baltyku/09": [
+1200,
+675
+],
+"hotel-perla-baltyku/10": [
+1024,
+683
+],
+"hotel-perla-baltyku/11": [
+1200,
+800
+],
+"hotel-perla-baltyku/12": [
+1200,
+800
+],
+"hotel-platinium-hotels-resort/01": [
+1200,
+652
+],
+"hotel-platinium-hotels-resort/02": [
+1200,
+652
+],
+"hotel-platinium-hotels-resort/03": [
+600,
+400
+],
+"hotel-platinium-hotels-resort/04": [
+640,
+480
+],
+"hotel-platinium-hotels-resort/05": [
+800,
+480
+],
+"hotel-platinium-hotels-resort/06": [
+800,
+450
+],
+"hotel-platinium-hotels-resort/07": [
+800,
+450
+],
+"hotel-platinium-hotels-resort/08": [
+800,
+450
+],
+"hotel-platinium-hotels-resort/09": [
+1200,
+651
+],
+"hotel-platinium-hotels-resort/10": [
+1200,
+652
+],
+"hotel-platinium-hotels-resort/11": [
+550,
+302
+],
+"hotel-platinium-hotels-resort/12": [
+800,
+450
+],
+"hotel-polaris-2/01": [
+580,
+327
+],
+"hotel-polaris-2/02": [
+1200,
+800
+],
+"hotel-polaris-2/03": [
+1024,
+768
+],
+"hotel-polaris-2/04": [
+1024,
+683
+],
+"hotel-polaris-2/05": [
+1200,
+800
+],
+"hotel-polaris-2/06": [
+1200,
+851
+],
+"hotel-polaris-2/07": [
+580,
+327
+],
+"hotel-polaris-2/08": [
+1024,
+683
+],
+"hotel-polaris-2/09": [
+1024,
+681
+],
+"hotel-polaris-2/10": [
+1024,
+681
+],
+"hotel-polaris-2/11": [
+1024,
+681
+],
+"hotel-polaris-2/12": [
+1024,
+332
+],
+"hotel-polaris-3/01": [
+580,
+327
+],
+"hotel-polaris-3/02": [
+460,
+384
+],
+"hotel-polaris-3/03": [
+500,
+334
+],
+"hotel-polaris-3/04": [
+510,
+210
+],
+"hotel-polaris-3/05": [
+1200,
+800
+],
+"hotel-polaris-3/06": [
+1060,
+1200
+],
+"hotel-polaris-3/07": [
+1200,
+800
+],
+"hotel-polaris-3/08": [
+1200,
+800
+],
+"hotel-poznanianka/01": [
+1200,
+801
+],
+"hotel-poznanianka/02": [
+1200,
+899
+],
+"hotel-poznanianka/03": [
+1200,
+798
+],
+"hotel-poznanianka/04": [
+1200,
+800
+],
+"hotel-poznanianka/05": [
+1200,
+800
+],
+"hotel-poznanianka/06": [
+1200,
+800
+],
+"hotel-poznanianka/07": [
+1200,
+800
+],
+"hotel-poznanianka/08": [
+1200,
+801
+],
+"hotel-poznanianka/09": [
+1200,
+800
+],
+"hotel-poznanianka/10": [
+1200,
+800
+],
+"hotel-poznanianka/11": [
+1200,
+801
+],
+"hotel-poznanianka/12": [
+1200,
+801
+],
+"hotel-radisson-blue-resort/01": [
+950,
+1177
+],
+"hotel-radisson-blue-resort/02": [
+1200,
+800
+],
+"hotel-radisson-blue-resort/03": [
+1024,
+683
+],
+"hotel-radisson-blue-resort/04": [
+1024,
+683
+],
+"hotel-radisson-blue-resort/05": [
+1024,
+683
+],
+"hotel-radisson-blue-resort/06": [
+960,
+1200
+],
+"hotel-radisson-blue-resort/07": [
+1200,
+641
+],
+"hotel-radisson-blue-resort/08": [
+1200,
+801
+],
+"hotel-radisson-blue-resort/09": [
+1200,
+800
+],
+"hotel-radisson-blue-resort/10": [
+1000,
+667
+],
+"hotel-radisson-blue-resort/11": [
+1199,
+800
+],
+"hotel-radisson-blue-resort/12": [
+1200,
+801
+],
+"hotel-resort-plaza-spa/01": [
+960,
+690
+],
+"hotel-resort-plaza-spa/02": [
+559,
+526
+],
+"hotel-resort-plaza-spa/03": [
+1200,
+800
+],
+"hotel-resort-plaza-spa/04": [
+900,
+608
+],
+"hotel-resort-plaza-spa/05": [
+900,
+608
+],
+"hotel-resort-plaza-spa/06": [
+1030,
+696
+],
+"hotel-resort-plaza-spa/07": [
+1030,
+696
+],
+"hotel-resort-plaza-spa/08": [
+1200,
+675
+],
+"hotel-resort-plaza-spa/09": [
+675,
+450
+],
+"hotel-resort-plaza-spa/10": [
+1200,
+775
+],
+"hotel-resort-plaza-spa/11": [
+1200,
+787
+],
+"hotel-resort-plaza-spa/12": [
+1200,
+814
+],
+"hotel-rezydent-resort/01": [
+1200,
+800
+],
+"hotel-rezydent-resort/02": [
+1200,
+800
+],
+"hotel-rezydent-resort/03": [
+1200,
+801
+],
+"hotel-rezydent-resort/04": [
+1200,
+800
+],
+"hotel-rezydent-resort/05": [
+1200,
+801
+],
+"hotel-rezydent-resort/06": [
+1200,
+800
+],
+"hotel-rezydent-resort/07": [
+1200,
+801
+],
+"hotel-royal-baltic/01": [
+1200,
+800
+],
+"hotel-royal-baltic/02": [
+1200,
+638
+],
+"hotel-royal-baltic/03": [
+1200,
+638
+],
+"hotel-royal-baltic/04": [
+1024,
+681
+],
+"hotel-royal-baltic/05": [
+1200,
+800
+],
+"hotel-royal-baltic/06": [
+1200,
+638
+],
+"hotel-royal-baltic/07": [
+1200,
+638
+],
+"hotel-royal-baltic/08": [
+1200,
+638
+],
+"hotel-royal-baltic/09": [
+1200,
+638
+],
+"hotel-royal-baltic/10": [
+1200,
+800
+],
+"hotel-royal-baltic/11": [
+1200,
+798
+],
+"hotel-royal-baltic/12": [
+1024,
+681
+],
+"hotel-sandra-spa/01": [
+1200,
+675
+],
+"hotel-sandra-spa/02": [
+1200,
+675
+],
+"hotel-sandra-spa/03": [
+1200,
+675
+],
+"hotel-sandra-spa/04": [
+1200,
+675
+],
+"hotel-sandra-spa/05": [
+800,
+600
+],
+"hotel-sandra-spa/06": [
+1200,
+675
+],
+"hotel-sandra-spa/07": [
+1200,
+675
+],
+"hotel-sandra-spa/08": [
+1200,
+675
+],
+"hotel-sandra-spa/09": [
+1200,
+675
+],
+"hotel-sandra-spa/10": [
+1200,
+675
+],
+"hotel-sandra-spa/11": [
+1024,
+577
+],
+"hotel-sandra-spa/12": [
+550,
+366
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/01": [
+1200,
+1200
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/02": [
+1140,
+560
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/03": [
+1200,
+798
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/04": [
+1024,
+768
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/05": [
+1200,
+900
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/06": [
+1140,
+560
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/07": [
+1200,
+900
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/08": [
+1140,
+560
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/09": [
+1200,
+900
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/10": [
+1200,
+900
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/11": [
+1200,
+900
+],
+"hotel-sea-resort-krol-plaza-spa-und-wellness/12": [
+1140,
+560
+],
+"hotel-sobotka/01": [
+1200,
+835
+],
+"hotel-sobotka/02": [
+1200,
+800
+],
+"hotel-sobotka/03": [
+1200,
+800
+],
+"hotel-sobotka/04": [
+1200,
+800
+],
+"hotel-sobotka/05": [
+1200,
+835
+],
+"hotel-sobotka/06": [
+1200,
+800
+],
+"hotel-sobotka/07": [
+1024,
+683
+],
+"hotel-sobotka/08": [
+1024,
+683
+],
+"hotel-sobotka/09": [
+1200,
+800
+],
+"hotel-sobotka/10": [
+1024,
+683
+],
+"hotel-sobotka/11": [
+1024,
+683
+],
+"hotel-sobotka/12": [
+1200,
+800
+],
+"hotel-sunset-spa/01": [
+884,
+600
+],
+"hotel-sunset-spa/02": [
+600,
+321
+],
+"hotel-sunset-spa/03": [
+900,
+600
+],
+"hotel-sunset-spa/04": [
+890,
+590
+],
+"hotel-sunset-spa/05": [
+900,
+600
+],
+"hotel-sunset-spa/06": [
+890,
+587
+],
+"hotel-sunset-spa/07": [
+888,
+589
+],
+"hotel-sunset-spa/08": [
+1200,
+330
+],
+"hotel-swarovzvc/01": [
+1200,
+900
+],
+"hotel-swarovzvc/02": [
+1200,
+800
+],
+"hotel-swarovzvc/03": [
+1024,
+683
+],
+"hotel-swarovzvc/04": [
+895,
+1200
+],
+"hotel-swarovzvc/05": [
+1200,
+900
+],
+"hotel-swarovzvc/06": [
+900,
+1200
+],
+"hotel-swarovzvc/07": [
+1024,
+524
+],
+"hotel-swarovzvc/08": [
+1200,
+797
+],
+"hotel-swarovzvc/09": [
+1200,
+800
+],
+"hotel-swarovzvc/10": [
+769,
+522
+],
+"hotel-swarovzvc/11": [
+560,
+372
+],
+"hotel-swarovzvc/12": [
+1024,
+680
+],
+"hotel-trofana/01": [
+800,
+1200
+],
+"hotel-trofana/02": [
+1200,
+900
+],
+"hotel-trofana/03": [
+1200,
+803
+],
+"hotel-trofana/04": [
+1200,
+800
+],
+"hotel-trofana/05": [
+1200,
+800
+],
+"hotel-trofana/06": [
+1200,
+800
+],
+"hotel-trofana/07": [
+1200,
+800
+],
+"hotel-trofana/08": [
+1200,
+800
+],
+"hotel-trofana/09": [
+1200,
+801
+],
+"hotel-trofana/10": [
+1200,
+800
+],
+"hotel-trofana/11": [
+1200,
+800
+],
+"hotel-trofana/12": [
+1200,
+800
+],
+"hotel-unitral/01": [
+1140,
+550
+],
+"hotel-unitral/02": [
+1140,
+550
+],
+"hotel-unitral/03": [
+1140,
+550
+],
+"hotel-unitral/04": [
+1140,
+550
+],
+"hotel-unitral/05": [
+1200,
+800
+],
+"hotel-unitral/06": [
+1200,
+798
+],
+"hotel-unitral/07": [
+1000,
+768
+],
+"hotel-unitral/08": [
+1140,
+550
+],
+"hotel-unitral/09": [
+1140,
+550
+],
+"hotel-unitral/10": [
+1140,
+550
+],
+"hotel-unitral/11": [
+1140,
+550
+],
+"hotel-unitral/12": [
+1140,
+550
+],
+"hotel-venus-spa/01": [
+600,
+400
+],
+"hotel-venus-spa/02": [
+1200,
+965
+],
+"hotel-venus-spa/03": [
+1200,
+1179
+],
+"hotel-venus-spa/04": [
+900,
+598
+],
+"hotel-venus-spa/05": [
+1200,
+801
+],
+"hotel-venus-spa/06": [
+1200,
+801
+],
+"hotel-venus-spa/07": [
+1200,
+900
+],
+"hotel-venus-spa/08": [
+1200,
+900
+],
+"hotel-venus-spa/09": [
+1200,
+900
+],
+"hotel-venus-spa/10": [
+900,
+581
+],
+"hotel-venus-spa/11": [
+900,
+568
+],
+"hotel-venus-spa/12": [
+600,
+400
+],
+"hotel-vestina/01": [
+842,
+595
+],
+"hotel-vestina/02": [
+1050,
+700
+],
+"hotel-vestina/03": [
+1049,
+700
+],
+"hotel-vestina/04": [
+1200,
+800
+],
+"hotel-vestina/05": [
+1047,
+700
+],
+"hotel-vestina/06": [
+842,
+595
+],
+"hotel-vestina/07": [
+1050,
+700
+],
+"hotel-vestina/08": [
+1049,
+700
+],
+"hotel-vestina/09": [
+1200,
+800
+],
+"hotel-vestina/10": [
+700,
+495
+],
+"hotel-vestina/11": [
+1049,
+700
+],
+"hotel-vestina/12": [
+1200,
+675
+],
+"hotel-victoria-spa/01": [
+1200,
+781
+],
+"hotel-victoria-spa/02": [
+800,
+553
+],
+"hotel-victoria-spa/03": [
+1200,
+795
+],
+"hotel-victoria-spa/04": [
+1024,
+439
+],
+"hotel-victoria-spa/05": [
+1024,
+455
+],
+"hotel-victoria-spa/06": [
+1200,
+521
+],
+"hotel-victoria-spa/07": [
+1024,
+680
+],
+"hotel-victoria-spa/08": [
+800,
+311
+],
+"hotel-victoria-spa/09": [
+800,
+445
+],
+"hotel-victoria-spa/10": [
+1200,
+795
+],
+"hotel-victoria-spa/11": [
+1200,
+795
+],
+"hotel-victoria-spa/12": [
+800,
+529
+],
+"hotel-villa-antares/01": [
+1024,
+683
+],
+"hotel-villa-antares/02": [
+1024,
+683
+],
+"hotel-villa-antares/03": [
+1024,
+683
+],
+"hotel-villa-antares/04": [
+1024,
+683
+],
+"hotel-villa-antares/05": [
+1200,
+882
+],
+"hotel-villa-antares/06": [
+1200,
+945
+],
+"hotel-villa-antares/07": [
+1024,
+683
+],
+"hotel-villa-merry/01": [
+1024,
+683
+],
+"hotel-villa-merry/02": [
+1024,
+683
+],
+"hotel-villa-merry/03": [
+1024,
+683
+],
+"hotel-villa-merry/04": [
+1024,
+683
+],
+"hotel-villa-merry/05": [
+1200,
+801
+],
+"hotel-villa-merry/06": [
+1200,
+675
+],
+"hotel-villa-merry/07": [
+1024,
+683
+],
+"hotel-villa-merry/08": [
+706,
+471
+],
+"hotel-villa-merry/09": [
+900,
+1200
+],
+"hotel-villa-merry/10": [
+1200,
+675
+],
+"hotel-villa-merry/11": [
+1024,
+683
+],
+"hotel-vlabravo/01": [
+1024,
+680
+],
+"hotel-vlabravo/02": [
+1024,
+680
+],
+"hotel-vlabravo/03": [
+400,
+265
+],
+"hotel-vlabravo/04": [
+694,
+390
+],
+"hotel-vlabravo/05": [
+992,
+768
+],
+"hotel-vlabravo/06": [
+1200,
+675
+],
+"hotel-vlabravo/07": [
+640,
+480
+],
+"hotel-vlabravo/08": [
+1024,
+713
+],
+"hotel-vlabravo/09": [
+1024,
+576
+],
+"hotel-vlabravo/10": [
+1030,
+687
+],
+"hotel-vlabravo/11": [
+1200,
+800
+],
+"hotel-vlabravo/12": [
+875,
+584
+],
+"hotel-west-baltik-resort/01": [
+1024,
+683
+],
+"hotel-west-baltik-resort/02": [
+683,
+1024
+],
+"hotel-west-baltik-resort/03": [
+1024,
+683
+],
+"hotel-west-baltik-resort/04": [
+1024,
+683
+],
+"hotel-west-baltik-resort/05": [
+1024,
+683
+],
+"hotel-west-baltik-resort/06": [
+1024,
+683
+],
+"hotel-west-baltik-resort/07": [
+1024,
+683
+],
+"hotel-west-baltik-resort/08": [
+1024,
+683
+],
+"hotel-west-baltik-resort/09": [
+1024,
+683
+],
+"hotel-west-baltik-resort/10": [
+1024,
+683
+],
+"hotel-west-baltik-resort/11": [
+1024,
+768
+],
+"hotel-west-baltik-resort/12": [
+1024,
+682
+],
+"hotel-zalewski/01": [
+1200,
+616
+],
+"hotel-zalewski/02": [
+675,
+900
+],
+"hotel-zalewski/03": [
+1200,
+675
+],
+"hotel-zalewski/04": [
+1200,
+747
+],
+"hotel-zalewski/05": [
+1200,
+675
+],
+"hotel-zalewski/06": [
+1200,
+798
+],
+"hotel-zalewski/07": [
+1200,
+725
+],
+"hotel-zalewski/08": [
+1200,
+798
+],
+"hotel-zalewski/09": [
+1200,
+669
+],
+"hotel-zalewski/10": [
+561,
+900
+],
+"hotel-zalewski/11": [
+675,
+900
+],
+"hotel-zalewski/12": [
+576,
+768
+],
+"hotel-zorza/01": [
+1200,
+675
+],
+"hotel-zorza/02": [
+1200,
+678
+],
+"hotel-zorza/03": [
+800,
+605
+],
+"hotel-zorza/04": [
+1200,
+801
+],
+"hotel-zorza/05": [
+1200,
+800
+],
+"hotel-zorza/06": [
+1200,
+900
+],
+"hotel-zorza/07": [
+1200,
+801
+],
+"hotel-zorza/08": [
+1200,
+801
+],
+"hotel-zorza/09": [
+1200,
+825
+],
+"hotel-zorza/10": [
+1100,
+716
+],
+"hotel-zorza/11": [
+800,
+605
+],
+"hotel-zorza/12": [
+800,
+605
+],
+"htl-grlu/01": [
+625,
+419
+],
+"htl-grlu/02": [
+1024,
+512
+],
+"htl-grlu/03": [
+1200,
+794
+],
+"htl-grlu/04": [
+600,
+380
+],
+"htl-grlu/05": [
+1100,
+481
+],
+"htl-grlu/06": [
+1024,
+512
+],
+"htl-grlu/07": [
+1024,
+512
+],
+"htl-yrs/01": [
+800,
+634
+],
+"htl-yrs/02": [
+1200,
+600
+],
+"htl-yrs/03": [
+800,
+533
+],
+"htl-yrs/04": [
+800,
+530
+],
+"htl-yrs/05": [
+800,
+533
+],
+"htl-yrs/06": [
+900,
+535
+],
+"htl-yrs/07": [
+800,
+533
+],
+"htl-yrs/08": [
+800,
+533
+],
+"htldiva/01": [
+864,
+540
+],
+"htldiva/02": [
+1200,
+761
+],
+"htldiva/03": [
+1200,
+760
+],
+"htldiva/04": [
+1200,
+737
+],
+"htldiva/05": [
+1024,
+614
+],
+"htldiva/06": [
+1200,
+761
+],
+"htldiva/07": [
+1200,
+861
+],
+"htldiva/08": [
+1200,
+800
+],
+"htldiva/09": [
+1200,
+764
+],
+"htldiva/10": [
+1024,
+768
+],
+"htldiva/11": [
+1024,
+681
+],
+"htldiva/12": [
+1024,
+684
+],
+"ikrplaza/01": [
+1200,
+738
+],
+"ikrplaza/02": [
+1113,
+744
+],
+"ikrplaza/03": [
+1200,
+676
+],
+"ikrplaza/04": [
+1200,
+675
+],
+"ikrplaza/05": [
+1024,
+681
+],
+"ikrplaza/06": [
+1024,
+681
+],
+"ikrplaza/07": [
+1024,
+575
+],
+"ikrplaza/08": [
+1200,
+799
+],
+"ikrplaza/09": [
+1200,
+675
+],
+"ikrplaza/10": [
+1200,
+798
+],
+"ikrplaza/11": [
+1024,
+681
+],
+"ikrplaza/12": [
+1200,
+798
+],
+"imperial-resort-medi-spa/01": [
+1024,
+683
+],
+"imperial-resort-medi-spa/02": [
+1024,
+576
+],
+"imperial-resort-medi-spa/03": [
+640,
+426
+],
+"imperial-resort-medi-spa/04": [
+1030,
+687
+],
+"imperial-resort-medi-spa/05": [
+1030,
+687
+],
+"imperial-resort-medi-spa/06": [
+800,
+769
+],
+"imperial-resort-medi-spa/07": [
+550,
+366
+],
+"kurhaus-baltyk/01": [
+1200,
+700
+],
+"kurhaus-baltyk/02": [
+798,
+1200
+],
+"kurhaus-baltyk/03": [
+1050,
+700
+],
+"kurhaus-baltyk/04": [
+1049,
+700
+],
+"kurhaus-baltyk/05": [
+1200,
+801
+],
+"kurhaus-baltyk/06": [
+467,
+700
+],
+"kurhaus-baltyk/07": [
+1050,
+700
+],
+"kurhaus-baltyk/08": [
+1152,
+480
+],
+"kurhaus-baltyk/09": [
+1200,
+801
+],
+"kurhaus-baltyk/10": [
+1050,
+700
+],
+"kurhaus-baltyk/11": [
+1200,
+800
+],
+"kurhaus-baltyk/12": [
+1152,
+480
+],
+"kurhotel-kaisergarten/01": [
+799,
+1200
+],
+"kurhotel-kaisergarten/02": [
+1024,
+681
+],
+"kurhotel-kaisergarten/03": [
+1200,
+799
+],
+"kurhotel-kaisergarten/04": [
+1200,
+799
+],
+"kurhotel-kaisergarten/05": [
+1200,
+799
+],
+"kurhotel-kaisergarten/06": [
+1200,
+799
+],
+"kurhotel-kaisergarten/07": [
+1200,
+799
+],
+"kurhotel-kaisergarten/08": [
+799,
+1200
+],
+"max/01": [
+1200,
+800
+],
+"max/02": [
+1200,
+799
+],
+"max/03": [
+1200,
+799
+],
+"max/04": [
+1200,
+800
+],
+"max/05": [
+1200,
+800
+],
+"max/06": [
+1200,
+800
+],
+"max/07": [
+1200,
+800
+],
+"max/08": [
+1200,
+800
+],
+"max/09": [
+1200,
+800
+],
+"max/10": [
+1200,
+604
+],
+"max/11": [
+1200,
+800
+],
+"max/12": [
+1200,
+800
+],
+"nad-parseta/01": [
+1200,
+801
+],
+"nad-parseta/02": [
+1200,
+801
+],
+"nad-parseta/03": [
+1200,
+801
+],
+"nad-parseta/04": [
+801,
+1200
+],
+"nad-parseta/05": [
+1200,
+801
+],
+"nad-parseta/06": [
+1200,
+801
+],
+"nad-parseta/07": [
+1200,
+801
+],
+"nad-parseta/08": [
+1200,
+801
+],
+"nad-parseta/09": [
+1200,
+801
+],
+"nad-parseta/10": [
+1200,
+801
+],
+"nad-parseta/11": [
+1200,
+801
+],
+"nad-parseta/12": [
+1200,
+801
+],
+"newskan/01": [
+1008,
+630
+],
+"newskan/02": [
+1008,
+630
+],
+"newskan/03": [
+1008,
+630
+],
+"newskan/04": [
+1008,
+630
+],
+"newskan/05": [
+1008,
+630
+],
+"newskan/06": [
+1024,
+679
+],
+"newskan/07": [
+1200,
+800
+],
+"newskan/08": [
+700,
+467
+],
+"newskan/09": [
+1200,
+800
+],
+"newskan/10": [
+1200,
+800
+],
+"pen-sies/01": [
+1000,
+667
+],
+"pen-sies/02": [
+1024,
+683
+],
+"pen-sies/03": [
+1024,
+683
+],
+"pen-sies/04": [
+662,
+352
+],
+"pen-sies/05": [
+600,
+400
+],
+"pen-sies/06": [
+1024,
+683
+],
+"pen-sies/07": [
+1024,
+672
+],
+"residenz-kaisers-garten/01": [
+1200,
+799
+],
+"residenz-kaisers-garten/02": [
+799,
+1200
+],
+"residenz-kaisers-garten/03": [
+1200,
+799
+],
+"residenz-kaisers-garten/04": [
+1200,
+799
+],
+"residenz-kaisers-garten/05": [
+799,
+1200
+],
+"residenz-kaisers-garten/06": [
+1200,
+799
+],
+"residenz-kaisers-garten/07": [
+1200,
+799
+],
+"residenz-kaisers-garten/08": [
+1200,
+799
+],
+"residenz-kaisers-garten/09": [
+1024,
+681
+],
+"residenz-kaisers-garten/10": [
+1200,
+799
+],
+"residenz-kaisers-garten/11": [
+1200,
+799
+],
+"resort-kaisergarten/01": [
+1200,
+799
+],
+"resort-kaisergarten/02": [
+1200,
+799
+],
+"resort-kaisergarten/03": [
+1000,
+666
+],
+"resort-kaisergarten/04": [
+1200,
+799
+],
+"resort-kaisergarten/05": [
+1200,
+799
+],
+"resort-kaisergarten/06": [
+1024,
+681
+],
+"resort-kaisergarten/07": [
+1200,
+799
+],
+"resort-kaisergarten/08": [
+1200,
+799
+],
+"resort-kaisergarten/09": [
+1200,
+798
+],
+"royal-tulip-sand/01": [
+1200,
+800
+],
+"royal-tulip-sand/02": [
+1200,
+800
+],
+"royal-tulip-sand/03": [
+1200,
+800
+],
+"royal-tulip-sand/04": [
+1200,
+800
+],
+"royal-tulip-sand/05": [
+1200,
+800
+],
+"royal-tulip-sand/06": [
+1200,
+648
+],
+"royal-tulip-sand/07": [
+1200,
+800
+],
+"royal-tulip-sand/08": [
+1200,
+800
+],
+"royal-tulip-sand/09": [
+1200,
+800
+],
+"royal-tulip-sand/10": [
+1200,
+800
+],
+"royal-tulip-sand/11": [
+1200,
+800
+],
+"shuum-boutique-wellness-hotel/01": [
+1200,
+684
+],
+"shuum-boutique-wellness-hotel/02": [
+1200,
+721
+],
+"shuum-boutique-wellness-hotel/03": [
+1200,
+729
+],
+"shuum-boutique-wellness-hotel/04": [
+1200,
+800
+],
+"shuum-boutique-wellness-hotel/05": [
+1200,
+764
+],
+"shuum-boutique-wellness-hotel/06": [
+1200,
+751
+],
+"shuum-boutique-wellness-hotel/07": [
+1200,
+824
+],
+"shuum-boutique-wellness-hotel/08": [
+1200,
+759
+],
+"sopotorium-medical-resort/01": [
+1200,
+1006
+],
+"sopotorium-medical-resort/02": [
+1200,
+800
+],
+"sopotorium-medical-resort/03": [
+1200,
+801
+],
+"sopotorium-medical-resort/04": [
+1200,
+801
+],
+"sopotorium-medical-resort/05": [
+1200,
+801
+],
+"sopotorium-medical-resort/06": [
+1200,
+1200
+],
+"sopotorium-medical-resort/07": [
+1200,
+446
+],
+"sopotorium-medical-resort/08": [
+1200,
+800
+],
+"sopotorium-medical-resort/09": [
+1200,
+799
+],
+"sopotorium-medical-resort/10": [
+1200,
+799
+],
+"villa-amber/01": [
+1200,
+800
+],
+"villa-amber/02": [
+1200,
+801
+],
+"villa-amber/03": [
+1200,
+797
+],
+"villa-amber/04": [
+1200,
+789
+],
+"villa-amber/05": [
+1200,
+760
+],
+"villa-amber/06": [
+1200,
+759
+],
+"villa-amber/07": [
+1200,
+801
+],
+"villa-amber/08": [
+1200,
+800
+]
+}
