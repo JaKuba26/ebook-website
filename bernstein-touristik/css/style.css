@@ -699,3 +699,16 @@ p { margin: 0 0 1em; }
 .klapp__btn svg { width: 20px; height: 20px; fill: currentColor; transition: transform .3s; }
 .klapp__btn[aria-expanded="true"] svg { transform: rotate(180deg); }
 .taxi .klapp::after { background: linear-gradient(to bottom, rgba(247,241,232,0), var(--sand) 85%); }
+
+/* Fußbereich am Handy: Spalten nebeneinander statt untereinander */
+@media (max-width: 680px) {
+  .footer { padding-top: 40px; }
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 28px 20px; padding-bottom: 32px; }
+  .footer__brand, .footer__grid > div:last-child { grid-column: 1 / -1; }
+  .footer__brand { display: flex; align-items: center; gap: 16px; }
+  .footer__brand img { width: 110px; padding: 8px 10px; margin: 0; flex: none; }
+  .footer__brand p { margin: 0; font-size: .88rem; }
+  .footer__grid > div:last-child { display: flex; flex-wrap: wrap; gap: 4px 28px; }
+  .footer__grid > div:last-child h3 { width: 100%; }
+  .footer__grid > div:last-child p { margin: 0; }
+}
