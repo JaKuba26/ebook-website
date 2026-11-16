@@ -199,6 +199,7 @@
       var plz = eingabe.value.replace(/\D/g, '').slice(0, 5);
       if (eingabe.value !== plz) eingabe.value = plz;
       box.classList.remove('is-ok', 'is-fehler');
+      if (hinweis) hinweis.hidden = true;
       if (plz.length < 2) { ausgabe.innerHTML = ''; return; }
       var t = fahrpreis(plz);
       if (!t) {
@@ -207,14 +208,18 @@
         return;
       }
       box.classList.add('is-ok');
+      if (hinweis) hinweis.hidden = false;
       var tage = t.samstag ? 'Abholung samstags · Rückfahrt samstags' : 'Abholung sonntags · Rückfahrt samstags';
       ausgabe.innerHTML = '<span class="plz-check__preis">' + euro(t.preis) + '<small> pro Person</small></span>' +
         '<span class="plz-check__detail">Hin- und Rückfahrt ab Ihrer Haustür · ' + tage + '</span>';
     };
+    var hinweis = null;
     if (ort) {
-      var hinweis = document.createElement('p');
+      hinweis = document.createElement('p');
       hinweis.className = 'plz-check__zuschlag';
-      hinweis.innerHTML = '<strong>Badeort-Zuschlag ' + ort[0] + ':</strong> ' + (ort[1] !== null ? euro(ort[1]) + ' pro Person' : 'auf Anfrage') + ' – wird separat berechnet.';
+      hinweis.hidden = true;
+      hinweis.innerHTML = '<strong>Dieses Hotel liegt in ' + ort[0] + ':</strong> zzgl. ' +
+        (ort[1] !== null ? euro(ort[1]) + ' Badeort-Zuschlag pro Person' : 'Badeort-Zuschlag (Preis auf Anfrage)') + ' – wird separat berechnet.';
       ausgabe.parentNode.insertBefore(hinweis, ausgabe.nextSibling);
     }
     eingabe.addEventListener('input', zeigen);
