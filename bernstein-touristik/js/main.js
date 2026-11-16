@@ -86,6 +86,63 @@
     });
   }
 
+  // Hotelseite: lange Abschnitte einklappen ("Mehr anzeigen")
+  var KLAPP_IDS = ['lage', 'zimmer', 'ausstattung', 'verpflegung', 'wellness', 'leistungen', 'anreise'];
+  var GRENZE = 260;   // ab dieser Höhe (px) wird eingeklappt
+  var SICHTBAR = 170; // so viel bleibt sichtbar
+  var klappen = [];
+  KLAPP_IDS.forEach(function (id) {
+    var block = document.getElementById(id);
+    if (!block || !block.classList.contains('block')) return;
+    var titel = block.querySelector('h2');
+    var box = document.createElement('div');
+    box.className = 'klapp';
+    box.id = id + '-inhalt';
+    while (titel.nextSibling) box.appendChild(titel.nextSibling);
+    block.appendChild(box);
+    if (box.scrollHeight <= GRENZE) return;
+    box.classList.add('is-zu');
+    box.style.maxHeight = SICHTBAR + 'px';
+    var knopf = document.createElement('button');
+    knopf.type = 'button';
+    knopf.className = 'klapp__btn';
+    knopf.setAttribute('aria-expanded', 'false');
+    knopf.setAttribute('aria-controls', box.id);
+    knopf.innerHTML = '<span>Mehr anzeigen</span><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg>';
+    block.appendChild(knopf);
+    var setze = function (auf, scrollen) {
+      knopf.setAttribute('aria-expanded', String(auf));
+      knopf.querySelector('span').textContent = auf ? 'Weniger anzeigen' : 'Mehr anzeigen';
+      box.classList.toggle('is-zu', !auf);
+      box.style.maxHeight = (auf ? box.scrollHeight : SICHTBAR) + 'px';
+      if (auf) setTimeout(function () { if (knopf.getAttribute('aria-expanded') === 'true') box.style.maxHeight = 'none'; }, 450);
+      else if (scrollen && block.getBoundingClientRect().top < 0) block.scrollIntoView({ behavior: 'smooth' });
+    };
+    knopf.addEventListener('click', function () {
+      var auf = knopf.getAttribute('aria-expanded') !== 'true';
+      if (!auf && box.style.maxHeight === 'none') {
+        // von "none" auf feste Höhe, damit die Animation läuft
+        box.style.maxHeight = box.scrollHeight + 'px';
+        box.offsetHeight; // eslint-disable-line no-unused-expressions
+      }
+      setze(auf, true);
+    });
+    klappen.push({ id: id, oeffnen: function () { if (knopf.getAttribute('aria-expanded') !== 'true') setze(true); } });
+  });
+  // Sprung über die Leiste (Lage, Zimmer …) klappt den Abschnitt auf
+  var oeffneAnker = function () {
+    var id = location.hash.slice(1);
+    klappen.forEach(function (k) { if (k.id === id) k.oeffnen(); });
+  };
+  window.addEventListener('hashchange', oeffneAnker);
+  document.querySelectorAll('.subnav a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var id = a.getAttribute('href').slice(1);
+      klappen.forEach(function (k) { if (k.id === id) k.oeffnen(); });
+    });
+  });
+  oeffneAnker();
+
   // Hotelseite: mobile Buchungsleiste
   if (document.querySelector('.sticky-book')) document.body.classList.add('has-sticky-book');
 

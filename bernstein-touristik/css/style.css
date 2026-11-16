@@ -680,3 +680,22 @@ p { margin: 0 0 1em; }
   .map-consent { min-height: 480px; }
   .map-consent iframe { height: 70vh; }
 }
+
+/* Hotelseite: einklappbare Abschnitte ("Mehr anzeigen") */
+.klapp { position: relative; overflow: hidden; transition: max-height .4s ease; }
+.klapp::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 110px; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 85%);
+  opacity: 0; transition: opacity .3s;
+}
+.klapp.is-zu::after { opacity: 1; }
+.klapp__btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px; margin: 4px auto 0;
+  font: 600 .95rem var(--sans); color: var(--navy); background: var(--white);
+  border: 1.5px solid var(--navy); border-radius: 999px; padding: .65em 1.4em; cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.klapp__btn:hover { background: var(--navy); color: var(--white); }
+.klapp__btn svg { width: 20px; height: 20px; fill: currentColor; transition: transform .3s; }
+.klapp__btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.taxi .klapp::after { background: linear-gradient(to bottom, rgba(247,241,232,0), var(--sand) 85%); }

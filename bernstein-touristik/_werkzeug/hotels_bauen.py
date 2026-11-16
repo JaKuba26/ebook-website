@@ -76,7 +76,10 @@ def plain(s):
 
 def als_liste(absatz_html):
     """Lange Aufzählungen mit Kommas als Liste darstellen."""
-    t = plain(absatz_html)
+    t = korrektur(plain(absatz_html))
+    # fehlende Kommas aus dem Originaltext
+    t = re.sub(r'(Salzgrotte) (Arztkonsultation)', r'\1, \2', t)
+    t = re.sub(r'(“) (Kinderspielplatz)', r'\1, \2', t)
     if t.count(',') < 5:
         return None
     t = re.sub(r'\s*\.\s*$', '', t)
@@ -86,8 +89,31 @@ def als_liste(absatz_html):
         return None
     if sum(len(x) for x in teile) / len(teile) > 55 or max(len(x) for x in teile) > 140:
         return None
-    teile = [re.sub(r'^(und|sowie)\s+', '', x, flags=re.I) for x in teile]
+    # "Trocken-, Rotlicht- und Dampfsauna" wieder zusammenfügen
+    zusammen = []
+    for x in teile:
+        if zusammen and zusammen[-1].endswith('-'):
+            zusammen[-1] = zusammen[-1] + ', ' + x
+        else:
+            zusammen.append(x)
+    teile = [re.sub(r'^(und|sowie)\s+', '', x.lstrip('-–• ').strip(), flags=re.I) for x in zusammen]
+    teile = [korrektur(x) for x in teile if x]
     return [x[0].upper() + x[1:] if x else x for x in teile]
+
+
+TIPPFEHLER = {
+    'Artkonsultation': 'Arztkonsultation',
+    'Jaccuzzi': 'Jacuzzi',
+    'Wellenss': 'Wellness',
+    'familengeführt': 'familiengeführt',
+}
+
+
+def korrektur(t):
+    for alt, neu in TIPPFEHLER.items():
+        t = t.replace(alt, neu)
+    t = re.sub(r"(?:''|‘‘|’’|\"|“)([^'‘’\"“”]+?)(?:''|‘‘|’’|\"|”)", r'„\1“', t)
+    return t
 
 
 def bloecke_html(bloecke, key):
