@@ -33,14 +33,56 @@
     });
   });
 
-  // Suche: gewählten Ort in den Suchbegriff übernehmen
-  var form = document.querySelector('.search');
-  if (form) {
-    form.addEventListener('submit', function () {
-      var ort = form.querySelector('select');
-      var s = form.querySelector('input[name="s"]');
-      s.value = [ort.value, s.value].filter(Boolean).join(' ').trim();
-      ort.disabled = true;
+  // Suchseite: Hotels aus suche/hotels.json filtern
+  var ergebnis = document.getElementById('suche-ergebnisse');
+  if (ergebnis) {
+    var params = new URLSearchParams(location.search);
+    var formS = document.querySelector('.search--page');
+    var q = (params.get('q') || params.get('s') || '').trim();
+    var ortP = params.get('ort') || '';
+    formS.q.value = q;
+    formS.ort.value = ortP;
+    var info = document.getElementById('suche-info');
+    var escH = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    var norm = function (t) { return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l'); };
+    fetch('hotels.json').then(function (r) { return r.json(); }).then(function (alle) {
+      var woerter = norm(q).split(/\s+/).filter(Boolean);
+      var treffer = alle.filter(function (h) {
+        if (ortP && h.o !== ortP) return false;
+        var text = norm(h.n + ' ' + h.on + ' ' + h.t);
+        return woerter.every(function (w) { return text.indexOf(w) !== -1; });
+      });
+      treffer.sort(function (a, b) {
+        var an = woerter.length && woerter.every(function (w) { return norm(a.n).indexOf(w) !== -1; }) ? 0 : 1;
+        var bn = woerter.length && woerter.every(function (w) { return norm(b.n).indexOf(w) !== -1; }) ? 0 : 1;
+        return an - bn || (parseFloat(a.p) || 9999) - (parseFloat(b.p) || 9999);
+      });
+      info.textContent = treffer.length
+        ? treffer.length + (treffer.length === 1 ? ' Hotel gefunden' : ' Hotels gefunden') + (q ? ' für „' + q + '“' : '')
+        : 'Leider keine Treffer' + (q ? ' für „' + q + '“' : '') + '. Versuchen Sie einen anderen Begriff oder rufen Sie uns an: 030-484 900 70.';
+      ergebnis.innerHTML = treffer.map(function (h) {
+        var url = '../hotels/' + h.s + '/';
+        return '<article class="offer"><a class="offer__media" href="' + url + '" tabindex="-1" aria-hidden="true"><img src="../' + h.b + '" alt="" loading="lazy" width="560" height="420">' +
+          (h.so ? '<span class="badge">Sonderangebot</span>' : '') + '</a><div class="offer__body"><p class="offer__place">' + escH(h.on) + '</p>' +
+          '<h3><a href="' + url + '">' + escH(h.n) + '</a> ' + (h.st ? '<span class="stars">' + '★'.repeat(h.st) + '</span>' : '') + '</h3>' +
+          '<div class="offer__foot"><p class="price"><span>1 Woche schon ab</span><strong>' + escH(h.p) + ' €</strong><span>pro Person</span></p>' +
+          '<a class="btn btn--navy" href="' + url + '">Ansehen</a></div></div></article>';
+      }).join('');
+    });
+  }
+
+  // Hotelkarte: Google Maps erst nach Klick laden (Datenschutz)
+  var mapBox = document.querySelector('.map-consent');
+  if (mapBox) {
+    mapBox.querySelector('button').addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = mapBox.dataset.src;
+      f.title = 'Hotelkarte (Google Maps)';
+      f.loading = 'lazy';
+      f.allowFullscreen = true;
+      mapBox.innerHTML = '';
+      mapBox.appendChild(f);
+      mapBox.classList.add('is-loaded');
     });
   }
 

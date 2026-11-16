@@ -29,3 +29,16 @@ Kopf, Fuß, Anreise, Formular und Seitenleiste stammen aus der handgebauten Vorl
 `hotels/radisson-blu-resort-swinemuende/index.html` (wird selbst nicht überschrieben).
 `auslassen.json` enthält Seiten, die nicht erzeugt werden (abgelaufene Weihnachtsangebote).
 Wer Inhalte ändern will, ändert `hotels.json` und startet `hotels_bauen.py` neu.
+
+## Weitere Seiten (`_werkzeug/seiten_bauen.py`)
+
+Erzeugt Orts-Seiten (`orte/`), Sonderangebote, Kontakt, VIP, Katalog, Hotelkarte, Suche
+und – wenn der Ordner mit den alten Seiten angegeben ist – Impressum, AGB und Datenschutz.
+Danach werden alle Links auf www.bernstein-touristik.de auf die neuen Seiten umgestellt.
+
+Alles auf einmal neu bauen:  `_werkzeug/alles_bauen.sh`
+
+- Hotelkarte: bindet die Google-„My Maps“-Karte des Kunden erst nach Klick ein (Datenschutz).
+- Suche: läuft komplett im Browser über `suche/hotels.json`.
+- Datenschutzerklärung: alter Text + markierter Entwurfsabschnitt zur neuen Website → rechtlich prüfen lassen!
+- Texte für Jershöft, Rügenwaldermünde und Danzig sind neu geschrieben → vom Kunden prüfen lassen.

@@ -45,11 +45,11 @@
     <nav class="nav" id="hauptnav" aria-label="Hauptmenü">
       <ul>
         <li><a href="./" aria-current="page">Startseite</a></li>
-        <li><a href="#orte">Orte</a></li>
+        <li><a href="orte/">Orte</a></li>
         <li><a href="hotels/">Hotels</a></li>
-        <li><a href="https://www.bernstein-touristik.de/karte/">Hotelkarte</a></li>
-        <li><a href="https://www.bernstein-touristik.de/bernstein-katalog/">Katalog</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="karte/">Hotelkarte</a></li>
+        <li><a href="bernstein-katalog/">Katalog</a></li>
+        <li><a href="kontakt/">Kontakt</a></li>
       </ul>
       <a class="btn btn--amber nav__cta" href="tel:+493048490070">Kostenlos beraten lassen</a>
     </nav>
@@ -67,25 +67,26 @@
       <h1>Ihre individuelle Traumreise an der <em>polnischen Ostsee</em></h1>
       <p class="hero__lead">Kurreisen, Wellness und Kurztrips in ausgewählten und getesteten 3–5-Sterne-Hotels – auf Wunsch mit Abholung direkt an Ihrer Haustür.</p>
 
-      <form class="search" action="https://www.bernstein-touristik.de/" method="get" role="search">
+      <form class="search" action="suche/" method="get" role="search">
         <label class="search__field">
           <span>Wohin soll's gehen?</span>
           <select name="ort" id="ort-select" aria-label="Ostseebad wählen">
             <option value="">Alle Ostseebäder</option>
-            <option>Swinemünde</option>
-            <option>Misdroy</option>
-            <option>Kolberg</option>
-            <option>Rewahl</option>
-            <option>Henkenhagen</option>
-            <option>Ziegenberg</option>
-            <option>Gribow</option>
-            <option>Heidebrink</option>
-            <option>Stolpmünde</option>
+            <option value="ostseebad-swinemuende">Swinemünde</option>
+            <option value="ostseebad-misdroy">Misdroy</option>
+            <option value="ostseebad-kolberg">Kolberg</option>
+            <option value="ostseebad-rewal">Rewahl</option>
+            <option value="ostseebad-henkenhagen-ustronie-morskie">Henkenhagen / Ziegenberg</option>
+            <option value="ostseebad-gribow">Gribow</option>
+            <option value="ostseebad-heidebrink">Heidebrink</option>
+            <option value="ostseebad-pobierowo">Poberow</option>
+            <option value="ostseebad-stolpmuende-ustka">Stolpmünde</option>
+            <option value="pommern-danzig">Danzig &amp; Pommern</option>
           </select>
         </label>
         <label class="search__field search__field--grow">
           <span>Hotel oder Stichwort</span>
-          <input type="search" name="s" placeholder="z. B. Spa, Kur, Radisson …">
+          <input type="search" name="q" placeholder="z. B. Spa, Kur, Radisson …">
         </label>
         <button class="btn btn--amber search__btn" type="submit">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 2a8 8 0 0 1 6.3 12.9l5.4 5.4-1.4 1.4-5.4-5.4A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
@@ -135,7 +136,7 @@
           <p class="eyebrow">Sonderangebote</p>
           <h2>Aktuelle Highlights in Swinemünde</h2>
         </div>
-        <a class="link-arrow" href="https://www.bernstein-touristik.de/orte/sonderangebote/">Alle Angebote</a>
+        <a class="link-arrow" href="orte/sonderangebote/">Alle Angebote</a>
       </div>
 
       <div class="offers">
@@ -224,26 +225,26 @@
         <h2>Die ganze Vielfalt der polnischen Ostseeküste</h2>
         <p>Von Swinemünde an der deutschen Grenze bis nach Danzig: Breite Sandstrände, Kiefernwälder und traditionsreiche Kurorte – nur wenige Stunden von Berlin entfernt.</p>
         <ul class="chips">
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-swinemuende/">Swinemünde</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-heidebrink/">Heidebrink</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-misdroy/">Misdroy</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-pobierowo/">Poberow</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-rewal/">Rewahl</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-fischerkaten-pogorzelica/">Fischerkaten</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/treptower-deep/">Treptower Deep</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-gribow/">Gribow</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-kolberg/">Kolberg</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-henkenhagen-ustronie-morskie/">Henkenhagen / Ziegenberg</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-groess-moellen-mielno/">Großmöllen</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/jershoeft/">Jershöft</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ruegenwaldermuende/">Rügenwaldermünde</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/ostseebad-stolpmuende-ustka/">Stolpmünde</a></li>
-          <li><a href="https://www.bernstein-touristik.de/orte/pommern-danzig/">Pommern &amp; Danzig</a></li>
+          <li><a href="orte/ostseebad-swinemuende/">Swinemünde</a></li>
+          <li><a href="orte/ostseebad-heidebrink/">Heidebrink</a></li>
+          <li><a href="orte/ostseebad-misdroy/">Misdroy</a></li>
+          <li><a href="orte/ostseebad-pobierowo/">Poberow</a></li>
+          <li><a href="orte/ostseebad-rewal/">Rewahl</a></li>
+          <li><a href="orte/ostseebad-fischerkaten-pogorzelica/">Fischerkaten</a></li>
+          <li><a href="orte/treptower-deep/">Treptower Deep</a></li>
+          <li><a href="orte/ostseebad-gribow/">Gribow</a></li>
+          <li><a href="orte/ostseebad-kolberg/">Kolberg</a></li>
+          <li><a href="orte/ostseebad-henkenhagen-ustronie-morskie/">Henkenhagen / Ziegenberg</a></li>
+          <li><a href="orte/ostseebad-groess-moellen-mielno/">Großmöllen</a></li>
+          <li><a href="orte/jershoeft/">Jershöft</a></li>
+          <li><a href="orte/ruegenwaldermuende/">Rügenwaldermünde</a></li>
+          <li><a href="orte/ostseebad-stolpmuende-ustka/">Stolpmünde</a></li>
+          <li><a href="orte/pommern-danzig/">Pommern &amp; Danzig</a></li>
         </ul>
       </div>
       <figure class="places__map">
         <img src="img/karte-ostsee.jpg" alt="Karte der polnischen Ostseeküste mit allen Bernstein-Reisezielen von Swinemünde bis Danzig" loading="lazy" width="1200" height="498">
-        <figcaption><a class="link-arrow" href="https://www.bernstein-touristik.de/karte/">Interaktive Hotelkarte öffnen</a></figcaption>
+        <figcaption><a class="link-arrow" href="karte/">Interaktive Hotelkarte öffnen</a></figcaption>
       </figure>
     </div>
   </section>
@@ -502,18 +503,19 @@
       <h3>Entdecken</h3>
       <ul>
         <li><a href="./">Startseite</a></li>
-        <li><a href="https://www.bernstein-touristik.de/karte/">Hotelkarte</a></li>
+        <li><a href="karte/">Hotelkarte</a></li>
         <li><a href="hotels/">Hotels</a></li>
-        <li><a href="https://www.bernstein-touristik.de/bernstein-katalog/">Katalog</a></li>
+        <li><a href="bernstein-katalog/">Katalog</a></li>
       </ul>
     </nav>
     <nav aria-label="Rechtliches">
       <h3>Service</h3>
       <ul>
-        <li><a href="#kontakt">Kontakt</a></li>
-        <li><a href="https://www.bernstein-touristik.de/agb/">AGB</a></li>
-        <li><a href="https://www.bernstein-touristik.de/impressum/">Impressum</a></li>
-        <li><a href="https://www.bernstein-touristik.de/datenschutzerklaerung/">Datenschutz</a></li>
+        <li><a href="kontakt/">Kontakt</a></li>
+        <li><a href="vip/">VIP-Gold-Club</a></li>
+        <li><a href="agb/">AGB</a></li>
+        <li><a href="impressum/">Impressum</a></li>
+        <li><a href="datenschutzerklaerung/">Datenschutz</a></li>
       </ul>
     </nav>
     <div>

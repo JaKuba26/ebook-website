@@ -335,7 +335,7 @@ def seite(h, alle, groessen, teile):
           <p class="eyebrow">Ebenfalls in {esc(h["ort_kurz"])}</p>
           <h2>Weitere Hotels</h2>
         </div>
-        <a class="link-arrow" href="../#{esc(h["ort"] or "")}">Alle Hotels in {esc(h["ort_kurz"])}</a>
+        <a class="link-arrow" href="../../orte/{esc(h["ort"] or "")}/">Alle Hotels in {esc(h["ort_kurz"])}</a>
       </div>
       <div class="offers">
         {"".join(karte(x, groessen, '../../') for x in gleiche[:3])}
@@ -356,7 +356,7 @@ def seite(h, alle, groessen, teile):
       <span aria-hidden="true">›</span>
       <a href="../">Hotels</a>
       <span aria-hidden="true">›</span>
-      <a href="../#{esc(h["ort"] or "")}">{esc(h["ort_name"])}</a>
+      <a href="../../orte/{esc(h["ort"] or "")}/">{esc(h["ort_name"])}</a>
       <span aria-hidden="true">›</span>
       <span aria-current="page">{esc(name)}</span>
     </nav>
